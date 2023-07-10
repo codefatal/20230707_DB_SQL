@@ -33,5 +33,7 @@ select email, instr(email, '@', -1, 1) 위치 from employee;
 
 select sysdate from dual;
 
+select * from employee;
 
+select EMP_NAME, EMP_NO, DECODE(substr(EMP_NO, 8, 1), '1', '남', '2', '여') as "성별" from employee;
 
