@@ -156,6 +156,15 @@ SELECT empno, ename, job, mgr,
   CASE WHEN mgr IN (SELECT empno FROM emp) THEN ename ELSE NULL END AS manager
 FROM emp;
 
+--Q. 6
+SELECT empno, ename, job, mgr,
+  CASE WHEN mgr IN (SELECT empno FROM emp) THEN ename ELSE NULL END AS manager
+FROM emp order by empno desc;
 
 select * from emp;
 
+
+--Q. 7
+select * from emp where sal > (select sal from emp where ename IN 'MARTIN') AND (deptno=(select deptno from emp where ename IN 'ALLEN') or deptno=20);
+
+--Q. 8
