@@ -14,7 +14,6 @@ select empno, ename, job, mgr, hiredate, sal, comm, deptno from emp;
 select * from emp;
 select * from dept;
 select * from salgrade;
-select * from bonus;
 
 
 -- Q: »ç¿ø¸í°ú ¿¬ºÀ°ú º¸³Ê½ºÆ÷ÇÔÇÑ ¿¬ºÀÀ» Á¶È¸
@@ -120,51 +119,94 @@ select * from emp where months_between(sysdate, hiredate)>=456;
 select extract(year from sysdate) from dual;
 
 --Q. 1
-select e.*,
-    case when sal <= 1200 then '1'
-        when sal <= 1600 then '2'
-        when sal <= 2400 then '3'
-        when sal <= 3000 then '4'
-    else '5'
-    end grade
-from emp e order by grade, empno;
+select e.*, grade
+    from emp e 
+        join salgrade sa on e.sal > sa.losal and e.sal < sa.hisal
+        order by grade, empno;
 
 --Q. 2
-select e.*,
-    case when sal <= 1200 then '1'
-        when sal <= 1600 then '2'
-        when sal <= 2400 then '3'
-        when sal <= 3000 then '4'
-    else '5'
-    end grade
-from emp e where deptno!=10 order by grade desc;
+select e.*, grade
+    from emp e 
+        join salgrade sa on e.sal > sa.losal and e.sal < sa.hisal
+        where deptno!=10 order by grade desc, empno desc;
 
 --Q. 3
-select
-    case when job = 'CLERK' then '1'
-        when job = 'SALESMAN' then '2'
-        when job = 'MANAGER' then '3'
-        when job = 'ANALYST' then '4'
-    end grade, round(avg(sal*12+nvl(comm, 0)), 0) as "Æò±Õ¿¬ºÀ"
-from emp e where deptno!=10 group by job order by "Æò±Õ¿¬ºÀ" desc;
+select grade, round(avg(sal*12+nvl(comm,0)), 0) as "Æò±Õ¿¬ºÀ"
+    from emp e
+        join salgrade sa on e.sal > sa.losal and e.sal < sa.hisal
+            where deptno!=10 group by grade order by "Æò±Õ¿¬ºÀ" desc;
 
 --Q. 4
-select deptno, round(avg(sal*12+nvl(comm, 0)), 0) as "Æò±Õ¿¬ºÀ" from emp where deptno!=10 group by deptno order by "Æò±Õ¿¬ºÀ" desc;
+select deptno, round(avg(sal*12+nvl(comm,0)), 0) as "Æò±Õ¿¬ºÀ"
+    from emp e
+        join salgrade sa on e.sal > sa.losal and e.sal < sa.hisal
+            where deptno!=10 group by deptno order by "Æò±Õ¿¬ºÀ" desc;
 
 --Q. 5
-SELECT empno, ename, job, mgr,
-  CASE WHEN mgr IN (SELECT empno FROM emp) THEN ename ELSE NULL END AS manager
-FROM emp;
+SELECT e.empno, e.ename, e.job, e.mgr, m.ename as MANAGER
+    FROM emp e, emp m
+        where e.mgr = m.empno
+            order by e.empno;
 
 --Q. 6
-SELECT empno, ename, job, mgr,
-  CASE WHEN mgr IN (SELECT empno FROM emp) THEN ename ELSE NULL END AS manager
-FROM emp order by empno desc;
-
-select * from emp;
-
+SELECT e.empno, e.ename, e.job, e.mgr, (select ename from emp m where m.empno=e.mgr) as MANAGER
+    FROM emp e
+        order by e.mgr, e.empno desc;
 
 --Q. 7
-select * from emp where sal > (select sal from emp where ename IN 'MARTIN') AND (deptno=(select deptno from emp where ename IN 'ALLEN') or deptno=20);
+select * 
+    from emp 
+        where sal > (select sal from emp where ename IN 'MARTIN') 
+            AND (deptno=(select deptno from emp where ename IN 'ALLEN') or deptno=20);
 
 --Q. 8
+select e.ename, (select ename from emp m where m.empno=e.mgr) as MANAGER
+    from emp e, dept d
+        where e.deptno=d.deptno AND d.dname IN 'RESEARCH';
+
+--Q. 9
+select sa.grade, ename as "µî±Þº°°¡ÀåÀÛÀº±Þ¿©"
+    from emp e, salgrade sa
+        where (grade, sal) IN (select grade, min(sal) from emp, salgrade where sal >= losal and sal <= hisal group by grade);
+
+--Q. 10
+select grade, min(sal) as "MIN_SAL", max(sal) as "MAX_SAL", round(avg(sal), 2) as "AVG_SAL"
+    from emp e, salgrade sa
+        where sal >= losal and sal <= hisal
+        group by grade;
+
+--Q. 11
+select sa.grade, e.ename as "Æò±Õ10ÇÁ·Î³»¿ÜÀÎ»ç¿ø"
+    from (select grade, ename, sal, percent_rank() over(partition by grade order by sal desc) as rank from emp, salgrade where sal >= losal and sal <= hisal) e, salgrade sa
+        where sal >= losal and sal <= hisal and e.rank <= 0.1;
+        
+--Q. 12
+select empno, ename, sal, 
+(case when loc = 'NEW YORK' then sal*1.02
+    when loc = 'DALLAS' then sal*1.05
+    when loc = 'CHICAGO' then sal*1.03
+    when loc = 'BOSTON' then sal*1.07
+    end) as SAL_SUBSIDY
+    from emp e, dept d
+        where e.deptno = d.deptno
+            order by (case when loc = 'NEW YORK' then sal*0.02
+                        when loc = 'DALLAS' then sal*0.05
+                        when loc = 'CHICAGO' then sal*0.03
+                        when loc = 'BOSTON' then sal*0.07
+                        end) desc;
+
+
+
+--with
+with abc as (select rownum rnum, e.*
+                from (select * from emp where deptno in (20, 30) order by ename asc) e)
+select *
+    from abc
+        where rnum between 7 and 9
+            and sal > (select avg(sal) from abc);
+            
+--view
+create view view_abc as 
+select rownum rnum, e.*
+                from (select * from emp where deptno in (20, 30) order by ename asc) e;
+                
