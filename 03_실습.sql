@@ -56,10 +56,23 @@ select grade, min(sal) as "MIN_SAL", max(sal) as "MAX_SAL", round(avg(sal), 2) a
         group by grade;
 
 --Q. 11
-select sa.grade, e.ename as "평균10프로내외인사원"
-    from (select grade, ename, sal, percent_rank() over(partition by grade order by sal desc) as rank from emp, salgrade where sal >= losal and sal <= hisal) e, salgrade sa
-        where sal >= losal and sal <= hisal and e.rank <= 0.1;
-        
+--select sa.grade, e.ename as "상위10프로사원"
+--    from (select grade, ename, sal, percent_rank() over(partition by grade order by sal desc) as rank from emp, salgrade where sal >= losal and sal <= hisal) e, salgrade sa
+--        where sal >= losal and sal <= hisal and e.rank <= 0.1;
+
+with tenper as (select floor(avg(e2.sal)*0.9) as min_sal, floor(avg(e2.sal)*1.1) as max_sal, sa2.grade
+            from emp e2 join salgrade sa2 on e2.sal between sa2.losal and sa2.hisal
+                group by sa2.grade)        
+select grade, ename as "평균10프로내외인사원"
+    from emp e
+        join tenper on e.sal between min_sal and max_sal
+            order by grade, 2;
+    
+select * from emp;
+select * from salgrade;
+
+    
+    
 --Q. 12
 select empno, ename, sal, 
 (case when loc = 'NEW YORK' then sal*1.02
