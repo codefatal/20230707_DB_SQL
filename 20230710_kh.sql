@@ -45,10 +45,6 @@ select DEPT_CODE, round(avg(salary), 0) from employee where salary>=3000000 grou
 --부서 코드와 급여 평균이 3000000 이상인 그룹 조회
 select DEPT_CODE, round(avg(salary), 0) from employee group by DEPT_CODE having round(avg(salary), 0)>=3000000;
 
-select * from employee;
-select * from department;
-select * from location;
-select * from NATIONAL;
 
 select emp_name, dept_code, location_id
     from employee e, department d

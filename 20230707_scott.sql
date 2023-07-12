@@ -71,4 +71,48 @@ select *
 create view view_abc as 
 select rownum rnum, e.*
                 from (select * from emp where deptno in (20, 30) order by ename asc) e;
-                
+
+
+-- SALESMAN 들의 급여와 같은 급여를 받는 사원을 조회
+select empno, ename, sal
+    from emp
+        where sal in (select sal from emp where job='SALESMAN');
+
+-- 관리자로 등록되어 있는 사원들의 조회
+-- exists where 절 상관쿼리 - 속도 빠름
+select empno, ename
+    from emp e
+        where exists (select empno from emp e2 where e2.empno = e.mgr);
+
+-- self join - 속도 느림
+select e.empno, e.ename
+    from emp e join emp e2 on e2.empno = e.mgr;
+
+-- 부서 번호가 30인 사원들의 급여와 부서번호를 묶어 메인 쿼리로 전달해 보자.
+select * 
+    from emp e
+        where (sal, deptno) IN (select sal, deptno from emp where deptno=30);
+        
+-- 부서별 평균급여
+select e.*, 
+    -- 스칼라 서브쿼리 작성되어야 함.
+    (select trunc(avg(sal)) from emp e2 where e2.deptno=e.deptno) as avg_sal
+    from emp e;
+    
+select e.*,
+(case e.deptno when 10 then (select trunc(avg(sal)) from emp e2 where e2.deptno=e.deptno)
+when 20 then (select trunc(avg(sal)) from emp e2 where e2.deptno=e.deptno)
+when 30 then (select trunc(avg(sal)) from emp e2 where e2.deptno=e.deptno)
+end) avgsal
+    from emp e;
+    
+-- 직원 정보와 부서번호, 부서명, 부서위치
+select ename, deptno, dname, loc
+    from emp join dept using (deptno);
+    
+select ename, deptno, 
+    (select dname from dept d where e.deptno=d.deptno) as dname, 
+    (select loc from dept d where e.deptno=d.deptno) as loc
+    from emp e;
+    
+
