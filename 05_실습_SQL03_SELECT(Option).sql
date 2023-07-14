@@ -96,34 +96,71 @@ select student_name, term_no
 
 --13. 예체능 계열 과목 중 과목 담당교수를 한 명도 배정받지 못한 과목을 찾아 그 과목
 --이름과 학과 이름을 출력하는 SQL 문장을 작성하시오.
-select DISTINCT class_name, department_no
-    from tb_professor tp
-        join tb_class using (department_no)
-        where department_no between '056' and '063';
-        ;
-
-select * from tb_class;
-select * from tb_department;
-select * from tb_professor;
-select * from tb_class_professor;
-select * from tb_student;
+select class_name, department_name
+    from tb_class tc
+        left join tb_professor tp on tc.department_no = tp.department_no
+        left join tb_department td on tc.department_no = td.department_no
+            where tc.department_no >= '056' and tc.department_no <= '063'
+            and tp.department_no is null;
 
 --14. 춘 기술대학교 서반아어학과 학생들의 지도교수를 게시하고자 한다. 학생이름과 지도교수 이름을 찾고 
 --만일 지도 교수가 없는 학생일 경우 "지도교수 미지정”으로 표시하도록 하는 SQL 문을 작성하시오. 
 --단, 출력헤더는 “학생이름” 지도교수"로 표시하며 고학번 학생이 먼저 표시되도록 한다.
+select student_name as "학생이름", nvl(professor_name,'지도교수 미지정') as "지도교수"
+    from tb_student ts
+        left join tb_department td using (department_no)
+        left join tb_professor tp on ts.coach_professor_no = tp.professor_no
+            where department_name = '서반아어학과'
+                order by entrance_date;
 
 --15. 휴학생이 아닌 학생 중 평점이 4.0 이상인 학생을 찾아 그 학생의 학번, 이름, 학과
 --이름, 평점을 출력하는 SQL 문을 작성하시오.
+select student_no, student_name, department_name, round(avg(point),3) as "평점"
+    from tb_student ts
+        left join tb_department td using (department_no)
+        left join tb_grade tg using (student_no)
+            where absence_yn = 'N'
+            group by student_no, student_name, department_name
+                having avg(point) >= 4.0
+                    order by 1;
+
+
 
 --16. 환경조경학과 전공과목들의 과목 별 평점을 파악할 수 있는 SQL 문을 작성하시오.
+select class_no, class_name, round(avg(point),3)
+    from tb_class tc
+        left join tb_grade tg using (class_no)
+        left join tb_department td using (department_no)
+            where department_name = '환경조경학과'
+            group by class_no, class_name;
 
 --17. 춘 기술대학교에 다니고 있는 최경희 학생과 같은 과 학생들의 이름과 주소를 출력하는 SQL 문을 작성하시오.
+select student_name, student_address
+    from tb_student ts
+        join tb_department td using (department_no)
+        where td.department_name IN (select td2.department_name from tb_department td2 join tb_student ts2 on td2.department_no = ts2.department_no where ts2.student_name='최경희');
 
 --18. 국어국문학과에서 총 평점이 가장 높은 학생의 이름과 학번을 표시하는 SQL 문을 작성하시오.
+select student_no, student_name
+from (
+    select ts.student_no, ts.student_name, sum(tg.point) as total_point
+    from tb_student ts
+        join tb_grade tg on ts.student_no = tg.student_no
+        join tb_department td on ts.department_no = td.department_no
+            where td.department_name = '국어국문학과'
+                group by ts.student_no, ts.student_name
+) subquery
+    order by total_point desc
+    fetch first 1 row only;
 
 --19. 춘 기술대학교의 "환경조경학과"가 속한 같은 계열 학과들의 학과 별 전공과목 평점을
 --파악하기 위한 적절한 SQL 문을 찾아내시오. 
 --단, 출력헤더는 "계열", "학과명", "전공평점"으로 표시되도록 하고, 
 --평점은 소수점 한 자리까지만 반올림하여 표시되도록 한다.
-
-
+select department_name as "계열 학과명", round(avg(point),1) as "전공평점"
+    from tb_class tc
+    join tb_department td using (department_no)
+    join tb_grade tg using (class_no)
+        where category in (select category from tb_department where department_name = '환경조경학과')
+        group by department_name
+        order by 1;
