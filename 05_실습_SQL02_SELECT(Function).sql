@@ -104,6 +104,8 @@ select student_name as "동일이름", count(*) as "동명인 수"
 --15. 학번이 A112113 인 김고운 학생의 년도, 학기 별 평점과 년도 별 누적 평점, 
 --총 평점을 구하는 SQL 문을 작성하시오. 
 --(단, 평점은 소수점 1자리까지만 반올림하여 표시한다.)
+
+-- union all + inline view를 사용해서 쿼리문 작성
 select "년도", "학기", "평점"
 from(
     select substr(term_no,1,4) as "년도", substr(term_no,5,2) as "학기", round(avg(point),1) as "평점"
@@ -132,3 +134,12 @@ from(
     order by 
         case when "년도" = ' ' then 1 else 0 end, "년도", 
         case when "학기" = ' ' then 1 else 0 end, "학기";
+
+
+-- rollup을 사용해서 쿼리문 작성
+select substr(term_no,1,4) as "년도", substr(term_no,5,2) as "학기", round(avg(point),1) as "평점"
+    from tb_student
+        left join tb_grade using (student_no)
+            where student_no = 'A112113'
+                group by rollup(substr(term_no,1,4), substr(term_no,5,2))
+                    order by 1;
