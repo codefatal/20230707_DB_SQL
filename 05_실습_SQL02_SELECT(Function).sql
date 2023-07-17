@@ -140,9 +140,9 @@ from(
 select substr(term_no,1,4) as "년도", substr(term_no,5,2) as "학기", round(avg(point),1) as "평점"
     from tb_student
         left join tb_grade using (student_no)
-            where student_no = 'A112113'
-                group by rollup(substr(term_no,1,4), substr(term_no,5,2))
-                    order by 1;
+    where student_no = 'A112113'
+    group by rollup(substr(term_no,1,4), substr(term_no,5,2))
+    order by 1, 2;
                     
 -- rollup을 사용해서 쿼리문 작성(grouping을 이용하여 null 값 공백 치환)
 select 
