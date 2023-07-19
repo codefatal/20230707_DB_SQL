@@ -8,19 +8,19 @@ select * from  SAL_GRADE;
 select emp_name, length(emp_name) len, lengthb(emp_name) byteLen
     from employee
     ;
-select * from employee where emp_name = '¹æ¸í¼ö';
+select * from employee where emp_name = 'ë°©ëª…ìˆ˜';
 
 --
---ORA-00911: ¹®ÀÚ°¡ ºÎÀûÇÕÇÕ´Ï´Ù
+--ORA-00911: ë¬¸ìê°€ ë¶€ì í•©í•©ë‹ˆë‹¤
 --00911. 00000 -  "invalid character"
---SELECT EMAIL, INSTR(EMAIL, '@', -1, 1) À§Ä¡
---SELECT EMAIL, INSTR(EMAIL, '@') À§Ä¡
--- instr - 1ºÎÅÍ½ÃÀÛ
-SELECT EMAIL, INSTR(EMAIL, '@', 2) À§Ä¡
+--SELECT EMAIL, INSTR(EMAIL, '@', -1, 1) ìœ„ì¹˜
+--SELECT EMAIL, INSTR(EMAIL, '@') ìœ„ì¹˜
+-- instr - 1ë¶€í„°ì‹œì‘
+SELECT EMAIL, INSTR(EMAIL, '@', 2) ìœ„ì¹˜
     FROM EMPLOYEE
 ;
--- email Àº @ ÀÌÈÄ¿¡ . 1°³ ÀÌ»óÀÖ¾î¾ß ÇÔ.
-SELECT EMAIL, INSTR(EMAIL, '@'), INSTR(EMAIL, '.', INSTR(EMAIL, '@')) À§Ä¡
+-- email ì€ @ ì´í›„ì— . 1ê°œ ì´ìƒìˆì–´ì•¼ í•¨.
+SELECT EMAIL, INSTR(EMAIL, '@'), INSTR(EMAIL, '.', INSTR(EMAIL, '@')) ìœ„ì¹˜
     FROM EMPLOYEE
     where INSTR(EMAIL, '.', INSTR(EMAIL, '@')) <> 0
 ;
@@ -32,101 +32,101 @@ select INSTR('AORACLEWELCOMEOKEY', 'O', 3)   from dual;
 select INSTR('AORACLEWELCOMEOKEY', 'O', 3, 2)    from dual;
 select INSTR('AORACLEWELCOMEOKEY', 'O', 3, 3)    from dual;
 
--- ±Ş¿©¸¦ 3500000º¸´Ù ¸¹ÀÌ ¹Ş°í 6000000º¸´Ù Àû°Ô ¹Ş´Â Á÷¿øÀÌ¸§°ú ±Ş¿© Á¶È¸
--- 'Àü'¾¾ ¼ºÀ» °¡Áø Á÷¿ø ÀÌ¸§°ú ±Ş¿© Á¶È¸
--- ÇÚµåÆùÀÇ ¾Õ ³× ÀÚ¸® Áß Ã¹ ¹øÈ£°¡ 7ÀÎ Á÷¿ø ÀÌ¸§°ú ÀüÈ­¹øÈ£ Á¶È¸
--- EMAIL ID Áß '_'ÀÇ ¾ÕÀÌ 3ÀÚ¸®ÀÎ Á÷¿ø ÀÌ¸§, ÀÌ¸ŞÀÏ Á¶È¸
+-- ê¸‰ì—¬ë¥¼ 3500000ë³´ë‹¤ ë§ì´ ë°›ê³  6000000ë³´ë‹¤ ì ê²Œ ë°›ëŠ” ì§ì›ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
+-- 'ì „'ì”¨ ì„±ì„ ê°€ì§„ ì§ì› ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
+-- í•¸ë“œí°ì˜ ì• ë„¤ ìë¦¬ ì¤‘ ì²« ë²ˆí˜¸ê°€ 7ì¸ ì§ì› ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ ì¡°íšŒ
+-- EMAIL ID ì¤‘ '_'ì˜ ì•ì´ 3ìë¦¬ì¸ ì§ì› ì´ë¦„, ì´ë©”ì¼ ì¡°íšŒ
 -- like '__*_' escape '*'
--- 'ÀÌ'¾¾ ¼ºÀÌ ¾Æ´Ñ Á÷¿ø »ç¹ø, ÀÌ¸§, ÀÌ¸ŞÀÏ Á¶È¸
--- °ü¸®ÀÚµµ ¾ø°í ºÎ¼­ ¹èÄ¡µµ ¹ŞÁö ¾ÊÀº Á÷¿ø Á¶È¸
--- ºÎ¼­ ¹èÄ¡¸¦ ¹ŞÁö ¾Ê¾ÒÁö¸¸ º¸³Ê½º¸¦ Áö±Ş¹Ş´Â Á÷¿ø Á¶È¸
--- D6 ºÎ¼­¿Í D8 ºÎ¼­¿øµéÀÇ ÀÌ¸§, ºÎ¼­ÄÚµå, ±Ş¿© Á¶È¸
--- 'J2' ¶Ç´Â 'J7' Á÷±Ş ÄÚµå Áß ±Ş¿©¸¦ 2000000º¸´Ù ¸¹ÀÌ ¹Ş´Â Á÷¿øÀÇ ÀÌ¸§, ±Ş¿©, Á÷±ŞÄÚµå Á¶È¸
+-- 'ì´'ì”¨ ì„±ì´ ì•„ë‹Œ ì§ì› ì‚¬ë²ˆ, ì´ë¦„, ì´ë©”ì¼ ì¡°íšŒ
+-- ê´€ë¦¬ìë„ ì—†ê³  ë¶€ì„œ ë°°ì¹˜ë„ ë°›ì§€ ì•Šì€ ì§ì› ì¡°íšŒ
+-- ë¶€ì„œ ë°°ì¹˜ë¥¼ ë°›ì§€ ì•Šì•˜ì§€ë§Œ ë³´ë„ˆìŠ¤ë¥¼ ì§€ê¸‰ë°›ëŠ” ì§ì› ì¡°íšŒ
+-- D6 ë¶€ì„œì™€ D8 ë¶€ì„œì›ë“¤ì˜ ì´ë¦„, ë¶€ì„œì½”ë“œ, ê¸‰ì—¬ ì¡°íšŒ
+-- 'J2' ë˜ëŠ” 'J7' ì§ê¸‰ ì½”ë“œ ì¤‘ ê¸‰ì—¬ë¥¼ 2000000ë³´ë‹¤ ë§ì´ ë°›ëŠ” ì§ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ì§ê¸‰ì½”ë“œ ì¡°íšŒ
 
--- ¸ğµç »ç¿øµéÀÇ ³², ¿© ¼ºº°°ú ÇÔ²² ÀÌ¸§°ú ÁÖ¹Î¹øÈ£
+-- ëª¨ë“  ì‚¬ì›ë“¤ì˜ ë‚¨, ì—¬ ì„±ë³„ê³¼ í•¨ê»˜ ì´ë¦„ê³¼ ì£¼ë¯¼ë²ˆí˜¸
 select emp_name, emp_no, 
-        decode(substr(emp_no, 8,1), 2, '¿©', 4, '¿©', 1, '³²', 3, '³²', '±×¿Ü')
-        as "¼º º°"
+        decode(substr(emp_no, 8,1), 2, 'ì—¬', 4, 'ì—¬', 1, 'ë‚¨', 3, 'ë‚¨', 'ê·¸ì™¸')
+        as "ì„± ë³„"
     from employee
 ;
 select emp_name, emp_no, 
         case
-            when substr(emp_no, 8,1) = 2 then '¿©'
-            when substr(emp_no, 8,1) > 1 then '³²'
-            when substr(emp_no, 8,1) > 4 then '¿©'
-            when substr(emp_no, 8,1) > 3 then '³²'
-            else '±×¿Ü'
+            when substr(emp_no, 8,1) = 2 then 'ì—¬'
+            when substr(emp_no, 8,1) > 1 then 'ë‚¨'
+            when substr(emp_no, 8,1) > 4 then 'ì—¬'
+            when substr(emp_no, 8,1) > 3 then 'ë‚¨'
+            else 'ê·¸ì™¸'
         end
-        as "¼º º°"
+        as "ì„± ë³„"
     from employee
 ;
 select emp_name, emp_no, 
         case substr(emp_no, 8,1)
-            when '2' then '¿©'
-            when '1' then '³²'
-            when '4' then '¿©'
-            when '3' then '³²'
-            else '±×¿Ü'
+            when '2' then 'ì—¬'
+            when '1' then 'ë‚¨'
+            when '4' then 'ì—¬'
+            when '3' then 'ë‚¨'
+            else 'ê·¸ì™¸'
         end
-        as "¼º º°"
+        as "ì„± ë³„"
     from employee
 ;
 select emp_name, emp_no, 
---ORA-00932: ÀÏ°ü¼º ¾ø´Â µ¥ÀÌÅÍ À¯Çü: CHARÀÌ(°¡) ÇÊ¿äÇÏÁö¸¸ NUMBERÀÓ
+--ORA-00932: ì¼ê´€ì„± ì—†ëŠ” ë°ì´í„° ìœ í˜•: CHARì´(ê°€) í•„ìš”í•˜ì§€ë§Œ NUMBERì„
 --00932. 00000 -  "inconsistent datatypes: expected %s got %s"
---ORA-00932: ÀÏ°ü¼º ¾ø´Â µ¥ÀÌÅÍ À¯Çü: NUMBERÀÌ(°¡) ÇÊ¿äÇÏÁö¸¸ CHARÀÓ
+--ORA-00932: ì¼ê´€ì„± ì—†ëŠ” ë°ì´í„° ìœ í˜•: NUMBERì´(ê°€) í•„ìš”í•˜ì§€ë§Œ CHARì„
 --00932. 00000 -  "inconsistent datatypes: expected %s got %s"
         case to_number(substr(emp_no, 8,1))
-            when 2 then '¿©'
-            when 1 then '³²'
-            when 4 then '¿©'
-            when 3 then '³²'
-            else '±×¿Ü'
+            when 2 then 'ì—¬'
+            when 1 then 'ë‚¨'
+            when 4 then 'ì—¬'
+            when 3 then 'ë‚¨'
+            else 'ê·¸ì™¸'
         end
-        as "¼º º°"
+        as "ì„± ë³„"
     from employee
 ;
--- java, js »ïÇ×¿¬»êÀÚ
--- string a = ( substr(emp_no, 8,1) == 2 ? "¿©" : "³²";
+-- java, js ì‚¼í•­ì—°ì‚°ì
+-- string a = ( substr(emp_no, 8,1) == 2 ? "ì—¬" : "ë‚¨";
 --if(substr(emp_no, 8,1) == 2){
---    return "¿©";
+--    return "ì—¬";
 --} else {
---    return "³²";
+--    return "ë‚¨";
 --}
 --if(substr(emp_no, 8,1) == 2){
---    return "¿©";
+--    return "ì—¬";
 --} else if(substr(emp_no, 8,1) == 4) {
---    return "¿©";
+--    return "ì—¬";
 --} else if(substr(emp_no, 8,1) == 1) {
---    return "³²";
+--    return "ë‚¨";
 --} else if(substr(emp_no, 8,1) == 3) {
---    return "³²";
+--    return "ë‚¨";
 --} else {
---    return "±×¿Ü";
+--    return "ê·¸ì™¸";
 --}
 --switch(substr(emp_no, 8,1)){
 --    case 1:
---        return "³²";
+--        return "ë‚¨";
 --    case 2:
---        return "¿©";
+--        return "ì—¬";
 --    case 3:
---        return "³²";
+--        return "ë‚¨";
 --    case 4:
---        return "¿©";
+--        return "ì—¬";
 --    default:
---        return "±×¿Ü";
+--        return "ê·¸ì™¸";
 --}
 
 
 
 select substr(emp_no, 8,3) from employee;
 
--- Á÷¿øµéÀÇ Æò±Õ ±Ş¿©´Â ¾ó¸¶ÀÎÁö Á¶È¸
-select (avg(salary)) Æò±Õ±Ş¿© from employee;
-select floor(avg(salary)) Æò±Õ±Ş¿© from employee;
-select trunc(avg(salary), 4) Æò±Õ±Ş¿© from employee;
-select round(avg(salary)) Æò±Õ±Ş¿© from employee;
-select ceil(avg(salary)) Æò±Õ±Ş¿© from employee;
+-- ì§ì›ë“¤ì˜ í‰ê·  ê¸‰ì—¬ëŠ” ì–¼ë§ˆì¸ì§€ ì¡°íšŒ
+select (avg(salary)) í‰ê· ê¸‰ì—¬ from employee;
+select floor(avg(salary)) í‰ê· ê¸‰ì—¬ from employee;
+select trunc(avg(salary), 4) í‰ê· ê¸‰ì—¬ from employee;
+select round(avg(salary)) í‰ê· ê¸‰ì—¬ from employee;
+select ceil(avg(salary)) í‰ê· ê¸‰ì—¬ from employee;
 
 SELECT COUNT(DISTINCT DEPT_CODE) 
     FROM EMPLOYEE;
@@ -137,8 +137,8 @@ SELECT COUNT(*)
 SELECT * --COUNT(*) 
     FROM EMPLOYEE 
     where dept_code is null;
--- count ´Â resultsetÀÇ row°ªÀÌ null ÀÌ¸é count µÇÁö ¾ÊÀ½.
--- count(*) row °³¼ö
+-- count ëŠ” resultsetì˜ rowê°’ì´ null ì´ë©´ count ë˜ì§€ ì•ŠìŒ.
+-- count(*) row ê°œìˆ˜
 SELECT COUNT(dept_code), count(bonus), count(emp_id), count(manager_id), count(*)
     FROM EMPLOYEE 
     where dept_code is null;
@@ -152,37 +152,37 @@ SELECT distinct DEPT_CODE    FROM EMPLOYEE;
 SELECT distinct DEPT_CODE    FROM EMPLOYEE
     order by dept_code asc
 ; 
--- EMPLOYEE¿¡¼­ ºÎ¼­ÄÚµå, ±×·ì º° ±Ş¿©ÀÇ ÇÕ°è, ±×·ì º° ±Ş¿©ÀÇ Æò±Õ(Á¤¼öÃ³¸®), ÀÎ¿ø ¼ö¸¦ Á¶È¸ÇÏ°í ºÎ¼­ ÄÚµå ¼øÀ¸·Î Á¤·Ä
+-- EMPLOYEEì—ì„œ ë¶€ì„œì½”ë“œ, ê·¸ë£¹ ë³„ ê¸‰ì—¬ì˜ í•©ê³„, ê·¸ë£¹ ë³„ ê¸‰ì—¬ì˜ í‰ê· (ì •ìˆ˜ì²˜ë¦¬), ì¸ì› ìˆ˜ë¥¼ ì¡°íšŒí•˜ê³  ë¶€ì„œ ì½”ë“œ ìˆœìœ¼ë¡œ ì •ë ¬
 
--- EMPLOYEEÅ×ÀÌºí¿¡¼­ ºÎ¼­ÄÚµå¿Í º¸³Ê½º ¹Ş´Â »ç¿ø ¼ö Á¶È¸ÇÏ°í ºÎ¼­ÄÚµå ¼øÀ¸·Î Á¤·Ä
--- EMPLOYEEÅ×ÀÌºí¿¡¼­ ¼ºº°°ú ¼ºº° º° ±Ş¿© Æò±Õ(Á¤¼öÃ³¸®), ±Ş¿© ÇÕ°è, ÀÎ¿ø ¼ö Á¶È¸ÇÏ°í ÀÎ¿ø¼ö·Î ³»¸²Â÷¼ø Á¤·Ä
+-- EMPLOYEEí…Œì´ë¸”ì—ì„œ ë¶€ì„œì½”ë“œì™€ ë³´ë„ˆìŠ¤ ë°›ëŠ” ì‚¬ì› ìˆ˜ ì¡°íšŒí•˜ê³  ë¶€ì„œì½”ë“œ ìˆœìœ¼ë¡œ ì •ë ¬
+-- EMPLOYEEí…Œì´ë¸”ì—ì„œ ì„±ë³„ê³¼ ì„±ë³„ ë³„ ê¸‰ì—¬ í‰ê· (ì •ìˆ˜ì²˜ë¦¬), ê¸‰ì—¬ í•©ê³„, ì¸ì› ìˆ˜ ì¡°íšŒí•˜ê³  ì¸ì›ìˆ˜ë¡œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 
 
---ºÎ¼­ ÄÚµå¿Í ±Ş¿© 3000000 ÀÌ»óÀÎ Á÷¿øÀÇ ±×·ìº° Æò±Õ Á¶È¸
+--ë¶€ì„œ ì½”ë“œì™€ ê¸‰ì—¬ 3000000 ì´ìƒì¸ ì§ì›ì˜ ê·¸ë£¹ë³„ í‰ê·  ì¡°íšŒ
 select dept_code, avg(salary)
     from employee
--- »ç¿ø °¢ÀÚÀÇ ±Ş¿©°¡ 3000000 ÀÌ»ó
+-- ì‚¬ì› ê°ìì˜ ê¸‰ì—¬ê°€ 3000000 ì´ìƒ
     where salary >= 3000000
     group by dept_code
 ;
---ºÎ¼­ ÄÚµå¿Í ±Ş¿© Æò±ÕÀÌ 3000000 ÀÌ»óÀÎ ±×·ì Á¶È¸
+--ë¶€ì„œ ì½”ë“œì™€ ê¸‰ì—¬ í‰ê· ì´ 3000000 ì´ìƒì¸ ê·¸ë£¹ ì¡°íšŒ
 select dept_code, avg(salary)
     from employee
     group by dept_code
--- ±×·ìµÈ ºÎ¼­º° Æò±Õ ±Ş¿©°¡ 3000000 ÀÌ»ó
+-- ê·¸ë£¹ëœ ë¶€ì„œë³„ í‰ê·  ê¸‰ì—¬ê°€ 3000000 ì´ìƒ
     having avg(salary) > 3000000
 ;
 
---- »ç¿ø¸í, ºÎ¼­¹øÈ£, ºÎ¼­¸í, ºÎ¼­À§Ä¡¸¦ Á¶È¸
+--- ì‚¬ì›ëª…, ë¶€ì„œë²ˆí˜¸, ë¶€ì„œëª…, ë¶€ì„œìœ„ì¹˜ë¥¼ ì¡°íšŒ
 select tb1.emp_name, tb1.dept_code, tb2.dept_title, tb2.location_id, tb3.national_code, tb4.national_name
     from employee tb1
         join department tb2 on tb1.dept_code = tb2.dept_id
         join location tb3 on tb2.location_id = tb3.local_code
         join national tb4 on tb3.national_code = tb4.national_code 
-        -- joinÁ¶°Ç¿¡ »ç¿ëµÇ´Â ÄÃ·³¸íÀÌ ´Ù¸£¸é using »ç¿ë ºÒ°¡
+        -- joinì¡°ê±´ì— ì‚¬ìš©ë˜ëŠ” ì»¬ëŸ¼ëª…ì´ ë‹¤ë¥´ë©´ using ì‚¬ìš© ë¶ˆê°€
 ;
---- »ç¿ø¸í, ºÎ¼­¹øÈ£, ºÎ¼­¸í, ºÎ¼­À§Ä¡¸¦ Á¶È¸
---ORA-00904: "TB3"."NATIONAL_CODE": ºÎÀûÇÕÇÑ ½Äº°ÀÚ
+--- ì‚¬ì›ëª…, ë¶€ì„œë²ˆí˜¸, ë¶€ì„œëª…, ë¶€ì„œìœ„ì¹˜ë¥¼ ì¡°íšŒ
+--ORA-00904: "TB3"."NATIONAL_CODE": ë¶€ì í•©í•œ ì‹ë³„ì
 --00904. 00000 -  "%s: invalid identifier"
 --select tb1.emp_name, tb1.dept_code, tb2.dept_title, tb2.location_id, tb3.national_code, tb4.national_name
 select tb1.emp_name as c1, tb1.dept_code c2, tb2.dept_title, tb2.location_id, national_code, tb4.national_name
@@ -190,14 +190,14 @@ select tb1.emp_name as c1, tb1.dept_code c2, tb2.dept_title, tb2.location_id, na
         join department tb2 on tb1.dept_code = tb2.dept_id
         join location tb3 on tb2.location_id = tb3.local_code
         join national tb4 using (national_code)
-        -- joinÁ¶°Ç¿¡ »ç¿ëµÇ´Â ÄÃ·³¸íÀÌ ´Ù¸£¸é using »ç¿ë ºÒ°¡
+        -- joinì¡°ê±´ì— ì‚¬ìš©ë˜ëŠ” ì»¬ëŸ¼ëª…ì´ ë‹¤ë¥´ë©´ using ì‚¬ìš© ë¶ˆê°€
 ;
 select emp_name, dept_code, dept_title, location_id, national_code, national_name
     from employee tb1
         join department tb2 on tb1.dept_code = tb2.dept_id
         join location tb3 on tb2.location_id = tb3.local_code
         join national tb4 using (national_code)
-        -- joinÁ¶°Ç¿¡ »ç¿ëµÇ´Â ÄÃ·³¸íÀÌ ´Ù¸£¸é using »ç¿ë ºÒ°¡
+        -- joinì¡°ê±´ì— ì‚¬ìš©ë˜ëŠ” ì»¬ëŸ¼ëª…ì´ ë‹¤ë¥´ë©´ using ì‚¬ìš© ë¶ˆê°€
 ;
 
 select tb1.emp_name, tb1.dept_code, tb2.dept_title, tb2.location_id, tb3.national_code, tb4.national_name
@@ -237,8 +237,8 @@ select *
 from  EMPLOYEE e , DEPARTMENT d 
  where e.dept_code(+)=d.dept_id
 ;
--- oracle join¿¡¼­ full outer join Ç¥±â¹ı¾øÀ½
---ORA-01468: outer-joinµÈ Å×ÀÌºíÀº 1°³¸¸ ÁöÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù
+-- oracle joinì—ì„œ full outer join í‘œê¸°ë²•ì—†ìŒ
+--ORA-01468: outer-joinëœ í…Œì´ë¸”ì€ 1ê°œë§Œ ì§€ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤
 --01468. 00000 -  "a predicate may reference only one outer-joined table"
 --select * 
 --from  EMPLOYEE e
@@ -248,7 +248,7 @@ from  EMPLOYEE e , DEPARTMENT d
 
 
 -- 20230712
--- 02 - 16. EMPLOYEEÅ×ÀÌºí¿¡¼­ »ç¿ø¸í, ÁÖ¹Î¹øÈ£ Á¶È¸ (´Ü, ÁÖ¹Î¹øÈ£´Â »ı³â¿ùÀÏ¸¸ º¸ÀÌ°Ô ÇÏ°í, '-'´ÙÀ½ °ªÀº '*'·Î ¹Ù²Ù±â)
+-- 02 - 16. EMPLOYEEí…Œì´ë¸”ì—ì„œ ì‚¬ì›ëª…, ì£¼ë¯¼ë²ˆí˜¸ ì¡°íšŒ (ë‹¨, ì£¼ë¯¼ë²ˆí˜¸ëŠ” ìƒë…„ì›”ì¼ë§Œ ë³´ì´ê²Œ í•˜ê³ , '-'ë‹¤ìŒ ê°’ì€ '*'ë¡œ ë°”ê¾¸ê¸°)
 select emp_id, emp_no, substr(emp_no, 1, 7), rPAD(substr(emp_no, 1, 7), 14, '*') 
     from employee
 ;
@@ -290,9 +290,9 @@ create table user_grade(
     grade_code number primary key,
     grade_name varchar2(30) not null
     );
-insert into user_grade values(10,'ÀÏ¹İÈ¸¿ø');
-insert into user_grade values(20,'¿ì¼öÈ¸¿ø');
-insert into user_grade values(30,'Æ¯º°È¸¿ø');
+insert into user_grade values(10,'ì¼ë°˜íšŒì›');
+insert into user_grade values(20,'ìš°ìˆ˜íšŒì›');
+insert into user_grade values(30,'íŠ¹ë³„íšŒì›');
 select * from user_grade;
 drop table user_foreignkey;
 create table user_foreignkey(
@@ -304,16 +304,16 @@ create table user_foreignkey(
     phone varchar2(30),
     email varchar2(50),
     grade_code number not null,
-    -- ¿©±â constraint ÀÌ¸§Á¤ÇØÁÖ±â. 
+    -- ì—¬ê¸° constraint ì´ë¦„ì •í•´ì£¼ê¸°. 
     -- FK_user_foreignkey_grade_code_user_grade
-    -- ÀÚµ¿»ı¼º SYS_0000000
+    -- ìë™ìƒì„± SYS_0000000
     constraint FK_user_foreignkey_grade_code_user_grade   foreign key (grade_code)  references user_grade(grade_code) 
     );
-insert into user_foreignkey values(1,'user01', 'pass01', 'È«±æµ¿', '³²', '010-1234-5678', 'hong123@kh.or.kr',10);
-insert into user_foreignkey values(2,'user02', 'pass02', 'ÀÌ¼ø½Å', '³²', '010-9012-3456', 'lee123@kh.or.kr',20);
-insert into user_foreignkey values(3,'user03', 'pass03', 'À¯°ü¼ø', '¿©', '010-3131-3131', 'yoo123@kh.or.kr',30);
-insert into user_foreignkey values(4,'user04', 'pass04', '½Å»çÀÓ´ç', '¿©', '010-1111-1111', 'shin123@kh.or.kr',null);
-insert into user_foreignkey values(5,'user05', 'pass05', '¾ÈÁß±Ù', '³²', '010-4444-4444', 'ahn123@kh.or.kr',50);
+insert into user_foreignkey values(1,'user01', 'pass01', 'í™ê¸¸ë™', 'ë‚¨', '010-1234-5678', 'hong123@kh.or.kr',10);
+insert into user_foreignkey values(2,'user02', 'pass02', 'ì´ìˆœì‹ ', 'ë‚¨', '010-9012-3456', 'lee123@kh.or.kr',20);
+insert into user_foreignkey values(3,'user03', 'pass03', 'ìœ ê´€ìˆœ', 'ì—¬', '010-3131-3131', 'yoo123@kh.or.kr',30);
+insert into user_foreignkey values(4,'user04', 'pass04', 'ì‹ ì‚¬ì„ë‹¹', 'ì—¬', '010-1111-1111', 'shin123@kh.or.kr',null);
+insert into user_foreignkey values(5,'user05', 'pass05', 'ì•ˆì¤‘ê·¼', 'ë‚¨', '010-4444-4444', 'ahn123@kh.or.kr',50);
 drop table user_foreignkey2;
 create table user_foreignkey2(
     user_no number primary key,
@@ -327,15 +327,15 @@ create table user_foreignkey2(
 --    grade_code number references user_grade(grade_code) on delete cascade
     );
 
-insert into user_foreignkey2 values(1,'user01', 'pass01', 'È«±æµ¿', '³²', '010-1234-5678', 'hong123@kh.or.kr',10);
-insert into user_foreignkey2 values(2,'user02', 'pass02', 'ÀÌ¼ø½Å', '³²', '010-9012-3456', 'lee123@kh.or.kr',20);
-insert into user_foreignkey2 values(3,'user03', 'pass03', 'À¯°ü¼ø', '¿©', '010-3131-3131', 'yoo123@kh.or.kr',30);
-insert into user_foreignkey2 values(4,'user04', 'pass04', '½Å»çÀÓ´ç', '¿©', '010-1111-1111', 'shin123@kh.or.kr',null);
-insert into user_foreignkey2 values(5,'user05', 'pass05', '¾ÈÁß±Ù', '³²', '010-4444-4444', 'ahn123@kh.or.kr',50);
+insert into user_foreignkey2 values(1,'user01', 'pass01', 'í™ê¸¸ë™', 'ë‚¨', '010-1234-5678', 'hong123@kh.or.kr',10);
+insert into user_foreignkey2 values(2,'user02', 'pass02', 'ì´ìˆœì‹ ', 'ë‚¨', '010-9012-3456', 'lee123@kh.or.kr',20);
+insert into user_foreignkey2 values(3,'user03', 'pass03', 'ìœ ê´€ìˆœ', 'ì—¬', '010-3131-3131', 'yoo123@kh.or.kr',30);
+insert into user_foreignkey2 values(4,'user04', 'pass04', 'ì‹ ì‚¬ì„ë‹¹', 'ì—¬', '010-1111-1111', 'shin123@kh.or.kr',null);
+insert into user_foreignkey2 values(5,'user05', 'pass05', 'ì•ˆì¤‘ê·¼', 'ë‚¨', '010-4444-4444', 'ahn123@kh.or.kr',50);
 
 delete from user_grade where grade_code=0;
---ORA-02292: ¹«°á¼º Á¦¾àÁ¶°Ç(KH.SYS_C008483)ÀÌ À§¹èµÇ¾ú½À´Ï´Ù- ÀÚ½Ä ·¹ÄÚµå°¡ ¹ß°ßµÇ¾ú½À´Ï´Ù
---ORA-02292: ¹«°á¼º Á¦¾àÁ¶°Ç(KH.FK_USER_FOREIGNKEY_GRADE_CODE_USER_GRADE)ÀÌ À§¹èµÇ¾ú½À´Ï´Ù- ÀÚ½Ä ·¹ÄÚµå°¡ ¹ß°ßµÇ¾ú½À´Ï´Ù
+--ORA-02292: ë¬´ê²°ì„± ì œì•½ì¡°ê±´(KH.SYS_C008483)ì´ ìœ„ë°°ë˜ì—ˆìŠµë‹ˆë‹¤- ìì‹ ë ˆì½”ë“œê°€ ë°œê²¬ë˜ì—ˆìŠµë‹ˆë‹¤
+--ORA-02292: ë¬´ê²°ì„± ì œì•½ì¡°ê±´(KH.FK_USER_FOREIGNKEY_GRADE_CODE_USER_GRADE)ì´ ìœ„ë°°ë˜ì—ˆìŠµë‹ˆë‹¤- ìì‹ ë ˆì½”ë“œê°€ ë°œê²¬ë˜ì—ˆìŠµë‹ˆë‹¤
 select * from user_constraints;
 select * from user_foreignkey;
 select * from user_foreignkey2;
@@ -354,9 +354,9 @@ USER_NAME VARCHAR2(30),
 GENDER VARCHAR2(10) ,
 PHONE VARCHAR2(30),
 EMAIL VARCHAR2(50)
-, CHECK (GENDER IN ('³²', '¿©'))
+, CHECK (GENDER IN ('ë‚¨', 'ì—¬'))
 );
-INSERT INTO USER_CHECK VALUES(1, 'user01', 'pass01', 'È«±æµ¿', '³²ÀÚ', '010-1234-5678', 
+INSERT INTO USER_CHECK VALUES(1, 'user01', 'pass01', 'í™ê¸¸ë™', 'ë‚¨ì', '010-1234-5678', 
 'hong123@kh.or.kr')
 ;
 
@@ -380,11 +380,11 @@ create table TB_CLASS_PROFESSOR_copy as select * from TB_CLASS_PROFESSOR;
 select * from user_tables;
 
 
---ORA-00998: ÀÌ ½ÄÀº ¿­ÀÇ º°¸í°ú ÇÔ²² ÁöÁ¤ÇØ¾ß ÇÕ´Ï´Ù
+--ORA-00998: ì´ ì‹ì€ ì—´ì˜ ë³„ëª…ê³¼ í•¨ê»˜ ì§€ì •í•´ì•¼ í•©ë‹ˆë‹¤
 --00998. 00000 -  "must name this expression with a column alias"
 CREATE OR REPLACE VIEW V_EMP_JOB2 
     AS SELECT EMP_ID , EMP_NAME , JOB_NAME , 
-        DECODE(SUBSTR(EMP_NO, 8, 1), 1, '³²', 2, '¿©') ,
+        DECODE(SUBSTR(EMP_NO, 8, 1), 1, 'ë‚¨', 2, 'ì—¬') ,
         EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM HIRE_DATE) 
         FROM EMPLOYEE
         JOIN JOB USING(JOB_CODE)
@@ -393,10 +393,10 @@ SELECT * FROM V_EMP_JOB;
 select EXTRACT(YEAR FROM SYSDATE) 
     ,EXTRACT(month FROM SYSDATE) 
     ,EXTRACT(day FROM SYSDATE) 
--- ¿À·ù    ,EXTRACT(hour FROM SYSDATE) 
+-- ì˜¤ë¥˜    ,EXTRACT(hour FROM SYSDATE) 
 from dual;
 
---ORA-00918: ¿­ÀÇ Á¤ÀÇ°¡ ¾Ö¸ÅÇÕ´Ï´Ù
+--ORA-00918: ì—´ì˜ ì •ì˜ê°€ ì• ë§¤í•©ë‹ˆë‹¤
 --00918. 00000 -  "column ambiguously defined"
 CREATE OR REPLACE VIEW V_JOB(JOB_CODE, JOB_NAME)
     AS SELECT j1.JOB_CODE, j1.JOB_NAME
@@ -405,9 +405,9 @@ CREATE OR REPLACE VIEW V_JOB(JOB_CODE, JOB_NAME)
             on j1.job_code = j2.job_code
 --        USING(JOB_CODE)
 ;
--- self join Àº ¹İµå½Ã table º°Äª
+-- self join ì€ ë°˜ë“œì‹œ table ë³„ì¹­
 select * from JOB;
-INSERT INTO V_JOB VALUES('J8', 'ÀÎÅÏ');
+INSERT INTO V_JOB VALUES('J8', 'ì¸í„´');
 commit;
 
 CREATE OR REPLACE VIEW V_JOB2(JOB_CODE)
@@ -424,14 +424,14 @@ FROM EMPLOYEE e
 where age = (SELECT min(EXTRACT(YEAR FROM sysdate) - (1900 + substr(emp_no,1,2))) minage
                 FROM EMPLOYEE )
 ;
--- Ãá´ëÇĞ 3-6
+-- ì¶˜ëŒ€í•™ 3-6
 SELECT STUDENT_NO, STUDENT_NAME, DEPARTMENT_NAME
     FROM TB_STUDENT
     JOIN TB_DEPARTMENT USING(DEPARTMENT_NO)
 ORDER BY 2;
 
 -- 04-2
---2. ³ªÀÌ »ó °¡Àå ¸·³»ÀÇ »ç¿ø ÄÚµå, »ç¿ø ¸í, ³ªÀÌ, ºÎ¼­ ¸í, Á÷±Ş ¸í Á¶È¸
+--2. ë‚˜ì´ ìƒ ê°€ì¥ ë§‰ë‚´ì˜ ì‚¬ì› ì½”ë“œ, ì‚¬ì› ëª…, ë‚˜ì´, ë¶€ì„œ ëª…, ì§ê¸‰ ëª… ì¡°íšŒ
 select emp_id, emp_name, d.dept_title, j.job_name
             , Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,2), 'rr')) age
     from employee e
@@ -460,13 +460,13 @@ select min(Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,
 
 
 
---ORA-01847: ´ŞÀÇ ³¯Â¥´Â 1¿¡¼­ ¸»ÀÏ »çÀÌ¾î¾ß ÇÕ´Ï´Ù
+--ORA-01847: ë‹¬ì˜ ë‚ ì§œëŠ” 1ì—ì„œ ë§ì¼ ì‚¬ì´ì–´ì•¼ í•©ë‹ˆë‹¤
 --01847. 00000 -  "day of month must be between 1 and last day of month"
 select Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,2), 'rr'))
     from employee
 ;
 select emp_no, extract(year from to_date(substr(emp_no,1,2), 'yy')),
--- rr Àº 50À» ±âÁØÀ¸·Î 1951, 2049
+-- rr ì€ 50ì„ ê¸°ì¤€ìœ¼ë¡œ 1951, 2049
     extract(year from to_date(substr(emp_no,1,2), 'rr')),
     case 
     when Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,2), 'yy')) < 0
@@ -482,14 +482,14 @@ select extract(year from to_date('500112', 'yymmdd')) yy
         , extract(year from to_date('990112', 'rrmmdd')) mm
     from dual;
 
--- 04-7. ÇÑ±¹ÀÌ³ª ÀÏº»¿¡¼­ ±Ù¹« ÁßÀÎ »ç¿øÀÇ »ç¿ø ¸í, ºÎ¼­ ¸í, Áö¿ª ¸í, ±¹°¡ ¸í Á¶È¸
+-- 04-7. í•œêµ­ì´ë‚˜ ì¼ë³¸ì—ì„œ ê·¼ë¬´ ì¤‘ì¸ ì‚¬ì›ì˜ ì‚¬ì› ëª…, ë¶€ì„œ ëª…, ì§€ì—­ ëª…, êµ­ê°€ ëª… ì¡°íšŒ
 select emp_name, tb_d.dept_title, tb_e.job_name, tb_d.local_name, tb_d.national_name
     from (select * from employee e join "JOB" j using(job_code)) tb_e
     join (
             select * from department d 
                 join location c on (d.location_id=c.local_code)
                 join national n using (national_code)
-                where n.national_name in ('ÇÑ±¹','ÀÏº»')
+                where n.national_name in ('í•œêµ­','ì¼ë³¸')
                 ) tb_d
     on tb_e.dept_code = tb_d.dept_id
 ;
@@ -505,18 +505,18 @@ order by e1.emp_name
 ;
 
 
---21. EMPLOYEEÅ×ÀÌºí¿¡¼­ Á÷¿ø ¸í, ºÎ¼­ÄÚµå, »ı³â¿ùÀÏ, ³ªÀÌ(¸¸) Á¶È¸
--- (´Ü, »ı³â¿ùÀÏÀº ÁÖ¹Î¹øÈ£¿¡¼­ ÃßÃâÇØ¼­ 00³â 00¿ù 00ÀÏ·Î Ãâ·ÂµÇ°Ô ÇÏ¸ç
--- ³ªÀÌ´Â ÁÖ¹Î¹øÈ£¿¡¼­ Ãâ·ÂÇØ¼­ ³¯Â¥µ¥ÀÌÅÍ·Î º¯È¯ÇÑ ´ÙÀ½ °è»ê)
+--21. EMPLOYEEí…Œì´ë¸”ì—ì„œ ì§ì› ëª…, ë¶€ì„œì½”ë“œ, ìƒë…„ì›”ì¼, ë‚˜ì´(ë§Œ) ì¡°íšŒ
+-- (ë‹¨, ìƒë…„ì›”ì¼ì€ ì£¼ë¯¼ë²ˆí˜¸ì—ì„œ ì¶”ì¶œí•´ì„œ 00ë…„ 00ì›” 00ì¼ë¡œ ì¶œë ¥ë˜ê²Œ í•˜ë©°
+-- ë‚˜ì´ëŠ” ì£¼ë¯¼ë²ˆí˜¸ì—ì„œ ì¶œë ¥í•´ì„œ ë‚ ì§œë°ì´í„°ë¡œ ë³€í™˜í•œ ë‹¤ìŒ ê³„ì‚°)
 select emp_name, dept_code,
-        substr(emp_no, 1,2)||'³â '||substr(emp_no, 3,2)||'¿ù '||substr(emp_no, 5,2)||'ÀÏ' "»ı³â¿ùÀÏ"
-        , Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,2), 'rr')) "¸¸³ªÀÌ"
+        substr(emp_no, 1,2)||'ë…„ '||substr(emp_no, 3,2)||'ì›” '||substr(emp_no, 5,2)||'ì¼' "ìƒë…„ì›”ì¼"
+        , Extract(year from sysdate)-extract(year from to_date(substr(emp_no,1,2), 'rr')) "ë§Œë‚˜ì´"
     from employee
 ;
 select emp_name
         , to_date(substr(emp_no, 1,6), 'rrmmdd')
-        , to_char(to_date(substr(emp_no, 1,6), 'rrmmdd'), 'yy"³â" mm"¿ù" dd"ÀÏ"') "»ı³â¿ùÀÏ"
-        , floor((sysdate - to_date(substr(emp_no, 1,6), 'rrmmdd'))/365) "ÁøÂ¥ ¸¸³ªÀÌ"
+        , to_char(to_date(substr(emp_no, 1,6), 'rrmmdd'), 'yy"ë…„" mm"ì›”" dd"ì¼"') "ìƒë…„ì›”ì¼"
+        , floor((sysdate - to_date(substr(emp_no, 1,6), 'rrmmdd'))/365) "ì§„ì§œ ë§Œë‚˜ì´"
     from employee;
 
 select student_name, student_ssn, entrance_date from tb_student;
@@ -560,22 +560,22 @@ select * from emp;
 
 
 -- 20230717
--- group by - ²À ÁöÄÑÁ®¾ßÇÏ´Â ·ê : group by ÄÃ·³¸í, ÄÃ·³¸í ¸¸ select ·Î ¼±ÅÃÇÒ ¼ö ÀÖÀ½. ¶Ç´Â ±×·ìÇÔ¼ö »ç¿ë°¡´É.
+-- group by - ê¼­ ì§€ì¼œì ¸ì•¼í•˜ëŠ” ë£° : group by ì»¬ëŸ¼ëª…, ì»¬ëŸ¼ëª… ë§Œ select ë¡œ ì„ íƒí•  ìˆ˜ ìˆìŒ. ë˜ëŠ” ê·¸ë£¹í•¨ìˆ˜ ì‚¬ìš©ê°€ëŠ¥.
 SELECT JOB_CODE, SUM(SALARY) sumsal, count(*) cnt    FROM EMPLOYEE    group by JOB_CODE              ORDER BY 1;
--- Áı°è(ÀüÃ¼)
+-- ì§‘ê³„(ì „ì²´)
 SELECT JOB_CODE, SUM(SALARY)    FROM EMPLOYEE    GROUP BY ROLLUP(JOB_CODE)      ORDER BY 1;
 SELECT JOB_CODE, SUM(SALARY)    FROM EMPLOYEE    GROUP BY CUBE(JOB_CODE)        ORDER BY 1;
 -- group by
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE    group by DEPT_CODE, JOB_CODE    ORDER BY 1;
--- Áı°è (ÀüÃ¼)
--- DEPT_CODE ¹­ÀÎ °ÍÀÌ ¾øÀ½.
+-- ì§‘ê³„ (ì „ì²´)
+-- DEPT_CODE ë¬¶ì¸ ê²ƒì´ ì—†ìŒ.
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY ROLLUP(JOB_CODE, DEPT_CODE) ORDER BY 1;
--- JOB_CODE ¹­ÀÎ °ÍÀÌ ¾øÀ½.
+-- JOB_CODE ë¬¶ì¸ ê²ƒì´ ì—†ìŒ.
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY ROLLUP(DEPT_CODE, JOB_CODE) ORDER BY 1;
 
 
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY CUBE(DEPT_CODE, JOB_CODE) ;
--- À§ ¾Æ·¡ °°Àº °á°ú¸¦ ³ª¿À°Ô ÇÏ±â À§ÇØ¼­´Â cube(c1, c2) = rollup(c1, c2)+rollup(c2)
+-- ìœ„ ì•„ë˜ ê°™ì€ ê²°ê³¼ë¥¼ ë‚˜ì˜¤ê²Œ í•˜ê¸° ìœ„í•´ì„œëŠ” cube(c1, c2) = rollup(c1, c2)+rollup(c2)
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY ROLLUP(DEPT_CODE, JOB_CODE) 
 UNION all
 SELECT '', JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY ROLLUP(JOB_CODE) ORDER BY 1;
@@ -584,14 +584,14 @@ SELECT '', JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY ROLLUP(JOB_CODE) ORDER B
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY) FROM EMPLOYEE GROUP BY CUBE(DEPT_CODE, JOB_CODE) ORDER BY 1;
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY),
         CASE 
-        -- grouping(c1) : c1ÀÇ Áı°èºÎºĞÀÎÁö 0,1·Î È®ÀÎµÊ.
-        -- 0 : ÇØ´ç ÄÃ·³À¸·Î grouping µÈ ¾ÈµÈ»óÅÂ. = C1°¢°¢ÀÇ »óÅÂ
-        -- 1 : ÇØ´çÇÏ´Â ÄÃ·³À¸·Î grouping µÈ »óÅÂ. = ÀüÃ¼»óÅÂ
-        WHEN GROUPING(DEPT_CODE) = 0 AND GROUPING(JOB_CODE) = 1         THEN 'ºÎ ÇÕ°è'
-        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 0         THEN 'Á÷ '
-        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 1         THEN 'ÃÑ ÇÕ°è'
-        ELSE '±×·ìº° ÇÕ°è'
-        END AS ±¸ºĞ
+        -- grouping(c1) : c1ì˜ ì§‘ê³„ë¶€ë¶„ì¸ì§€ 0,1ë¡œ í™•ì¸ë¨.
+        -- 0 : í•´ë‹¹ ì»¬ëŸ¼ìœ¼ë¡œ grouping ëœ ì•ˆëœìƒíƒœ. = C1ê°ê°ì˜ ìƒíƒœ
+        -- 1 : í•´ë‹¹í•˜ëŠ” ì»¬ëŸ¼ìœ¼ë¡œ grouping ëœ ìƒíƒœ. = ì „ì²´ìƒíƒœ
+        WHEN GROUPING(DEPT_CODE) = 0 AND GROUPING(JOB_CODE) = 1         THEN 'ë¶€ í•©ê³„'
+        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 0         THEN 'ì§ '
+        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 1         THEN 'ì´ í•©ê³„'
+        ELSE 'ê·¸ë£¹ë³„ í•©ê³„'
+        END AS êµ¬ë¶„
     FROM EMPLOYEE
     GROUP BY CUBE(DEPT_CODE, JOB_CODE)
     ORDER BY 1;
@@ -599,74 +599,74 @@ SELECT DEPT_CODE, JOB_CODE, SUM(SALARY),
     
 SELECT DEPT_CODE, JOB_CODE, SUM(SALARY),
         CASE 
-        -- grouping(c1) : c1ÀÇ Áı°èºÎºĞÀÎÁö 0,1·Î È®ÀÎµÊ.
-        -- 0 : ÇØ´ç ÄÃ·³À¸·Î grouping µÈ ¾ÈµÈ»óÅÂ. = C1°¢°¢ÀÇ »óÅÂ
-        -- 1 : ÇØ´çÇÏ´Â ÄÃ·³À¸·Î grouping µÈ »óÅÂ. = ÀüÃ¼»óÅÂ = °á°ú¿¡ null ·Î Ç¥ÇöµÊ.
-        WHEN GROUPING(DEPT_CODE) = 0 AND GROUPING(JOB_CODE) = 1         THEN 'ºÎ ÇÕ°è'
-        -- ROLLUPÀÎ °æ¿ì ³ªÅ¸³ªÁö ¾ÊÀ½.
-        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 0         THEN 'Á÷ '
-        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 1         THEN 'ÃÑ ÇÕ°è'
-        ELSE '±×·ìº° ÇÕ°è'
-        END AS ±¸ºĞ
+        -- grouping(c1) : c1ì˜ ì§‘ê³„ë¶€ë¶„ì¸ì§€ 0,1ë¡œ í™•ì¸ë¨.
+        -- 0 : í•´ë‹¹ ì»¬ëŸ¼ìœ¼ë¡œ grouping ëœ ì•ˆëœìƒíƒœ. = C1ê°ê°ì˜ ìƒíƒœ
+        -- 1 : í•´ë‹¹í•˜ëŠ” ì»¬ëŸ¼ìœ¼ë¡œ grouping ëœ ìƒíƒœ. = ì „ì²´ìƒíƒœ = ê²°ê³¼ì— null ë¡œ í‘œí˜„ë¨.
+        WHEN GROUPING(DEPT_CODE) = 0 AND GROUPING(JOB_CODE) = 1         THEN 'ë¶€ í•©ê³„'
+        -- ROLLUPì¸ ê²½ìš° ë‚˜íƒ€ë‚˜ì§€ ì•ŠìŒ.
+        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 0         THEN 'ì§ '
+        WHEN GROUPING(DEPT_CODE) = 1 AND GROUPING(JOB_CODE) = 1         THEN 'ì´ í•©ê³„'
+        ELSE 'ê·¸ë£¹ë³„ í•©ê³„'
+        END AS êµ¬ë¶„
     FROM EMPLOYEE
     GROUP BY rollup(DEPT_CODE, JOB_CODE)  
     ORDER BY 1;
 
 
--- grouping sets : group by ÇÑ °á°ú¹°À» union ÇÔ.
+-- grouping sets : group by í•œ ê²°ê³¼ë¬¼ì„ union í•¨.
 SELECT DEPT_CODE, JOB_CODE, MANAGER_ID, FLOOR(AVG(SALARY)) FROM EMPLOYEE
     GROUP BY GROUPING SETS((DEPT_CODE, JOB, MANAGER_ID),(DEPT_CODE, MANAGER_ID), (JOB_CODE, MANAGER_ID));
 
 
--- Ãá´ëÇĞ±³ 3-15 rollup, cube »ç¿ë
+-- ì¶˜ëŒ€í•™êµ 3-15 rollup, cube ì‚¬ìš©
 
 
---	ºĞ¼®ÇÔ¼ö Á¾·ù
---	a. ¼øÀ§ÇÔ¼ö : RANK(), DENSE_RANK(), ROW_NUMBER(), NTILE()
---	b. Áı°èÇÔ¼ö = ±×·ìÇÔ¼ö: COUNT(), SUM(), AVG(), MIN(), MAX()
---	c. ±×·ìÇÔ¼ö = Áı°èÇÔ¼ö group by : ROLLUP()+grouping(), CUBE()+grouping(), GROUPING SET() Âü°í ¡°3_GROUP BY_HAVING4.pdf¡±
+--	ë¶„ì„í•¨ìˆ˜ ì¢…ë¥˜
+--	a. ìˆœìœ„í•¨ìˆ˜ : RANK(), DENSE_RANK(), ROW_NUMBER(), NTILE()
+--	b. ì§‘ê³„í•¨ìˆ˜ = ê·¸ë£¹í•¨ìˆ˜: COUNT(), SUM(), AVG(), MIN(), MAX()
+--	c. ê·¸ë£¹í•¨ìˆ˜ = ì§‘ê³„í•¨ìˆ˜ group by : ROLLUP()+grouping(), CUBE()+grouping(), GROUPING SET() ì°¸ê³  â€œ3_GROUP BY_HAVING4.pdfâ€
 --	d. 1 : CUME_DIST(), RATIO_TO_REPORT()
 --	e. \\\LAG(), ///LEAD()
 --	f. FIRST_VALUE(), LAST_VALUE()
 --	
---	"À§ c Á¦¿ÜÇÑ 
---ºĞ¼®ÇÔ¼öÀÇ À©µµ¿ì-¹üÀ§(¿µ¿ª) Á¤ÇÏ±â"
---	a,b,d,e,f ºĞ¼®ÇÔ¼ö
---	OVER()  ==> window - À©µµ¿ì ¿µ¿ª Àı
+--	"ìœ„ c ì œì™¸í•œ 
+--ë¶„ì„í•¨ìˆ˜ì˜ ìœˆë„ìš°-ë²”ìœ„(ì˜ì—­) ì •í•˜ê¸°"
+--	a,b,d,e,f ë¶„ì„í•¨ìˆ˜
+--	OVER()  ==> window - ìœˆë„ìš° ì˜ì—­ ì ˆ
 --1	OVER()
---2	OVER( PARTITION BY ÄÃ1 )
---3	OVER( ORDER BY ÄÃ1 DESC, ÄÃ2 ASC, ÄÃ3 DESC )
---4	OVER( PARTITION BY ÄÃ1 ORDER BY ÄÃ1 DESC, ÄÃ2, ÄÃ3 )
---5	OVER( PARTITION BY ÄÃ1 ROWS ¾Æ·¡ Âü°í)
---5-1	OVER( PARTITION BY ÄÃ1 ROWS ~ )
---5-2	OVER( PARTITION BY ÄÃ1 ROWS BETWEEN ~ AND ~ )
+--2	OVER( PARTITION BY ì»¬1 )
+--3	OVER( ORDER BY ì»¬1 DESC, ì»¬2 ASC, ì»¬3 DESC )
+--4	OVER( PARTITION BY ì»¬1 ORDER BY ì»¬1 DESC, ì»¬2, ì»¬3 )
+--5	OVER( PARTITION BY ì»¬1 ROWS ì•„ë˜ ì°¸ê³ )
+--5-1	OVER( PARTITION BY ì»¬1 ROWS ~ )
+--5-2	OVER( PARTITION BY ì»¬1 ROWS BETWEEN ~ AND ~ )
 --~	UNBOUNDED PRECEDING
 --~	UNBOUNDED FOLLOWING
 --~	CURRENT ROW
 --~	2 PRECEDING
 --~	1 FOLLOWING
---6	OVER( PARTITION BY ÄÃ1 ORDER BY ÄÃ1 DESC, ÄÃ2, ÄÃ3 ROWS BETWEEN ~ AND ~ )
+--6	OVER( PARTITION BY ì»¬1 ORDER BY ì»¬1 DESC, ì»¬2, ì»¬3 ROWS BETWEEN ~ AND ~ )
 
 
 
 SELECT EMP_NAME, DEPT_code, SALARY,
-    LAG(SALARY, 2, 0) OVER (ORDER BY SALARY) ÀÌÀü°ª,
-    -- 2¹øÂ°¸Å°³ÀÎÀÚ : ¸îÇàÀÌÀüÀÎÁö ³ªÅ¸³¿. 1 ÀÌÀüÇà, 2 ÀüÀüÇà
-    -- 3¹øÂ°¸Å°³ÀÎÀÚ : ÀÌÀüÇàÀÌ ¾ø´Ù¸é Ãâ·ÂÇÒ °ªÀ» ÀÛ¼º (ÀÌÀüÇà ÀÖ´Ù¸é ÀÌÀüÇà°ª)
-    -- 1 : À§ÀÇ Çà°ª, 0 : ÀÌÀüÇàÀÌ ¾øÀ¸¸é 0 Ã³¸®ÇÔ
-    LAG(SALARY, 1, SALARY) OVER (ORDER BY SALARY) "Á¶È¸2",
-    -- ÀÌÀüÇàÀÌ ¾øÀ¸¸é ÇöÀç ÇàÀÇ °ªÀ» Ãâ·Â
-    LAG(SALARY, 1, SALARY) OVER (PARTITION BY DEPT_code ORDER BY SALARY) "Á¶È¸3"
-    -- ºÎ¼­ ±×·ì¾È¿¡¼­ÀÇ ÀÌÀü Çà°ª Ãâ·Â
+    LAG(SALARY, 2, 0) OVER (ORDER BY SALARY) ì´ì „ê°’,
+    -- 2ë²ˆì§¸ë§¤ê°œì¸ì : ëª‡í–‰ì´ì „ì¸ì§€ ë‚˜íƒ€ëƒ„. 1 ì´ì „í–‰, 2 ì „ì „í–‰
+    -- 3ë²ˆì§¸ë§¤ê°œì¸ì : ì´ì „í–‰ì´ ì—†ë‹¤ë©´ ì¶œë ¥í•  ê°’ì„ ì‘ì„± (ì´ì „í–‰ ìˆë‹¤ë©´ ì´ì „í–‰ê°’)
+    -- 1 : ìœ„ì˜ í–‰ê°’, 0 : ì´ì „í–‰ì´ ì—†ìœ¼ë©´ 0 ì²˜ë¦¬í•¨
+    LAG(SALARY, 1, SALARY) OVER (ORDER BY SALARY) "ì¡°íšŒ2",
+    -- ì´ì „í–‰ì´ ì—†ìœ¼ë©´ í˜„ì¬ í–‰ì˜ ê°’ì„ ì¶œë ¥
+    LAG(SALARY, 1, SALARY) OVER (PARTITION BY DEPT_code ORDER BY SALARY) "ì¡°íšŒ3"
+    -- ë¶€ì„œ ê·¸ë£¹ì•ˆì—ì„œì˜ ì´ì „ í–‰ê°’ ì¶œë ¥
     
-    ,LEAD(SALARY, 1, 0) OVER (ORDER BY SALARY) ´ÙÀ½°ª,
-    -- 2¹øÂ°¸Å°³ÀÎÀÚ : ¸îÇà´ÙÀ½ÀÎÁö ³ªÅ¸³¿. 1 ´ÙÀ½Çà, 2 ´Ù´ÙÀ½Çà
-    -- 3¹øÂ°¸Å°³ÀÎÀÚ : ´ÙÀ½ÇàÀÌ ¾ø´Ù¸é Ãâ·ÂÇÒ °ªÀ» ÀÛ¼º (´ÙÀ½Çà ÀÖ´Ù¸é ´ÙÀ½Çà°ª)
-    -- 1 : ´ÙÀ½ Çà°ª, 0 : ´ÙÀ½ÇàÀÌ ¾øÀ¸¸é 0 Ã³¸®ÇÔ
-    LEAD(SALARY, 1, SALARY) OVER (ORDER BY SALARY) "Á¶È¸2",
-    -- ´ÙÀ½ÇàÀÌ ¾øÀ¸¸é ÇöÀç ÇàÀÇ °ªÀ» Ãâ·Â
-    LEAD(SALARY, 1, SALARY) OVER (PARTITION BY DEPT_code  ORDER BY SALARY) "Á¶È¸3"
-    -- ºÎ¼­ ±×·ì¾È¿¡¼­ÀÇ ´ÙÀ½ Çà°ª Ãâ·Â
+    ,LEAD(SALARY, 1, 0) OVER (ORDER BY SALARY) ë‹¤ìŒê°’,
+    -- 2ë²ˆì§¸ë§¤ê°œì¸ì : ëª‡í–‰ë‹¤ìŒì¸ì§€ ë‚˜íƒ€ëƒ„. 1 ë‹¤ìŒí–‰, 2 ë‹¤ë‹¤ìŒí–‰
+    -- 3ë²ˆì§¸ë§¤ê°œì¸ì : ë‹¤ìŒí–‰ì´ ì—†ë‹¤ë©´ ì¶œë ¥í•  ê°’ì„ ì‘ì„± (ë‹¤ìŒí–‰ ìˆë‹¤ë©´ ë‹¤ìŒí–‰ê°’)
+    -- 1 : ë‹¤ìŒ í–‰ê°’, 0 : ë‹¤ìŒí–‰ì´ ì—†ìœ¼ë©´ 0 ì²˜ë¦¬í•¨
+    LEAD(SALARY, 1, SALARY) OVER (ORDER BY SALARY) "ì¡°íšŒ2",
+    -- ë‹¤ìŒí–‰ì´ ì—†ìœ¼ë©´ í˜„ì¬ í–‰ì˜ ê°’ì„ ì¶œë ¥
+    LEAD(SALARY, 1, SALARY) OVER (PARTITION BY DEPT_code  ORDER BY SALARY) "ì¡°íšŒ3"
+    -- ë¶€ì„œ ê·¸ë£¹ì•ˆì—ì„œì˜ ë‹¤ìŒ í–‰ê°’ ì¶œë ¥
 FROM EMPLOYEE
 --order by DEPT_code, SALARY
 ;
@@ -674,14 +674,87 @@ FROM EMPLOYEE
 
 SELECT DEPT_code, EMP_ID, SALARY
 -- 1 preceding and 1 following 
--- ÇöÀç ÇàÀ» Áß½ÉÀ¸·Î ÀÌÀüÇàºÎÅÍ ´ÙÀ½ÇàÀÇ ±Ş¿©ÇÕ°è
+-- í˜„ì¬ í–‰ì„ ì¤‘ì‹¬ìœ¼ë¡œ ì´ì „í–‰ë¶€í„° ë‹¤ìŒí–‰ì˜ ê¸‰ì—¬í•©ê³„
         , SUM(SALARY) OVER (PARTITION BY DEPT_code ORDER BY EMP_ID ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) win1
 -- 1 preceding and current row
--- ÀÌÀüÇàºÎÅÍ ÇöÀçÇàÀÇ ±Ş¿© ÇÕ°è
+-- ì´ì „í–‰ë¶€í„° í˜„ì¬í–‰ì˜ ê¸‰ì—¬ í•©ê³„
         , SUM(SALARY) OVER (PARTITION BY DEPT_code ORDER BY EMP_ID ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) win2
 -- current row and 1 following
--- ÇöÀç Çà°ú ´ÙÀ½ÇàÀÇ ÇÕ°è
+-- í˜„ì¬ í–‰ê³¼ ë‹¤ìŒí–‰ì˜ í•©ê³„
         , SUM(SALARY) OVER (PARTITION BY DEPT_code ORDER BY EMP_ID ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) win3
     FROM EMPLOYEE
 --    WHERE DEPT_code = 'D5'
 ; 
+
+DESC EMPLOYEE;
+
+
+create table product(
+    pcode number primary key,
+    pname varchar2(30),
+    brand varchar2(30),
+    price number,
+    stock number default 0
+);
+    
+create table pro_detail(
+    dcode number primary key,
+    pcode number,
+    pdate date,
+    amount number,
+    status varchar2(10) check (status in ('ì…ê³ ', 'ì¶œê³ ')),
+    foreign key (pcode) references product(pcode)
+);
+
+create sequence seq_pcode;
+create sequence seq_dcode;
+
+insert into product values(seq_pcode.nextval, 'ê°¤ëŸ­ì‹œë…¸íŠ¸8', 'ì‚¼ì„±', 900000, default);
+insert into product values(seq_pcode.nextval, 'ì•„ì´í°8', 'ì• í”Œ', 1000000, default);
+insert into product values(seq_pcode.nextval, 'ëŒ€ë¥™', 'ìƒ¤ì˜¤ë¯¸', 600000, default);
+
+select * from product;
+
+create or replace trigger tgr_02
+after insert on pro_detail
+    for each row
+        begin
+            if :new.status='ì…ê³ '
+            then
+                update product set stock = stock + :new.amount
+                where pcode = :new.pcode;
+            end if;
+            
+            if :new.status='ì¶œê³ '
+            then
+                update product set stock = stock - :new.amount
+                where pcode = :new.pcode;
+            end if;
+end;
+/
+
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,1, SYSDATE, 50, 'ì…ê³ ');
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,2, SYSDATE, 100, 'ì…ê³ ');
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,3, SYSDATE, 200, 'ì…ê³ ');
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,1, SYSDATE, 10, 'ì¶œê³ ');
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,2, SYSDATE, 70, 'ì¶œê³ ');
+INSERT INTO PRO_DETAIL VALUES (SEQ_DCODE.NEXTVAL,3, SYSDATE, 110, 'ì¶œê³ ');
+
+select * from pro_detail;
+
+select * from product;
+
+
+create sequence seq_test02;
+
+create or replace trigger trg_aaa
+    before
+    insert on dept
+    referencing new as new
+    for each row
+begin
+    select seq_test02.nextval into :new.deptno from dual;
+end;
+/
+
+select seq_test02.nextval from dual;

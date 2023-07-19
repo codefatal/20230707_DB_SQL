@@ -1,4 +1,4 @@
--- ÇĞ½À¿ë SCOTT ¸í·É¾îµé
+-- í•™ìŠµìš© SCOTT ëª…ë ¹ì–´ë“¤
 SELECT *
 FROM EMP
 ;
@@ -13,60 +13,60 @@ SELECT ENAME, MGR, SAL, DEPTNO
 FROM emp
 --WHERE ENAME = 'smith'
 WHERE ENAME = 'SMITH'
--- ORA-00904: "SMITH": ºÎÀûÇÕÇÑ ½Äº°ÀÚ
+-- ORA-00904: "SMITH": ë¶€ì í•©í•œ ì‹ë³„ì
 ;
 select empno, ename, sal
 from emp
 ;
--- * À» »ç¿ëÇÏ´Â °Í º¸´Ù ¼Óµµ ºü¸§. ±ÇÀå.
+-- * ì„ ì‚¬ìš©í•˜ëŠ” ê²ƒ ë³´ë‹¤ ì†ë„ ë¹ ë¦„. ê¶Œì¥.
 select empno, ename, job, mgr, hiredate, sal, comm, deptno
 from emp;
--- * º¸´Ù ÄÃ·³¸íÀ» ³ª¿­ÇÏ´Â °ÍÀÌ ¼Óµµ¸é¿¡¼­ ÁÁÀ½.
+-- * ë³´ë‹¤ ì»¬ëŸ¼ëª…ì„ ë‚˜ì—´í•˜ëŠ” ê²ƒì´ ì†ë„ë©´ì—ì„œ ì¢‹ìŒ.
 select * from emp;
 select * from dept;
 select * from salgrade;
 select * from bonus;
 
 
--- Q: »ç¿ø¸í°ú ¿¬ºÀ°ú º¸³Ê½ºÆ÷ÇÔÇÑ ¿¬ºÀÀ» Á¶È¸
+-- Q: ì‚¬ì›ëª…ê³¼ ì—°ë´‰ê³¼ ë³´ë„ˆìŠ¤í¬í•¨í•œ ì—°ë´‰ì„ ì¡°íšŒ
 select ename, sal*12, sal*12 + nvl(comm, 0)
 from emp
 ;
 select comm, nvl(comm, 0), nvl(comm, 100)
 from emp
 ;
-select ename as "»ç¿ø¸í", sal*12 as ¿¬ºÀ, sal*12 + nvl(comm, 0) as "º¸³Ê½º Æ÷ÇÔ ¿¬ºÀ"
+select ename as "ì‚¬ì›ëª…", sal*12 as ì—°ë´‰, sal*12 + nvl(comm, 0) as "ë³´ë„ˆìŠ¤ í¬í•¨ ì—°ë´‰"
 from emp
 ;
 select ename "name", sal*12 sal12, sal*12 + nvl(comm, 0) salwcomm
 from emp
 ;
 
-select '¾È³ç' as hello
+select 'ì•ˆë…•' as hello
 from emp
 ;
-select '¾È³ç' as hello
+select 'ì•ˆë…•' as hello
 from dept
 ;
-select '$' as ´ÜÀ§, sal 
+select '$' as ë‹¨ìœ„, sal 
 from emp
 ;
-select distinct '$' as ´ÜÀ§, sal 
+select distinct '$' as ë‹¨ìœ„, sal 
 from emp
 ;
 
--- ±Ş¿©¸¦ 1500º¸´Ù ¸¹ÀÌ ¹Ş°í 2800º¸´Ù Àû°Ô ¹Ş´Â Á÷¿ø ÀÌ¸§°ú ±Ş¿© Á¶È¸
--- between and »ç¿ë
+-- ê¸‰ì—¬ë¥¼ 1500ë³´ë‹¤ ë§ì´ ë°›ê³  2800ë³´ë‹¤ ì ê²Œ ë°›ëŠ” ì§ì› ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
+-- between and ì‚¬ìš©
 select ename, sal
     from emp
     where sal between 1500 and 2799
 ;
--- >= <= »ç¿ë
+-- >= <= ì‚¬ìš©
 select ename, sal
     from emp
     where sal >= 1500 and sal < 2800
 ;
--- 20¹ø ºÎ¼­¸¦ Á¦¿ÜÇÑ »ç¿ø Á¤º¸¸¦ Á¶È¸
+-- 20ë²ˆ ë¶€ì„œë¥¼ ì œì™¸í•œ ì‚¬ì› ì •ë³´ë¥¼ ì¡°íšŒ
 select * 
     from emp
 --    where deptno != 20
@@ -75,20 +75,20 @@ select *
 --    where not deptno = 20
     where deptno not in (20)
 ;
--- 20¹ø ºÎ¼­¸¦ Á¦¿ÜÇÑ »ç¿ø Áß commÀÌ nullÀÌ ¾Æ´Ñ »ç¿ø Á¤º¸¸¦ Á¶È¸
+-- 20ë²ˆ ë¶€ì„œë¥¼ ì œì™¸í•œ ì‚¬ì› ì¤‘ commì´ nullì´ ì•„ë‹Œ ì‚¬ì› ì •ë³´ë¥¼ ì¡°íšŒ
 select * 
     from emp
     where not deptno = 20 
 --        and comm is not null
--- ¿À·ù        comm != null  comm = null
+-- ì˜¤ë¥˜        comm != null  comm = null
 ;
--- 10, 20, 30 ºÎ¼­¸¦ »ç¿ø Á¤º¸¸¦ Á¶È¸
+-- 10, 20, 30 ë¶€ì„œë¥¼ ì‚¬ì› ì •ë³´ë¥¼ ì¡°íšŒ
 select * 
     from emp
 --    where deptno = 10 OR deptno = 20 OR deptno = 30
     where deptno in (10, 20, 30)
 ;
--- 10, 20, 30 ºÎ¼­¸¦ Á¦¿ÜÇÑ »ç¿ø Á¤º¸¸¦ Á¶È¸
+-- 10, 20, 30 ë¶€ì„œë¥¼ ì œì™¸í•œ ì‚¬ì› ì •ë³´ë¥¼ ì¡°íšŒ
 select * 
     from emp
 --    where not (deptno = 10 OR deptno = 20)
@@ -98,47 +98,47 @@ select *
 select * from emp;
 
 
--- ±Ş¿©¸¦ 1800º¸´Ù ¸¹ÀÌ ¹Ş°í 2500º¸´Ù Àû°Ô ¹Ş´Â Á÷¿øÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- ê¸‰ì—¬ë¥¼ 1800ë³´ë‹¤ ë§ì´ ë°›ê³  2500ë³´ë‹¤ ì ê²Œ ë°›ëŠ” ì§ì›ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 
--- ¡®S¡¯·Î ½ÃÀÛÇÏ´Â 2±ÛÀÚÀÌ»óÀÇ ÀÌ¸§À» °¡Áø Á÷¿ø ÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- â€˜Sâ€™ë¡œ ì‹œì‘í•˜ëŠ” 2ê¸€ìì´ìƒì˜ ì´ë¦„ì„ ê°€ì§„ ì§ì› ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 select ename, sal 
     from emp
     where ename like 'S_%'
 ;
---ORA-00933: SQL ¸í·É¾î°¡ ¿Ã¹Ù¸£°Ô Á¾·áµÇÁö ¾Ê¾Ò½À´Ï´Ù
+--ORA-00933: SQL ëª…ë ¹ì–´ê°€ ì˜¬ë°”ë¥´ê²Œ ì¢…ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤
 --00933. 00000 -  "SQL command not properly ended"
---SQL Error [933] [42000]: ORA-00933: SQL ¸í·É¾î°¡ ¿Ã¹Ù¸£°Ô Á¾·áµÇÁö ¾Ê¾Ò½À´Ï´Ù
+--SQL Error [933] [42000]: ORA-00933: SQL ëª…ë ¹ì–´ê°€ ì˜¬ë°”ë¥´ê²Œ ì¢…ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤
 
--- ÇÚµåÆùÀÇ ¾Õ ³× ÀÚ¸® Áß Ã¹ ¹øÈ£°¡ 7ÀÎ Á÷¿ø ÀÌ¸§°ú ÀüÈ­¹øÈ£ Á¶È¸
--- ÀÌ¸§ Áß 3¹øÂ° ±ÛÀÚ°¡ ¡®S¡¯ ÀÎ Á÷¿ø ÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- í•¸ë“œí°ì˜ ì• ë„¤ ìë¦¬ ì¤‘ ì²« ë²ˆí˜¸ê°€ 7ì¸ ì§ì› ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ ì¡°íšŒ
+-- ì´ë¦„ ì¤‘ 3ë²ˆì§¸ ê¸€ìê°€ â€˜Sâ€™ ì¸ ì§ì› ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 select ename, sal 
     from emp
     where ename like '__S%'
 ;
--- ÀÌ¸§ Áß 3¹øÂ° ±ÛÀÚ°¡ ¡®_¡¯ ÀÎ Á÷¿ø ÀÌ¸§°ú ±Ş¿© Á¶È¸
+-- ì´ë¦„ ì¤‘ 3ë²ˆì§¸ ê¸€ìê°€ â€˜_â€™ ì¸ ì§ì› ì´ë¦„ê³¼ ê¸‰ì—¬ ì¡°íšŒ
 select ename, sal 
     from emp
-    -- ÀÌ¸§ÀÌ 4±ÛÀÚ ÀÌ»óÀÎ Á÷¿ø
+    -- ì´ë¦„ì´ 4ê¸€ì ì´ìƒì¸ ì§ì›
 --    where ename like '___%'  
     where ename like '__\_%' escape '\'
          or job like '__@_%' escape '@'
 -- like '__*_' escape '*'
 ;
--- EMAIL ID Áß ¡®_¡¯ÀÇ ¾ÕÀÌ 3ÀÚ¸®ÀÎ Á÷¿ø ÀÌ¸§, ÀÌ¸ŞÀÏ Á¶È¸
--- ¡®ÀÌ¡¯¾¾ ¼ºÀÌ ¾Æ´Ñ Á÷¿ø »ç¹ø, ÀÌ¸§, ÀÌ¸ŞÀÏ Á¶È¸
--- °ü¸®ÀÚµµ ¾ø°í ºÎ¼­ ¹èÄ¡µµ ¹ŞÁö ¾ÊÀº Á÷¿ø Á¶È¸ - *
+-- EMAIL ID ì¤‘ â€˜_â€™ì˜ ì•ì´ 3ìë¦¬ì¸ ì§ì› ì´ë¦„, ì´ë©”ì¼ ì¡°íšŒ
+-- â€˜ì´â€™ì”¨ ì„±ì´ ì•„ë‹Œ ì§ì› ì‚¬ë²ˆ, ì´ë¦„, ì´ë©”ì¼ ì¡°íšŒ
+-- ê´€ë¦¬ìë„ ì—†ê³  ë¶€ì„œ ë°°ì¹˜ë„ ë°›ì§€ ì•Šì€ ì§ì› ì¡°íšŒ - *
 select *
     from emp
     where mgr is null
         and deptno is null
 ;
--- °ü¸®ÀÚ°¡ ¾øÁö¸¸ º¸³Ê½º¸¦ Áö±Ş¹Ş´Â Á÷¿ø Á¶È¸
+-- ê´€ë¦¬ìê°€ ì—†ì§€ë§Œ ë³´ë„ˆìŠ¤ë¥¼ ì§€ê¸‰ë°›ëŠ” ì§ì› ì¡°íšŒ
 select *
     from emp
     where mgr is null
         and comm is not null
 ;
--- 20 ºÎ¼­¿Í 30 ºÎ¼­¿øµéÀÇ ÀÌ¸§, ºÎ¼­ÄÚµå, ±Ş¿© Á¶È¸
+-- 20 ë¶€ì„œì™€ 30 ë¶€ì„œì›ë“¤ì˜ ì´ë¦„, ë¶€ì„œì½”ë“œ, ê¸‰ì—¬ ì¡°íšŒ
 -- in
 select ename, deptno, sal
     from emp
@@ -146,52 +146,52 @@ select ename, deptno, sal
     -- deptno = 20 or deptno = 30
 ;
 
--- ANALYST ¶Ç´Â SALESMAN ÀÎ »ç¿ø Áß ±Ş¿©¸¦ 2500º¸´Ù ¸¹ÀÌ ¹Ş´Â Á÷¿øÀÇ ÀÌ¸§, ±Ş¿©, job Á¶È¸
+-- ANALYST ë˜ëŠ” SALESMAN ì¸ ì‚¬ì› ì¤‘ ê¸‰ì—¬ë¥¼ 2500ë³´ë‹¤ ë§ì´ ë°›ëŠ” ì§ì›ì˜ ì´ë¦„, ê¸‰ì—¬, job ì¡°íšŒ
 select ename, sal, job
     from emp
     where job in ('ANALYST', 'SALESMAN') 
         and sal >= 2500
     ;
--- »ç¿ø¸íÀÇ ±æÀÌ¿Í byteÅ©±â¸¦ Á¶È¸
+-- ì‚¬ì›ëª…ì˜ ê¸¸ì´ì™€ byteí¬ê¸°ë¥¼ ì¡°íšŒ
 select length(ename), lengthb(ename)
     from emp
     ;
---select ' a¾È ³çb ', length(' a¾È ³çb '), lengthb(' a¾È ³çb ')
-select trim(' a¾È ³çb '), length(trim(' a¾È ³çb ')), lengthb(trim(' a¾È ³çb ')) 
+--select ' aì•ˆ ë…•b ', length(' aì•ˆ ë…•b '), lengthb(' aì•ˆ ë…•b ')
+select trim(' aì•ˆ ë…•b '), length(trim(' aì•ˆ ë…•b ')), lengthb(trim(' aì•ˆ ë…•b ')) 
 --    from emp
     from dual
---   Å×ÀÌºí dual Àº ÀÓ½ÃÅ×ÀÌºí·Î ¿¬»êÀÌ³ª °£´ÜÇÑ ÇÔ¼ö °á°ú°ªÀ» Á¶È¸ÇÒ¶§ »ç¿ëÇÔ.
+--   í…Œì´ë¸” dual ì€ ì„ì‹œí…Œì´ë¸”ë¡œ ì—°ì‚°ì´ë‚˜ ê°„ë‹¨í•œ í•¨ìˆ˜ ê²°ê³¼ê°’ì„ ì¡°íšŒí• ë•Œ ì‚¬ìš©í•¨.
 ;
--- »ç¿ø¸íÀÇ ½ÃÀÛºÎºĞ S¿Í ³¡³ª´Â ºÎºĞ S ¸ğµÎ Á¦°ÅÇØÁÖ¼¼¿ä.
+-- ì‚¬ì›ëª…ì˜ ì‹œì‘ë¶€ë¶„ Sì™€ ëë‚˜ëŠ” ë¶€ë¶„ S ëª¨ë‘ ì œê±°í•´ì£¼ì„¸ìš”.
 select Rtrim(Ltrim(ename, 'S'), 'S') from emp;
--- Ltrim ¿¹½Ã 010 Á¦°Å
+-- Ltrim ì˜ˆì‹œ 010 ì œê±°
 
--- Lpad / Rpad Ã¤¿ö³Ö±â
--- enameÀÌ ÃÑ 10ÀÚ°¡ µÇµµ·Ï left ÂÊ¿¡ 'S'¸¦ Ã¤¿öÁÖ¼¼¿ä.
+-- Lpad / Rpad ì±„ì›Œë„£ê¸°
+-- enameì´ ì´ 10ìê°€ ë˜ë„ë¡ left ìª½ì— 'S'ë¥¼ ì±„ì›Œì£¼ì„¸ìš”.
 select Lpad(ename, 10, 'S') from emp;
--- enameÀÌ ÃÑ 10ÀÚ°¡ µÇµµ·Ï left ÂÊ¿¡ ' ' °ø¹é(default)¸¦ Ã¤¿öÁÖ¼¼¿ä.
+-- enameì´ ì´ 10ìê°€ ë˜ë„ë¡ left ìª½ì— ' ' ê³µë°±(default)ë¥¼ ì±„ì›Œì£¼ì„¸ìš”.
 select Lpad(ename, 10) from emp;
 
--- ¹®ÀÚ(ÄÃ·³) ÀÌ¾îºÙÀÌ±â
+-- ë¬¸ì(ì»¬ëŸ¼) ì´ì–´ë¶™ì´ê¸°
 select concat(ename, comm) from emp;
 select ename||comm from emp;
-select sal||'´Ş·¯' from emp;
-select concat(sal, '´Ş·¯') from emp;
--- substr ¾öÃ»Áß¿ä !!
+select sal||'ë‹¬ëŸ¬' from emp;
+select concat(sal, 'ë‹¬ëŸ¬') from emp;
+-- substr ì—„ì²­ì¤‘ìš” !!
 -- replace
 select replace(ename, 'AM', 'AB') from emp;
 
 
-select ename||'s family' , sal ||'¿ø'
+select ename||'s family' , sal ||'ì›'
 from emp;
-select sal, '¿ø'
+select sal, 'ì›'
 from emp;
 
--- sysdateÀº ÇÔ¼ö´Â ¾Æ´Ï³ª ¸í·É¾î°¡ ½ÇÇàµÇ´Â ½ÃÁ¡¿¡ °á°ú°ªÀ» Ãâ·ÂÇØÁÖ¹Ç·Î ÇÔ¼öÈ£Ãâ°ú °°ÀÌ µ¿ÀÛÇÔ.
+-- sysdateì€ í•¨ìˆ˜ëŠ” ì•„ë‹ˆë‚˜ ëª…ë ¹ì–´ê°€ ì‹¤í–‰ë˜ëŠ” ì‹œì ì— ê²°ê³¼ê°’ì„ ì¶œë ¥í•´ì£¼ë¯€ë¡œ í•¨ìˆ˜í˜¸ì¶œê³¼ ê°™ì´ ë™ì‘í•¨.
 select sysdate, add_months(sysdate, 1) from dual;
 select hiredate from emp;
 select hiredate, add_months(hiredate, 1) from emp;
--- 2023.07.10 (¿ù)
+-- 2023.07.10 (ì›”)
 select sysdate, to_char(sysdate, 'yyyy.mm.dd (dy) hh24:mi:ss')  from dual;
 select sysdate, to_char(sysdate, 'yyyy.mm.dd (day) hh24:mi:ss')  from dual;
 
@@ -202,12 +202,12 @@ select * from emp;
 -- year 2023 month 09 day 11 hour 13
 select to_date('2023091113', 'yyyymmddhh24') from dual;
 select add_months(to_date('2023091113', 'yyyymmddhh24'), 5) from dual;
-select next_day(to_date('2023091113', 'yyyymmddhh24'), '¼ö') from dual;  
+select next_day(to_date('2023091113', 'yyyymmddhh24'), 'ìˆ˜') from dual;  
 select next_day(to_date('2023091113', 'yyyymmddhh24'), 4) from dual;  
--- 1:ÀÏ¿äÀÏ, 2 ¿ù¿äÀÏ, 3 È­¿äÀÏ...
+-- 1:ì¼ìš”ì¼, 2 ì›”ìš”ì¼, 3 í™”ìš”ì¼...
 select last_day(to_date('2023091113', 'yyyymmddhh24')) from dual;
 
--- ¿À·ù select add_months('20230911132214', 4) from dual;
+-- ì˜¤ë¥˜ select add_months('20230911132214', 4) from dual;
 
 select to_char(empno, '000000') , '$'||trim(to_char(sal, '999,999,999,999'))
     from emp;
@@ -215,47 +215,47 @@ select to_char(empno, '000000') , trim(to_char(sal, 'L999,999,999,999'))
     from emp;
 
 select to_number('123,4567,89.01', '999,9999,99.99')*5 from dual;
--- ¿À·ù select '123,4567,8901'*5 from dual;
--- ¿À·ù select '123,456,789,012'*5 from dual;
+-- ì˜¤ë¥˜ select '123,4567,8901'*5 from dual;
+-- ì˜¤ë¥˜ select '123,456,789,012'*5 from dual;
 
--- Á÷¿øµéÀÇ Æò±Õ ±Ş¿©´Â ¾ó¸¶ÀÎÁö Á¶È¸
-select avg(sal) Æò±Õ±Ş¿© from emp;
+-- ì§ì›ë“¤ì˜ í‰ê·  ê¸‰ì—¬ëŠ” ì–¼ë§ˆì¸ì§€ ì¡°íšŒ
+select avg(sal) í‰ê· ê¸‰ì—¬ from emp;
 select sum(sal) sum from emp;
 select max(sal) max from emp;
 select min(sal) min from emp;
 select count(sal) count from emp;
--- ºÎ¼­º° Æò±Õ ±Ş¿© Á¶È¸
-select avg(sal) Æò±Õ±Ş¿©, deptno from emp group by deptno;
+-- ë¶€ì„œë³„ í‰ê·  ê¸‰ì—¬ ì¡°íšŒ
+select avg(sal) í‰ê· ê¸‰ì—¬, deptno from emp group by deptno;
 select sum(sal) sum, deptno from emp group by deptno;
 select max(sal) max, deptno from emp group by deptno;
 select min(sal) min, deptno from emp group by deptno;
 select count(sal) count, deptno from emp group by deptno;
 select count(*) count, deptno from emp group by deptno;
--- jobº° Æò±Õ ±Ş¿© Á¶È¸
-select avg(sal) Æò±Õ±Ş¿©, job from emp group by job;
+-- jobë³„ í‰ê·  ê¸‰ì—¬ ì¡°íšŒ
+select avg(sal) í‰ê· ê¸‰ì—¬, job from emp group by job;
 select sum(sal) sum, job from emp group by job;
 select max(sal) max, job from emp group by job;
 select min(sal) min, job from emp group by job;
 select count(sal) count, job from emp group by job;
 select count(*) count, job from emp group by job;
 
--- jobÀÌ ANALYST ÀÎ Á÷¿øÀÇ Æò±Õ ±Ş¿© Á¶È¸
-select avg(sal) Æò±Õ±Ş¿©, job 
+-- jobì´ ANALYST ì¸ ì§ì›ì˜ í‰ê·  ê¸‰ì—¬ ì¡°íšŒ
+select avg(sal) í‰ê· ê¸‰ì—¬, job 
     from emp 
     group by job
     having job='ANALYST'
 ;
-select avg(sal) Æò±Õ±Ş¿©
-    -- ¿À·ù, job 
+select avg(sal) í‰ê· ê¸‰ì—¬
+    -- ì˜¤ë¥˜, job 
     from emp 
     where job='ANALYST'
 ;
--- jobÀÌ CLERK ÀÎ ºÎ¼­º° Á÷¿øÀÇ Æò±Õ ±Ş¿© Á¶È¸
----- jobÀÌ CLERK ÀÎ ºÎ¼­º° Á÷¿ø
+-- jobì´ CLERK ì¸ ë¶€ì„œë³„ ì§ì›ì˜ í‰ê·  ê¸‰ì—¬ ì¡°íšŒ
+---- jobì´ CLERK ì¸ ë¶€ì„œë³„ ì§ì›
 select job, deptno, ename, sal
     from emp
     where job='CLERK';
--- jobÀÌ CLERK ÀÎ ºÎ¼­º° Á÷¿øÀÇ Æò±Õ ±Ş¿© Á¶È¸
+-- jobì´ CLERK ì¸ ë¶€ì„œë³„ ì§ì›ì˜ í‰ê·  ê¸‰ì—¬ ì¡°íšŒ
 select job, deptno, avg(sal)
 --, ename
     from emp
@@ -274,13 +274,13 @@ select ename, sal*12+nvl(comm,0)
     from emp
     order by 2 desc, 1 desc
     ;
--- job ¿À¸§Â÷¼ø
+-- job ì˜¤ë¦„ì°¨ìˆœ
 select * from emp
 --    order by job;
     order by 3;    
     
     
---- »ç¿ø¸í, ºÎ¼­¹øÈ£, ºÎ¼­¸í, ºÎ¼­À§Ä¡¸¦ Á¶È¸
+--- ì‚¬ì›ëª…, ë¶€ì„œë²ˆí˜¸, ë¶€ì„œëª…, ë¶€ì„œìœ„ì¹˜ë¥¼ ì¡°íšŒ
 select * from dept;
 select * from emp;
 select * 
@@ -295,7 +295,7 @@ select emp.ename, emp.deptno, dept.dname, dept.loc
     from emp
         join dept on emp.deptno = dept.deptno        
 ;
---ORA-00918: ¿­ÀÇ Á¤ÀÇ°¡ ¾Ö¸ÅÇÕ´Ï´Ù
+--ORA-00918: ì—´ì˜ ì •ì˜ê°€ ì• ë§¤í•©ë‹ˆë‹¤
 --00918. 00000 -  "column ambiguously defined"
 select ename, dept.deptno, dname, loc
     from emp
@@ -314,7 +314,7 @@ select ename, dept.deptno, dname, loc
     from emp, dept 
     where emp.deptno = dept.deptno
 ;
--- ºÎ¼­À§Ä¡°¡ DALLASÀÎ »ç¿ø¸í, ºÎ¼­¹øÈ£, ºÎ¼­¸í, À§Ä¡¸¦ Á¶È¸
+-- ë¶€ì„œìœ„ì¹˜ê°€ DALLASì¸ ì‚¬ì›ëª…, ë¶€ì„œë²ˆí˜¸, ë¶€ì„œëª…, ìœ„ì¹˜ë¥¼ ì¡°íšŒ
 select ename, dept.deptno, dname, loc
     from emp, dept 
     where emp.deptno = dept.deptno
@@ -327,7 +327,7 @@ select empno, loc
 
 select * from emp;
 select * from salgrade;
--- »ç¿øÀÇ ÀÌ¸§, »ç¹ø, sal, grade ¸¦ Á¶È¸
+-- ì‚¬ì›ì˜ ì´ë¦„, ì‚¬ë²ˆ, sal, grade ë¥¼ ì¡°íšŒ
 select e.ename, e.empno, e.sal, s.grade
     from emp e join salgrade s         
                 on e.sal between s.losal and s.hisal
@@ -343,7 +343,7 @@ select e.empno, e.ename, e.mgr, m.ename mgrname
     from emp e join emp m 
         on e.mgr = m.empno
 ;
--- °°Àº ÀÌ¸§ ÄÃ·³¸íÀÌ ³ªÅ¸³ªÁö ¾Êµµ·Ï º°Ä¥ »ç¿ë
+-- ê°™ì€ ì´ë¦„ ì»¬ëŸ¼ëª…ì´ ë‚˜íƒ€ë‚˜ì§€ ì•Šë„ë¡ ë³„ì¹  ì‚¬ìš©
 select e.empno boss, e.ename, m.empno emp, m.ename emps
     from emp e join emp m 
         on e.empno = m.mgr
@@ -352,16 +352,16 @@ select ename from emp where empno=7566
 ;
 select * from emp;
 
--- ÀÚ·áÇü
+-- ìë£Œí˜•
 create table t1( 
     c1 char(5), 
     c2 varchar2(5) 
 );
 insert into t1 values('12','12');
 insert into t1 values('12345','12345');
---ORA-12899: "SCOTT"."T1"."C1" ¿­¿¡ ´ëÇÑ °ªÀÌ ³Ê¹« Å­(½ÇÁ¦: 6, ÃÖ´ë°ª: 5)
+--ORA-12899: "SCOTT"."T1"."C1" ì—´ì— ëŒ€í•œ ê°’ì´ ë„ˆë¬´ í¼(ì‹¤ì œ: 6, ìµœëŒ€ê°’: 5)
 --insert into t1 values('123456','123456');
---ORA-12899: "SCOTT"."T1"."C2" ¿­¿¡ ´ëÇÑ °ªÀÌ ³Ê¹« Å­(½ÇÁ¦: 6, ÃÖ´ë°ª: 5)
+--ORA-12899: "SCOTT"."T1"."C2" ì—´ì— ëŒ€í•œ ê°’ì´ ë„ˆë¬´ í¼(ì‹¤ì œ: 6, ìµœëŒ€ê°’: 5)
 --insert into t1 values('12345','123456');
 commit;
 select * from t1;
@@ -376,11 +376,11 @@ desc emp;
 
 select rownum, e.* from emp e where deptno in (20, 30)
 ;
--- ¿À·ù
+-- ì˜¤ë¥˜
 select rownum, e.* from emp e where deptno in (20, 30)
     order by ename asc
 ;
--- ÇØ°á ¹æ¹ı
+-- í•´ê²° ë°©ë²•
 select rownum, e.* 
     from ( select * from emp order by ename asc ) e 
     where deptno in (20, 30)
@@ -398,13 +398,13 @@ select rownum, e.*
 select rownum rnum, e.* 
     from ( select * from emp where deptno in (20, 30) order by ename asc ) e 
     where rownum between 4 and 6
---    rnumÀº select -6 ¼öÇà¼ø¼­·Î where Àı¿¡¼­ »ç¿ëÇÒ ¼ö ¾øÀ½.
+--    rnumì€ select -6 ìˆ˜í–‰ìˆœì„œë¡œ where ì ˆì—ì„œ ì‚¬ìš©í•  ìˆ˜ ì—†ìŒ.
 ;
 select sysdate, e.* 
     from ( select * from emp where deptno in (20, 30) order by ename asc ) e 
     where sysdate > '2023-06-11'
 ;
--- ÇØ°á - ROWNUMÀ» Á¦´ë·Î »ç¿ëÇÏ±â À§ÇØ¼­´Â 2°³ÀÇ ÁßÃ¸ subquery(inline-view)ÇÊ¿äÇÔ.
+-- í•´ê²° - ROWNUMì„ ì œëŒ€ë¡œ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œëŠ” 2ê°œì˜ ì¤‘ì²© subquery(inline-view)í•„ìš”í•¨.
 -- 3page 7-9
 select *
     from (select rownum rnum, e.* 
@@ -418,7 +418,7 @@ with abc as (select rownum rnum, e.*
 select *
 from abc
 where rnum between 7 and 9
--- abc °¡ ¸¶Ä¡ »õ·Î¿î Å×ÀÌºí Ã³·³ »ç¿ë°¡´ÉÇÔ.
+-- abc ê°€ ë§ˆì¹˜ ìƒˆë¡œìš´ í…Œì´ë¸” ì²˜ëŸ¼ ì‚¬ìš©ê°€ëŠ¥í•¨.
 --    and sal > (select avg(sal) from abc)
 ;
 
@@ -434,15 +434,15 @@ where rnum between 7 and 9
 ;
 
 --20230712
--- 03- 11. GRADEº°·Î Æò±Õ±Ş¿©¿¡ 10ÇÁ·Î³»¿ÜÀÇ ±Ş¿©¸¦ ¹Ş´Â »ç¿ø¸íÀ» Á¶È¸ - Á¤·Ä
--- where ¿¡ subquery È°¿ë
+-- 03- 11. GRADEë³„ë¡œ í‰ê· ê¸‰ì—¬ì— 10í”„ë¡œë‚´ì™¸ì˜ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì‚¬ì›ëª…ì„ ì¡°íšŒ - ì •ë ¬
+-- where ì— subquery í™œìš©
 
--- select¿¡¼­ rownum ¹İµå½Ã º°Äª
--- select¿¡¼­ ÇÔ¼ö»ç¿ëÇÑ °æ¿ì ¹İµå½Ã º°Äª
--- with »ç¿ë
+-- selectì—ì„œ rownum ë°˜ë“œì‹œ ë³„ì¹­
+-- selectì—ì„œ í•¨ìˆ˜ì‚¬ìš©í•œ ê²½ìš° ë°˜ë“œì‹œ ë³„ì¹­
+-- with ì‚¬ìš©
 
---  from Àı subquery
-select grade, ename "10ÇÁ·Î³»¿Ü"
+--  from ì ˆ subquery
+select grade, ename "10í”„ë¡œë‚´ì™¸"
     from emp e join (
             select floor(avg(e2.sal)*0.9) minsal, floor(avg(e2.sal)*1.1) maxsal, floor(avg(e2.sal)) avgsal, s2.grade, s2.losal, s2.hisal
                 from emp e2 join salgrade s2 on e2.sal between s2.losal and s2.hisal
@@ -458,26 +458,26 @@ with abc4 as (
                             from emp e2 join salgrade s2 on e2.sal between s2.losal and s2.hisal
                             group by s2.grade , s2.losal, s2.hisal
             )
-select grade, ename "10ÇÁ·Î³»¿Ü"
+select grade, ename "10í”„ë¡œë‚´ì™¸"
     from emp e join abc4
         on e.sal between minsal and maxsal
     order by grade asc, 2 asc
 ;
 
 
--- group by »ç¿ë½Ã 
--- select ÄÃ·³¸íÀ¸·Î´Â group by¿¡ »ç¿ëµÈ ÄÃ·³¸í ÀÛ¼º°¡´É. ±×¸®°í ±×·ìÇÔ¼ö »ç¿ë°¡´É.
+-- group by ì‚¬ìš©ì‹œ 
+-- select ì»¬ëŸ¼ëª…ìœ¼ë¡œëŠ” group byì— ì‚¬ìš©ëœ ì»¬ëŸ¼ëª… ì‘ì„±ê°€ëŠ¥. ê·¸ë¦¬ê³  ê·¸ë£¹í•¨ìˆ˜ ì‚¬ìš©ê°€ëŠ¥.
             select floor(avg(e2.sal)*0.9) minsal, floor(avg(e2.sal)*1.1) maxsal, floor(avg(e2.sal)) avgsal, s2.grade, s2.losal, s2.hisal
                 from emp e2 join salgrade s2 on e2.sal between s2.losal and s2.hisal
                 group by s2.grade , s2.losal, s2.hisal
                 ;
 
-select a.grade as grade, b.ename as Æò±Õ10ÇÁ·Î³»¿ÜÀÎ»ç¿ø 
+select a.grade as grade, b.ename as í‰ê· 10í”„ë¡œë‚´ì™¸ì¸ì‚¬ì› 
     from  (select s.grade as grade, avg(sal) as avgsal from emp e join salgrade s 
     on e.sal between s.losal and s.hisal group by s.grade) a 
     join emp b  
     on b.sal between a.avgsal * 0.9 and a.avgsal * 1.1
-    order by a.grade asc, Æò±Õ10ÇÁ·Î³»¿ÜÀÎ»ç¿ø asc;
+    order by a.grade asc, í‰ê· 10í”„ë¡œë‚´ì™¸ì¸ì‚¬ì› asc;
 
 
 
@@ -486,10 +486,10 @@ select * from salgrade;
 select * from dept;
 
 
---Áö¿ª Àç³­ Áö¿ø±İÀ» »ç¿øµé¿¡°Ô Ãß°¡ Áö±Ş
---Á¶°Ç :
---1. NEW YORKÁö¿ªÀº SALÀÇ 2%, DALLASÁö¿ªÀº SALÀÇ 5%, CHICAGOÁö¿ªÀº SALÀÇ 3%, BOSTONÁö¿ªÀº SALÀÇ 7%
---2. Ãß°¡Áö¿ø±İÀÌ ¸¹Àº »ç¶÷ ¼øÀ¸·Î Á¤·Ä
+--ì§€ì—­ ì¬ë‚œ ì§€ì›ê¸ˆì„ ì‚¬ì›ë“¤ì—ê²Œ ì¶”ê°€ ì§€ê¸‰
+--ì¡°ê±´ :
+--1. NEW YORKì§€ì—­ì€ SALì˜ 2%, DALLASì§€ì—­ì€ SALì˜ 5%, CHICAGOì§€ì—­ì€ SALì˜ 3%, BOSTONì§€ì—­ì€ SALì˜ 7%
+--2. ì¶”ê°€ì§€ì›ê¸ˆì´ ë§ì€ ì‚¬ëŒ ìˆœìœ¼ë¡œ ì •ë ¬
 select empno, ename, sal, loc,
         sal + case loc
             when 'NEW YORK' then sal*0.02
@@ -513,7 +513,7 @@ select empno, ename, sal, loc,
 --    order by (sal_subsidy - sal) desc
     order by decode(loc,  'NEW YORK', sal*0.02,  'DALLAS', sal*0.05, 'CHICAGO', sal*0.03, 'BOSTON' ,sal*0.07, 0) desc
 ;
---SALESMAN µéÀÇ ±Ş¿©¿Í °°Àº ±Ş¿©¸¦ ¹Ş´Â »ç¿øÀ» Á¶È¸
+--SALESMAN ë“¤ì˜ ê¸‰ì—¬ì™€ ê°™ì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì‚¬ì›ì„ ì¡°íšŒ
 select empno, ename, sal
     from emp
     where sal > all (select sal from emp where job='SALESMAN')
@@ -521,7 +521,7 @@ select empno, ename, sal
 ;
 select ename,sal from emp where job='SALESMAN' ;
 
---°ü¸®ÀÚ·Î µî·ÏµÇ¾î ÀÖ´Â »ç¿øµéÀ» Á¶È¸
+--ê´€ë¦¬ìë¡œ ë“±ë¡ë˜ì–´ ìˆëŠ” ì‚¬ì›ë“¤ì„ ì¡°íšŒ
 select empno, ename
     from emp e
     where exists ( select empno from emp e2 where e.empno = e2.mgr)
@@ -531,21 +531,21 @@ select distinct e.empno, e.ename
     from emp e join emp e2
         on e.empno = e2.mgr
 ;
--- join ´ëºñ »ó°üÄõ¸®»ç¿ë½Ã ¼Óµµ Çâ»ó
+-- join ëŒ€ë¹„ ìƒê´€ì¿¼ë¦¬ì‚¬ìš©ì‹œ ì†ë„ í–¥ìƒ
 
 
---ºÎ¼­ ¹øÈ£°¡ 30ÀÎ »ç¿øµéÀÇ ±Ş¿©¿Í ºÎ¼­¹øÈ£¸¦ ¹­¾î ¸ŞÀÎ Äõ¸®·Î Àü´ŞÇØ º¸ÀÚ.
+--ë¶€ì„œ ë²ˆí˜¸ê°€ 30ì¸ ì‚¬ì›ë“¤ì˜ ê¸‰ì—¬ì™€ ë¶€ì„œë²ˆí˜¸ë¥¼ ë¬¶ì–´ ë©”ì¸ ì¿¼ë¦¬ë¡œ ì „ë‹¬í•´ ë³´ì.
 select *
     from emp
     where (deptno, sal) in (select deptno, sal from emp where deptno=30)
 ;
--- ºÎ¼­º° Æò±Õ±Ş¿©¿Í Á÷¿øµé Á¤º¸¸¦ Á¶È¸ÇØÁÖ¼¼¿ä.
+-- ë¶€ì„œë³„ í‰ê· ê¸‰ì—¬ì™€ ì§ì›ë“¤ ì •ë³´ë¥¼ ì¡°íšŒí•´ì£¼ì„¸ìš”.
 select e.*, 
-        -- ½ºÄ®¶ó ¼­ºêÄõ¸® ÀÛ¼ºµÇ¾î¾ß ÇÔ.
+        -- ìŠ¤ì¹¼ë¼ ì„œë¸Œì¿¼ë¦¬ ì‘ì„±ë˜ì–´ì•¼ í•¨.
     (select trunc(avg(sal)) from emp e2 where e2.deptno=e.deptno) avgsal
     from emp e
     ;
--- Á÷¿ø Á¤º¸¿Í ºÎ¼­¹øÈ£, ºÎ¼­¸í, ºÎ¼­À§Ä¡
+-- ì§ì› ì •ë³´ì™€ ë¶€ì„œë²ˆí˜¸, ë¶€ì„œëª…, ë¶€ì„œìœ„ì¹˜
 select ename, deptno, dname, loc
     from emp join dept using(deptno)
 ;
@@ -555,7 +555,7 @@ select ename, deptno,
     from emp e
 ;
 
--- SALESMAN °ú 'MANAGER' ¸¦ Á¶È¸ÇØÁÖ¼¼¿ä.
+-- SALESMAN ê³¼ 'MANAGER' ë¥¼ ì¡°íšŒí•´ì£¼ì„¸ìš”.
 select * from emp
     where job='SALESMAN' or job='MANAGER';
 select * from emp
@@ -568,21 +568,21 @@ select * from emp    where job='MANAGER'
 select empno, ename, job from emp    where job='SALESMAN'
 union
 select mgr, ename, job from emp    where job='MANAGER'
---ORA-01790: ´ëÀÀÇÏ´Â ½Ä°ú °°Àº µ¥ÀÌÅÍ À¯ÇüÀÌ¾î¾ß ÇÕ´Ï´Ù
+--ORA-01790: ëŒ€ì‘í•˜ëŠ” ì‹ê³¼ ê°™ì€ ë°ì´í„° ìœ í˜•ì´ì–´ì•¼ í•©ë‹ˆë‹¤
 --01790. 00000 -  "expression must have same datatype as corresponding expression"
 --select ename, mgr, job from emp    where job='MANAGER'
 ;
--- ±Ş¿©°¡ 1000¹Ì¸¸ÀÎ Á÷¿ø, 2000 ¹Ì¸¸ÀÎ Á÷¿ø Á¶È¸- Áßº¹ Æ÷ÇÔ °á°ú
+-- ê¸‰ì—¬ê°€ 1000ë¯¸ë§Œì¸ ì§ì›, 2000 ë¯¸ë§Œì¸ ì§ì› ì¡°íšŒ- ì¤‘ë³µ í¬í•¨ ê²°ê³¼
 select empno, ename, sal from emp where sal < 1000
 union all
 select empno, ename, sal from emp where sal < 2000
 ;
--- ±Ş¿©°¡ 1000 ÃÊ°úÀÎ Á÷¿ø, 2000 ¹Ì¸¸ÀÎ Á÷¿ø Á¶È¸ - intersect
+-- ê¸‰ì—¬ê°€ 1000 ì´ˆê³¼ì¸ ì§ì›, 2000 ë¯¸ë§Œì¸ ì§ì› ì¡°íšŒ - intersect
 select empno, ename, sal from emp where sal > 1000
 intersect
 select empno, ename, sal from emp where sal < 2000
 ;
--- 2000 ¹Ì¸¸ÀÎ Á÷¿øÀ» Á¦¿ÜÇÏ°í Á¶È¸ - minus
+-- 2000 ë¯¸ë§Œì¸ ì§ì›ì„ ì œì™¸í•˜ê³  ì¡°íšŒ - minus
 select empno, ename, sal from emp
 minus
 select empno, ename, sal from emp where sal < 2000
@@ -596,7 +596,7 @@ select empno, ename, sal from emp e
 
 -- DDL
 -- comment
-comment on column emp.mgr is '°ü¸®ÀÚ»ç¹ø';
+comment on column emp.mgr is 'ê´€ë¦¬ìì‚¬ë²ˆ';
 
 desc emp;
 desc user_constraints;
@@ -622,7 +622,7 @@ commit;
 insert into view_emp1 values(8002, 'EJ2', 'KH', 7788, sysdate, 3000, 700, 40);
 commit;
 create table emp_copy20 as 
-select empno, ename »ç¿ø¸í, job, hiredate, sal
+select empno, ename ì‚¬ì›ëª…, job, hiredate, sal
 from emp
 where deptno=20
 ;
@@ -631,7 +631,7 @@ desc emp_copy20;
 select * from user_constraints;
 
 desc emp;
---insert into emp (ÄÃ·³¸í1, ÄÃ·³¸í2,...) values (°ª1, °ª2,...);
+--insert into emp (ì»¬ëŸ¼ëª…1, ì»¬ëŸ¼ëª…2,...) values (ê°’1, ê°’2,...);
 insert into emp (ename, empno, job, mgr, hiredate, deptno) 
     values ('EJK', 8003, 'T', 7788,  sysdate, 40);
 select * from emp;
@@ -641,23 +641,23 @@ commit;
 update emp
     set mgr=7788
     where ename='EJK2'
-    -- update ¸í·É¹®ÀÇ whereÀı¿¡´Â ÄÃ·³¸íPK=°ª
-    -- whereÀı¿¡´Â ÄÃ·³¸íPK=°ª  ==> resultset Àº ´ÜÀÏÇà
-    -- whereÀı¿¡´Â ÄÃ·³¸íUK=°ª  ==> resultset Àº ´ÜÀÏÇà
+    -- update ëª…ë ¹ë¬¸ì˜ whereì ˆì—ëŠ” ì»¬ëŸ¼ëª…PK=ê°’
+    -- whereì ˆì—ëŠ” ì»¬ëŸ¼ëª…PK=ê°’  ==> resultset ì€ ë‹¨ì¼í–‰
+    -- whereì ˆì—ëŠ” ì»¬ëŸ¼ëª…UK=ê°’  ==> resultset ì€ ë‹¨ì¼í–‰
 ;
--- 20¹ø ºÎ¼­ÀÇ mgr°¡ SMITH 7908 ·Î Á¶Á÷°³Æí
+-- 20ë²ˆ ë¶€ì„œì˜ mgrê°€ SMITH 7908 ë¡œ ì¡°ì§ê°œí¸
 update emp 
     set mgr=7908
     where deptno=20
-;  -- °á°ú 5
+;  -- ê²°ê³¼ 5
 update emp 
     set mgr=7908
     where deptno=70
-;  -- °á°ú 0
+;  -- ê²°ê³¼ 0
 
 rollback;
 
--- 30¹ø ºÎ¼­ÀÇ mgr°¡ SMITH 7908 ·Î Á¶Á÷°³Æí
+-- 30ë²ˆ ë¶€ì„œì˜ mgrê°€ SMITH 7908 ë¡œ ì¡°ì§ê°œí¸
 update emp 
     set mgr=7908
     where deptno=30
@@ -668,17 +668,17 @@ update emp
     where ename='EJK2'
 ;
 select * from emp;
--- ¿©·¯ DML ¸í·É¾î µéÀ» ¹­¾î¼­ ÇÏ³ªÀÇ Çàµ¿(ÀÏ)Ã³¸®¸¦ ÇÏ°íÀÚ ÇÒ¶§ commit / rollback À» ÀûÀıÈ÷ »ç¿ë.
--- 1 DML ¸í·É¾î°¡ ÇÏ³ªÀÇ Çàµ¿(ÀÏ) Ã³¸® ´ÜÀ§¶ó¸é DML - commit;
--- 2 ÀÌ»ó DML ¸í·É¾î°¡ ÇÏ³ªÀÇ Çàµ¿(ÀÏ) Ã³¸® ´ÜÀ§¶ó¸é DML ¸ğµÎ°¡ ¼º°øÇØ¾ß - commit;, ±×Áß ÀÏºÎ°¡ ½ÇÆĞÇß´Ù¸é - rollback
--- ÇÏ³ªÀÇ Çàµ¿(ÀÏ) Ã³¸®´ÜÀ§¸¦ Transaction Æ®·£Àè¼Ç - commit/rollback ¸í·É¾î°¡ ¼öÇàµÇ´Â ´ÜÀ§
+-- ì—¬ëŸ¬ DML ëª…ë ¹ì–´ ë“¤ì„ ë¬¶ì–´ì„œ í•˜ë‚˜ì˜ í–‰ë™(ì¼)ì²˜ë¦¬ë¥¼ í•˜ê³ ì í• ë•Œ commit / rollback ì„ ì ì ˆíˆ ì‚¬ìš©.
+-- 1 DML ëª…ë ¹ì–´ê°€ í•˜ë‚˜ì˜ í–‰ë™(ì¼) ì²˜ë¦¬ ë‹¨ìœ„ë¼ë©´ DML - commit;
+-- 2 ì´ìƒ DML ëª…ë ¹ì–´ê°€ í•˜ë‚˜ì˜ í–‰ë™(ì¼) ì²˜ë¦¬ ë‹¨ìœ„ë¼ë©´ DML ëª¨ë‘ê°€ ì„±ê³µí•´ì•¼ - commit;, ê·¸ì¤‘ ì¼ë¶€ê°€ ì‹¤íŒ¨í–ˆë‹¤ë©´ - rollback
+-- í•˜ë‚˜ì˜ í–‰ë™(ì¼) ì²˜ë¦¬ë‹¨ìœ„ë¥¼ Transaction íŠ¸ëœì­ì…˜ - commit/rollback ëª…ë ¹ì–´ê°€ ìˆ˜í–‰ë˜ëŠ” ë‹¨ìœ„
 -- commit;
 -- rollback;
 
 commit;
 select * from emp;
 select * from dept;
--- 20¹ø ºÎ¼­¿¡ ½ÅÀÔ»ç¿ø EJ3 (8005), EJ4(5006) À» ÅõÀÔÇÔ.
+-- 20ë²ˆ ë¶€ì„œì— ì‹ ì…ì‚¬ì› EJ3 (8005), EJ4(5006) ì„ íˆ¬ì…í•¨.
 insert into emp (ename, empno, deptno) values ('EJ3', 8005, 20);
 insert into emp (ename, empno, deptno) values ('EJ4', 8006, 20);
 insert all
@@ -698,7 +698,7 @@ insert into emp (ename, empno, deptno) values ('EJ8', (select max(empno) maxempn
 select * from emp;
 select * from dept;
 
--- »õ·Î¿î ºÎ¼­ 50¹øÀÌ ¸¸µé¾îÁö°í ±× ºÎ¼­¿¡ ½ÅÀÔ»ç¿ø EJ3 (8005), EJ4(5006) À» ÅõÀÔÇÔ.
+-- ìƒˆë¡œìš´ ë¶€ì„œ 50ë²ˆì´ ë§Œë“¤ì–´ì§€ê³  ê·¸ ë¶€ì„œì— ì‹ ì…ì‚¬ì› EJ3 (8005), EJ4(5006) ì„ íˆ¬ì…í•¨.
 insert all
     into dept (deptno) values (newdeptno)
     into emp (ename, empno, deptno) values ('EJ9', (select max(empno) maxempno from emp)+1, newdeptno)
@@ -707,7 +707,7 @@ select max(deptno)+10 newdeptno from dept
 ;
 rollback;
 create table dept_copy2 as select * from dept where 1<>1;
--- DDL ¸í·É¾î ¼öÇà½Ã commit Çàµ¿µµ ÇÔ²² ¼öÇàµÊ.
+-- DDL ëª…ë ¹ì–´ ìˆ˜í–‰ì‹œ commit í–‰ë™ë„ í•¨ê»˜ ìˆ˜í–‰ë¨.
 
 delete from dept where deptno = 40;
 ALTER TABLE emp DISABLE CONSTRAINT FK_DEPTNO CASCADE;
@@ -751,7 +751,7 @@ select * from user_cons_columns;
 select * from user_users;
 
 
--- T2Å×ÀÌºíÀÌ ¾øÀ½¿¡µµ view »ı¼º
+-- T2í…Œì´ë¸”ì´ ì—†ìŒì—ë„ view ìƒì„±
 create or replace force  view view_t2
     as select * from t2;
 create force  view view_t2
@@ -766,7 +766,7 @@ create or replace view view_emp_readonly
     with read only
 ;
 insert into view_emp_readonly (empno, ename, deptno) values(8100, 'EJEJ', 30);
---SQL ¿À·ù: ORA-42399: ÀĞ±â Àü¿ë ºä¿¡¼­´Â DML ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ¾ø½À´Ï´Ù.
+--SQL ì˜¤ë¥˜: ORA-42399: ì½ê¸° ì „ìš© ë·°ì—ì„œëŠ” DML ì‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 --42399.0000 - "cannot perform a DML operation on a read-only view"
 
 create or replace view view_emp_checkoption
@@ -776,7 +776,7 @@ create or replace view view_emp_checkoption
     with check option
 ;
 select * from view_emp_checkoption;
---ORA-01402: ºäÀÇ WITH CHECK OPTIONÀÇ Á¶°Ç¿¡ À§¹è µË´Ï´Ù
+--ORA-01402: ë·°ì˜ WITH CHECK OPTIONì˜ ì¡°ê±´ì— ìœ„ë°° ë©ë‹ˆë‹¤
 update view_emp_checkoption set deptno=20 where empno=7499;
 update view_emp_checkoption set comm=350 where empno=7499;
 update emp set deptno=20 where empno=7499;
@@ -784,16 +784,16 @@ update emp set deptno=20 where empno=7499;
 
 create sequence seq_t1;
 select seq_t1.currval from dual;
---ORA-08002: ½ÃÄö½º SEQ_T1.CURRVALÀº ÀÌ ¼¼¼Ç¿¡¼­´Â Á¤ÀÇ µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù
+--ORA-08002: ì‹œí€€ìŠ¤ SEQ_T1.CURRVALì€ ì´ ì„¸ì…˜ì—ì„œëŠ” ì •ì˜ ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤
 --08002. 00000 -  "sequence %s.CURRVAL is not yet defined in this session"
 --*Cause:    sequence CURRVAL has been selected before sequence NEXTVAL
 --*Action:   select NEXTVAL from the sequence before selecting CURRVAL
 select seq_t1.nextval from dual;  
 select seq_t1.currval from dual;
--- sequenceÀÇ nextval Àº uniqueÇÑ °ª¿¡ insert ½Ã¿¡ È°¿ëµÊ.
--- sequence ÀÌ¸§À» ÁöÀ»¶§ SEQ_Å×ÀÌºí¸í_ÄÃ·³¸í
--- ¿¹¸¦ µé¾î empÅ×ÀÌºí¿¡ empno¿¡ Àû¿ë - SEQ_EMP_EMPNO
--- insert into emp values ( SEQ_EMP_EMPNO.nextval , 'È«±æµ¿',....);
+-- sequenceì˜ nextval ì€ uniqueí•œ ê°’ì— insert ì‹œì— í™œìš©ë¨.
+-- sequence ì´ë¦„ì„ ì§€ì„ë•Œ SEQ_í…Œì´ë¸”ëª…_ì»¬ëŸ¼ëª…
+-- ì˜ˆë¥¼ ë“¤ì–´ empí…Œì´ë¸”ì— empnoì— ì ìš© - SEQ_EMP_EMPNO
+-- insert into emp values ( SEQ_EMP_EMPNO.nextval , 'í™ê¸¸ë™',....);
 select * from user_sequences;
 --
 select * from user_indexes;
@@ -801,18 +801,18 @@ select * from user_ind_columns;
 select * from user_constraints;
 select * from user_cons_columns;
 
--- a. ÇÔ¼ö ±â¹İ index
+-- a. í•¨ìˆ˜ ê¸°ë°˜ index
 create index idx_emp_sal on emp(sal);
 create index idx_emp_sal on emp(sal*12);
--- where Àı¿¡ sal*12 >5000 Ã³·³ Á¶°Ç¹®¿¡ »ç¿ëÀÌ ºó¹øÇÒ¶§ index¸¦ °É¾îÁÜ
+-- where ì ˆì— sal*12 >5000 ì²˜ëŸ¼ ì¡°ê±´ë¬¸ì— ì‚¬ìš©ì´ ë¹ˆë²ˆí• ë•Œ indexë¥¼ ê±¸ì–´ì¤Œ
 create index idx_emp_sal_comm on emp(sal,comm);
--- where Àı¿¡ sal >5000 and comm >200 Ã³·³ Á¶°Ç¹®¿¡ »ç¿ëÀÌ ºó¹øÇÒ¶§ index¸¦ °É¾îÁÜ
+-- where ì ˆì— sal >5000 and comm >200 ì²˜ëŸ¼ ì¡°ê±´ë¬¸ì— ì‚¬ìš©ì´ ë¹ˆë²ˆí• ë•Œ indexë¥¼ ê±¸ì–´ì¤Œ
 select * from emp where sal>3000 and comm is not null;
--- b. bitmap ±â¹İ index - µµ¸ŞÀÎÀÇ Á¾·ù°¡ ÀûÀ»¶§ µ¿ÀÏÇÑ µ¥ÀÌÅÍ°¡ ¸¹Àº °æ¿ì- gender ³²¿©
+-- b. bitmap ê¸°ë°˜ index - ë„ë©”ì¸ì˜ ì¢…ë¥˜ê°€ ì ì„ë•Œ ë™ì¼í•œ ë°ì´í„°ê°€ ë§ì€ ê²½ìš°- gender ë‚¨ì—¬
 create bitmap index idx_emp_deptno on emp(deptno);
 create bitmap index idx_emp_deptno_job on emp(job,deptno);
 -- I. unique
- -- insert ¿À·ùÃ¼Å©ºü¸§.
+ -- insert ì˜¤ë¥˜ì²´í¬ë¹ ë¦„.
 -- II. non-unique
 alter index pk_emp rebuild;
 
@@ -820,7 +820,7 @@ select * from DEPT2_PUBLIC;
 select * from KH.DEPARTMENT;
 
 create sequence seq_tb1_c1 start with 10 increment by 10 maxvalue 90 minvalue 10 nocycle cache 20;
---ORA-08002: ½ÃÄö½º SEQ_TB1_C1.CURRVALÀº ÀÌ ¼¼¼Ç¿¡¼­´Â Á¤ÀÇ µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù
+--ORA-08002: ì‹œí€€ìŠ¤ SEQ_TB1_C1.CURRVALì€ ì´ ì„¸ì…˜ì—ì„œëŠ” ì •ì˜ ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤
 --08002. 00000 -  "sequence %s.CURRVAL is not yet defined in this session"
 --*Cause:    sequence CURRVAL has been selected before sequence NEXTVAL
 --*Action:   select NEXTVAL from the sequence before selecting CURRVAL
@@ -830,49 +830,49 @@ select seq_tb1_c1.nextval from dual;
 select seq_tb1_c1.currval from dual;
 
 select seq_tb1_c1.nextval from dual;
---ORA-08004: ½ÃÄö½º SEQ_TB1_C1.NEXTVAL exceeds MAXVALUEÀº »ç·Ê·Î µÉ ¼ö ¾ø½À´Ï´Ù
+--ORA-08004: ì‹œí€€ìŠ¤ SEQ_TB1_C1.NEXTVAL exceeds MAXVALUEì€ ì‚¬ë¡€ë¡œ ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤
 --08004. 00000 -  "sequence %s.NEXTVAL %s %sVALUE and cannot be instantiated"
 --*Cause:    instantiating NEXTVAL would violate one of MAX/MINVALUE
 --*Action:   alter the sequence so that a new value can be requested
 
 -- ROLE
--- Á¢¼Ó°ü·ÃµÈ ¼³Á¤- oracle 12ÀÌÈÄ ¹öÁ¯¿¡¼­ false »óÅÂ·Î Á¢¼ÓµÊ.
+-- ì ‘ì†ê´€ë ¨ëœ ì„¤ì •- oracle 12ì´í›„ ë²„ì ¼ì—ì„œ false ìƒíƒœë¡œ ì ‘ì†ë¨.
 alter session set "_ORACLE_SCRIPT"=false;  
 create role role_scott_manager;
 create user c##kh2 identified by kh2;
 
---	ºĞ¼®ÇÔ¼ö Á¾·ù
---	a. ¼øÀ§ÇÔ¼ö : RANK(), DENSE_RANK(), ROW_NUMBER(), NTILE()
---	b. Áı°èÇÔ¼ö = ±×·ìÇÔ¼ö: COUNT(), SUM(), AVG(), MIN(), MAX()
---	c. ±×·ìÇÔ¼ö = Áı°èÇÔ¼ö group by : ROLLUP()+grouping(), CUBE()+grouping(), GROUPING SET() Âü°í ¡°3_GROUP BY_HAVING4.pdf¡±
+--	ë¶„ì„í•¨ìˆ˜ ì¢…ë¥˜
+--	a. ìˆœìœ„í•¨ìˆ˜ : RANK(), DENSE_RANK(), ROW_NUMBER(), NTILE()
+--	b. ì§‘ê³„í•¨ìˆ˜ = ê·¸ë£¹í•¨ìˆ˜: COUNT(), SUM(), AVG(), MIN(), MAX()
+--	c. ê·¸ë£¹í•¨ìˆ˜ = ì§‘ê³„í•¨ìˆ˜ group by : ROLLUP()+grouping(), CUBE()+grouping(), GROUPING SET() ì°¸ê³  â€œ3_GROUP BY_HAVING4.pdfâ€
 --	d. 1 : CUME_DIST(), RATIO_TO_REPORT()
 --	e. \\\LAG(), ///LEAD()
 --	f. FIRST_VALUE(), LAST_VALUE()
 --	
---	"À§ c Á¦¿ÜÇÑ 
---ºĞ¼®ÇÔ¼öÀÇ À©µµ¿ì-¹üÀ§(¿µ¿ª) Á¤ÇÏ±â"
---	a,b,d,e,f ºĞ¼®ÇÔ¼ö
---	OVER()  ==> window - À©µµ¿ì ¿µ¿ª Àı
+--	"ìœ„ c ì œì™¸í•œ 
+--ë¶„ì„í•¨ìˆ˜ì˜ ìœˆë„ìš°-ë²”ìœ„(ì˜ì—­) ì •í•˜ê¸°"
+--	a,b,d,e,f ë¶„ì„í•¨ìˆ˜
+--	OVER()  ==> window - ìœˆë„ìš° ì˜ì—­ ì ˆ
 --1	OVER()
---2	OVER( PARTITION BY ÄÃ1 )
---3	OVER( ORDER BY ÄÃ1 DESC, ÄÃ2 ASC, ÄÃ3 DESC )
---4	OVER( PARTITION BY ÄÃ1 ORDER BY ÄÃ1 DESC, ÄÃ2, ÄÃ3 )
---5	OVER( PARTITION BY ÄÃ1 ROWS ¾Æ·¡ Âü°í)
---5-1	OVER( PARTITION BY ÄÃ1 ROWS ~ )
---5-2	OVER( PARTITION BY ÄÃ1 ROWS BETWEEN ~ AND ~ )
+--2	OVER( PARTITION BY ì»¬1 )
+--3	OVER( ORDER BY ì»¬1 DESC, ì»¬2 ASC, ì»¬3 DESC )
+--4	OVER( PARTITION BY ì»¬1 ORDER BY ì»¬1 DESC, ì»¬2, ì»¬3 )
+--5	OVER( PARTITION BY ì»¬1 ROWS ì•„ë˜ ì°¸ê³ )
+--5-1	OVER( PARTITION BY ì»¬1 ROWS ~ )
+--5-2	OVER( PARTITION BY ì»¬1 ROWS BETWEEN ~ AND ~ )
 --~	UNBOUNDED PRECEDING
 --~	UNBOUNDED FOLLOWING
 --~	CURRENT ROW
 --~	2 PRECEDING
 --~	1 FOLLOWING
---6	OVER( PARTITION BY ÄÃ1 ORDER BY ÄÃ1 DESC, ÄÃ2, ÄÃ3 ROWS BETWEEN ~ AND ~ )
+--6	OVER( PARTITION BY ì»¬1 ORDER BY ì»¬1 DESC, ì»¬2, ì»¬3 ROWS BETWEEN ~ AND ~ )
 
--- window - over ( partition by ..) : ±âÁ¸ group by ´ÜÁ¡ °³¼±
+-- window - over ( partition by ..) : ê¸°ì¡´ group by ë‹¨ì  ê°œì„ 
 select deptno, empno, ename, sal
         , sum(sal) over(partition by deptno) sumsal 
     from emp;
 
--- window - over( order by ..) : ±âÁ¸ rownum ´ëºñ °£°á, - µ¿ÀÏ¼øÀ§°¡ ÀÖÀ»¶§ ´ÙÀ½¼øÀ§°ªÀÌ +1 dense_rank()
+-- window - over( order by ..) : ê¸°ì¡´ rownum ëŒ€ë¹„ ê°„ê²°, - ë™ì¼ìˆœìœ„ê°€ ìˆì„ë•Œ ë‹¤ìŒìˆœìœ„ê°’ì´ +1 dense_rank()
 select deptno, empno, ename, sal
         , rank() over(order by sal asc) ranksal
         , dense_rank() over(order by sal asc) dranksal
@@ -887,9 +887,9 @@ select dense_rank(2450) within group (order by sal asc) clarksal
 select deptno, empno, ename, sal
         , rn ranksal
     from (select rownum rn, t1.*  from (select deptno, empno, ename, sal from  emp order by sal asc) t1) ;
---  ºÎ¼­ÄÚµå°¡ '30'ÀÎ Á÷¿øÀÇ ÀÌ¸§, ±Ş¿©, ±Ş¿©¿¡´ëÇÑ´©ÀûºĞ»ê À» Á¶È¸
---  ºÎ¼­º° Á÷¿øÀÇ ÀÌ¸§, ±Ş¿©, ±Ş¿©¿¡´ëÇÑ´©ÀûºĞ»ê À» Á¶È¸
---d. 1 : ´©ÀûºĞ»ê CUME_DIST(), ºñÀ² RATIO_TO_REPORT()
+--  ë¶€ì„œì½”ë“œê°€ '30'ì¸ ì§ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ê¸‰ì—¬ì—ëŒ€í•œëˆ„ì ë¶„ì‚° ì„ ì¡°íšŒ
+--  ë¶€ì„œë³„ ì§ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ê¸‰ì—¬ì—ëŒ€í•œëˆ„ì ë¶„ì‚° ì„ ì¡°íšŒ
+--d. 1 : ëˆ„ì ë¶„ì‚° CUME_DIST(), ë¹„ìœ¨ RATIO_TO_REPORT()
 select ename, deptno, sal 
         , trunc(CUME_DIST() over(order by sal), 2) sal_cume_dist
         , trunc(ratio_to_report(sal) over(), 2) sal_ratio
@@ -906,16 +906,68 @@ SELECT DEPTNO, ENAME, SAL
                             ) as DEPT_RICH 
  , LAST_VALUE(ENAME) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC
                             ) as DEPT_POOR_ERROR
--- ¿À·ù
+-- ì˜¤ë¥˜
 , LAST_VALUE(ENAME) OVER (PARTITION BY DEPTNO ORDER BY SAL DESC
--- WINDOW Àı
--- »ı·«½Ã ÇöÀç ÇàÀÌ ÀÛ¼ºµÇ´Â ³»¿ë(°ª)±îÁö¸¸ ¾Ë ¼ö ÀÖÀ½. ´ÙÀ½ Çà¿¡ ³ª¿Ã °ªÀº ¾ËÁö ¸øÇÔ.
--- unbounded preceding : À©µµ¿ìÀÇ Ã¹Çà
--- unbounded following : À©µµ¿ìÀÇ ¸¶Áö¸·Çà
--- 1 preceding : ÇöÀçÇàÀÇ ÀÌÀüÇà
--- 1 following : ÇöÀçÇàÀÇ ´ÙÀ½Çà
--- current row : ÇöÀçÇà
+-- WINDOW ì ˆ
+-- ìƒëµì‹œ í˜„ì¬ í–‰ì´ ì‘ì„±ë˜ëŠ” ë‚´ìš©(ê°’)ê¹Œì§€ë§Œ ì•Œ ìˆ˜ ìˆìŒ. ë‹¤ìŒ í–‰ì— ë‚˜ì˜¬ ê°’ì€ ì•Œì§€ ëª»í•¨.
+-- unbounded preceding : ìœˆë„ìš°ì˜ ì²«í–‰
+-- unbounded following : ìœˆë„ìš°ì˜ ë§ˆì§€ë§‰í–‰
+-- 1 preceding : í˜„ì¬í–‰ì˜ ì´ì „í–‰
+-- 1 following : í˜„ì¬í–‰ì˜ ë‹¤ìŒí–‰
+-- current row : í˜„ì¬í–‰
                             ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING
 --                            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
                             ) as DEPT_POORFROM
 FROM EMP;
+
+select empno, ename, sal, ntile(4) over(order by sal) from emp order by sal;
+
+desc dept;
+select * from dept;
+insert into dept values(10,'ACCOUNT','NEW YORK');
+insert into dept values('&deptno','&ë¶€ì„œëª…','&ì§€ì—­');
+--ì´ì „:insert into dept values('&deptnoê°’ì„ ë„£ì–´ì£¼ì„¸ìš”','&ë¶€ì„œëª…','&ì§€ì—­')
+--ì‹ ê·œ:insert into dept values('40 ë„£ì–´ì£¼ì„¸ìš”','ë§¤ë‹ˆì €','ì„œìš¸')
+commit;
+
+select * from emp
+    where 
+--    ename = '%SMITH' 
+--        ename like '%SMITH'  -- abcSMITH
+--        comm is null
+        ename = '&SMITH'
+    ;
+-- ë¹„êµ = != <> ^= > < >= <=
+-- true false
+-- null
+select '&ã…ã…ã…' from dual;
+-- '&' - ì‘ì€ ë”°ì˜´í‘œ ì•ˆì— & - escape ë¬¸ì : íŠ¹ë³„í•œì—­í•  - ëŒ€ì²´ë¬¸ìì…ë ¥ì°½ì„ ë„ì›Œì¤Œ. -- where , select ì—¬ê¸°ì €ê¸°ì €ê¸° 
+-- ê²€ìƒ‰ì„ '&_'ë¡œ ê²€ìƒ‰í•˜ê³  ì‹¶ë‹¤ë©´ 
+-- like '%'  / like '_'  - escape ë¬¸ì : íŠ¹ë³„í•œì—­í•  - %ë¬¸ì0ê°œì´ìƒ, _ë¬¸ì1ê°œ
+-- ê²€ìƒ‰ì„ _%ë¡œ í•˜ê³  ì‹¶ì€ë©´ : like '$_$%' escape '$'
+set define off;
+select '&ã…ã…ã…' from dual;
+insert into dept values(80,'R&D','NEW YORK');
+set define on;
+select '&ã…ã…ã…' from dual;
+
+
+create sequence seq_test02;
+
+create or replace trigger trg_aaa
+    before
+    insert on dept
+    referencing new as new
+    for each row
+begin
+    select seq_test02.nextval into :new.deptno from dual;
+end;
+/
+
+select seq_test02.nextval from dual;
+
+insert into dept (deptno, dname, loc) values (99, 'temp1', 'temploc');
+insert into dept (dname, loc) values ('temp2', 'temploc');
+
+select * from dept;
+
