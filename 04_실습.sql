@@ -1,11 +1,11 @@
---1. 70³â´ë »ı(1970~1979) Áß ¿©ÀÚÀÌ¸é¼­ Àü¾¾ÀÎ »ç¿øÀÇ ÀÌ¸§°ú ÁÖ¹Î¹øÈ£, ºÎ¼­ ¸í, Á÷±Ş Á¶È¸
+--1. 70ë…„ëŒ€ ìƒ(1970~1979) ì¤‘ ì—¬ìì´ë©´ì„œ ì „ì”¨ì¸ ì‚¬ì›ì˜ ì´ë¦„ê³¼ ì£¼ë¯¼ë²ˆí˜¸, ë¶€ì„œ ëª…, ì§ê¸‰ ì¡°íšŒ
 select e.emp_name, e.emp_no, d.dept_title, j.job_name
     from employee e
         join department d on e.dept_code = d.dept_id
         join job j on e.job_code = j.job_code
-        where (e.emp_no, e.emp_name) IN (select emp_no, emp_name from employee where substr(emp_no, 1, 2)>='70' and substr(emp_no, 1, 2)<='79' and substr(emp_no, 8, 1)='2' and emp_name LIKE 'Àü%');
+        where (e.emp_no, e.emp_name) IN (select emp_no, emp_name from employee where substr(emp_no, 1, 2)>='70' and substr(emp_no, 1, 2)<='79' and substr(emp_no, 8, 1)='2' and emp_name LIKE 'ì „%');
         
---2. ³ªÀÌ »ó °¡Àå ¸·³»ÀÇ »ç¿ø ÄÚµå, »ç¿ø ¸í, ³ªÀÌ, ºÎ¼­ ¸í, Á÷±Ş ¸í Á¶È¸
+--2. ë‚˜ì´ ìƒ ê°€ì¥ ë§‰ë‚´ì˜ ì‚¬ì› ì½”ë“œ, ì‚¬ì› ëª…, ë‚˜ì´, ë¶€ì„œ ëª…, ì§ê¸‰ ëª… ì¡°íšŒ
 select emp_id, emp_name, age, dept_title, job_name
     from (select e.emp_id, e.emp_name, d.dept_title, j.job_name, (123 - SUBSTR(e.emp_no, 1, 2)) AS age
             from employee e
@@ -14,55 +14,55 @@ select emp_id, emp_name, age, dept_title, job_name
                 order by age) t
         where rownum = 1;
 
---3. ÀÌ¸§¿¡ ¡®Çü¡¯ÀÌ µé¾î°¡´Â »ç¿øÀÇ »ç¿ø ÄÚµå, »ç¿ø ¸í, Á÷±Ş Á¶È¸
+--3. ì´ë¦„ì— â€˜í˜•â€™ì´ ë“¤ì–´ê°€ëŠ” ì‚¬ì›ì˜ ì‚¬ì› ì½”ë“œ, ì‚¬ì› ëª…, ì§ê¸‰ ì¡°íšŒ
 select emp_id, emp_name, job_name
     from employee e
         join department d on e.dept_code = d.dept_id
         join job j on e.job_code = j.job_code
-            where emp_name like '%Çü%';
+            where emp_name like '%í˜•%';
 
---4. ºÎ¼­ÄÚµå°¡ D5ÀÌ°Å³ª D6ÀÎ »ç¿øÀÇ »ç¿ø ¸í, Á÷±Ş ¸í, ºÎ¼­ ÄÚµå, ºÎ¼­ ¸í Á¶È¸
+--4. ë¶€ì„œì½”ë“œê°€ D5ì´ê±°ë‚˜ D6ì¸ ì‚¬ì›ì˜ ì‚¬ì› ëª…, ì§ê¸‰ ëª…, ë¶€ì„œ ì½”ë“œ, ë¶€ì„œ ëª… ì¡°íšŒ
 select emp_name, job_name, dept_code, dept_title
     from employee e
         join department d on e.dept_code = d.dept_id
         join job j on e.job_code = j.job_code
             where dept_code IN ('D5', 'D6');
 
---5. º¸³Ê½º¸¦ ¹Ş´Â »ç¿øÀÇ »ç¿ø ¸í, ºÎ¼­ ¸í, Áö¿ª ¸í Á¶È¸
+--5. ë³´ë„ˆìŠ¤ë¥¼ ë°›ëŠ” ì‚¬ì›ì˜ ì‚¬ì› ëª…, ë¶€ì„œ ëª…, ì§€ì—­ ëª… ì¡°íšŒ
 select emp_name, bonus, dept_title, local_name
     from employee e
         join department d on e.dept_code = d.dept_id
         join location l on d.location_id = l.local_code
             where bonus is not null;
 
---6. »ç¿ø ¸í, Á÷±Ş ¸í, ºÎ¼­ ¸í, Áö¿ª ¸í Á¶È¸
+--6. ì‚¬ì› ëª…, ì§ê¸‰ ëª…, ë¶€ì„œ ëª…, ì§€ì—­ ëª… ì¡°íšŒ
 select emp_name, job_name, dept_title, local_name
     from employee e
         join department d on e.dept_code = d.dept_id
         join job j on e.job_code = j.job_code
         join location l on d.location_id = l.local_code;
 
---7. ÇÑ±¹ÀÌ³ª ÀÏº»¿¡¼­ ±Ù¹« ÁßÀÎ »ç¿øÀÇ »ç¿ø ¸í, ºÎ¼­ ¸í, Áö¿ª ¸í, ±¹°¡ ¸í Á¶È¸
+--7. í•œêµ­ì´ë‚˜ ì¼ë³¸ì—ì„œ ê·¼ë¬´ ì¤‘ì¸ ì‚¬ì›ì˜ ì‚¬ì› ëª…, ë¶€ì„œ ëª…, ì§€ì—­ ëª…, êµ­ê°€ ëª… ì¡°íšŒ
 select emp_name, dept_title, local_name, national_name
     from employee e
         join department d on e.dept_code = d.dept_id
         join location l on d.location_id = l.local_code
         join national n on l.national_code = n.national_code
-            where n.national_name = 'ÇÑ±¹' or n.national_name = 'ÀÏº»';
+            where n.national_name = 'í•œêµ­' or n.national_name = 'ì¼ë³¸';
 
---8. ÇÑ »ç¿ø°ú °°Àº ºÎ¼­¿¡¼­ ÀÏÇÏ´Â »ç¿øÀÇ ÀÌ¸§ Á¶È¸
+--8. í•œ ì‚¬ì›ê³¼ ê°™ì€ ë¶€ì„œì—ì„œ ì¼í•˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„ ì¡°íšŒ
 select e.emp_name, e.dept_code, m.emp_name
     from employee e, employee m
         where e.dept_code = m.dept_code
         order by e.emp_name;
 
---9. º¸³Ê½º°¡ ¾ø°í Á÷±Ş ÄÚµå°¡ J4ÀÌ°Å³ª J7ÀÎ »ç¿øÀÇ ÀÌ¸§, Á÷±Ş ¸í, ±Ş¿© Á¶È¸(NVL ÀÌ¿ë)
+--9. ë³´ë„ˆìŠ¤ê°€ ì—†ê³  ì§ê¸‰ ì½”ë“œê°€ J4ì´ê±°ë‚˜ J7ì¸ ì‚¬ì›ì˜ ì´ë¦„, ì§ê¸‰ ëª…, ê¸‰ì—¬ ì¡°íšŒ(NVL ì´ìš©)
 select emp_name, job_name, salary
     from employee e
         join job j on e.job_code = j.job_code
             where bonus is null and e.job_code IN ('J4', 'J7');
 
---10. º¸³Ê½º Æ÷ÇÔÇÑ ¿¬ºÀÀÌ ³ôÀº 5¸íÀÇ »ç¹ø, ÀÌ¸§, ºÎ¼­ ¸í, Á÷±Ş, ÀÔ»çÀÏ, ¼øÀ§ Á¶È¸
+--10. ë³´ë„ˆìŠ¤ í¬í•¨í•œ ì—°ë´‰ì´ ë†’ì€ 5ëª…ì˜ ì‚¬ë²ˆ, ì´ë¦„, ë¶€ì„œ ëª…, ì§ê¸‰, ì…ì‚¬ì¼, ìˆœìœ„ ì¡°íšŒ
 select emp_id, emp_name, dept_title, job_name, hire_date
     from (select emp_id, emp_name, dept_title, job_name, hire_date, (salary*(salary+nvl(bonus,0))*12) as grade
         from employee e
@@ -72,32 +72,34 @@ select emp_id, emp_name, dept_title, job_name, hire_date
             order by grade desc) t
         where rownum <= 5;
 
---11. ºÎ¼­ º° ±Ş¿© ÇÕ°è°¡ ÀüÃ¼ ±Ş¿© ÃÑ ÇÕÀÇ 20%º¸´Ù ¸¹Àº ºÎ¼­ÀÇ ºÎ¼­ ¸í, ºÎ¼­ º° ±Ş¿© ÇÕ°è Á¶È¸
---11-1. JOIN°ú HAVING »ç¿ë
+--11. ë¶€ì„œ ë³„ ê¸‰ì—¬ í•©ê³„ê°€ ì „ì²´ ê¸‰ì—¬ ì´ í•©ì˜ 20%ë³´ë‹¤ ë§ì€ ë¶€ì„œì˜ ë¶€ì„œ ëª…, ë¶€ì„œ ë³„ ê¸‰ì—¬ í•©ê³„ ì¡°íšŒ
+--11-1. JOINê³¼ HAVING ì‚¬ìš©
 select d.dept_title, sum(salary)
     from employee e
         join department d on e.dept_code = d.dept_id
             group by d.dept_title
                 having sum(salary) >= ((select sum(salary) from employee)*0.2);
+       
 
---11-2. ÀÎ¶óÀÎ ºä »ç¿ë
+--11-2. ì¸ë¼ì¸ ë·° ì‚¬ìš©
 select *
     from (select d.dept_title, sum(salary) as sums from employee e, department d where e.dept_code=d.dept_id group by d.dept_title) sum
     where sum.sums >= ((select sum(salary) from employee)*0.2);
 
---11-3. WITH »ç¿ë
+--11-3. WITH ì‚¬ìš©
 with sum as (select d.dept_title, sum(salary) as sums from employee e, department d where e.dept_code=d.dept_id group by d.dept_title)
 select *
     from sum
     where sum.sums >= ((select sum(salary) from employee)*0.2);
 
---12. ºÎ¼­ ¸í°ú ºÎ¼­ º° ±Ş¿© ÇÕ°è Á¶È¸
+--12. ë¶€ì„œ ëª…ê³¼ ë¶€ì„œ ë³„ ê¸‰ì—¬ í•©ê³„ ì¡°íšŒ
 select d.dept_title, sum(e.salary)
     from employee e
         join department d on e.dept_code = d.dept_id
             group by d.dept_title;
 
---13. WITH¸¦ ÀÌ¿ëÇÏ¿© ±Ş¿© ÇÕ°ú ±Ş¿© Æò±Õ Á¶È¸
+--13. WITHë¥¼ ì´ìš©í•˜ì—¬ ê¸‰ì—¬ í•©ê³¼ ê¸‰ì—¬ í‰ê·  ì¡°íšŒ
 with sumavg as (select sum(salary) as sums, avg(salary) from employee e)
 select *
     from sumavg;
+

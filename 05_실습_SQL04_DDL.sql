@@ -1,34 +1,27 @@
-select * from tb_class;
-select * from tb_department;
-select * from tb_professor;
-select * from tb_class_professor;
-select * from tb_student;
-select * from tb_grade;
-
---1. °è¿­ Á¤º¸¸¦ ÀúÀåÇÒ Ä«Å×°í¸® Å×ÀÌºíÀ» ¸¸µé·Á°í ÇÑ´Ù. ´ÙÀ½°ú °°Àº Å×ÀÌºíÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--1. ê³„ì—´ ì •ë³´ë¥¼ ì €ìž¥í•  ì¹´í…Œê³ ë¦¬ í…Œì´ë¸”ì„ ë§Œë“¤ë ¤ê³  í•œë‹¤. ë‹¤ìŒê³¼ ê°™ì€ í…Œì´ë¸”ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 create table TB_CATEGORY(
     NAME VARCHAR2(10),
     USE_YN CHAR(1) default 'Y' check(USE_YN IN ('Y','N')) 
 );
 
---2. °ú¸ñ ±¸ºÐÀ» ÀúÀåÇÒ Å×ÀÌºíÀ» ¸¸µé·Á°í ÇÑ´Ù. ´ÙÀ½°ú °°Àº Å×ÀÌºíÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--2. ê³¼ëª© êµ¬ë¶„ì„ ì €ìž¥í•  í…Œì´ë¸”ì„ ë§Œë“¤ë ¤ê³  í•œë‹¤. ë‹¤ìŒê³¼ ê°™ì€ í…Œì´ë¸”ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 create table TB_CLASS_TYPE(
     NO VARCHAR2(5) PRIMARY KEY,
     NAME VARCHAR2(10)
 );
 
---3. TB_CATEGORY Å×ÀÌºíÀÇ NAME ÄÃ·³¿¡ PRIMARY KEY¸¦ »ý¼ºÇÏ½Ã¿À.
---(KEY ÀÌ¸§À» »ý¼ºÇÏÁö ¾Ê¾Æµµ ¹«¹æÇÔ. ¸¸ÀÏ KEY ÀÌ¸¦ ÁöÁ¤ÇÏ°íÀÚ ÇÑ´Ù¸é ÀÌ¸§Àº
---º»ÀÎÀÌ ¾Ë¾Æ¼­ Àû´çÇÑ ÀÌ¸§À» »ç¿ëÇÑ´Ù.)
+--3. TB_CATEGORY í…Œì´ë¸”ì˜ NAME ì»¬ëŸ¼ì— PRIMARY KEYë¥¼ ìƒì„±í•˜ì‹œì˜¤.
+--(KEY ì´ë¦„ì„ ìƒì„±í•˜ì§€ ì•Šì•„ë„ ë¬´ë°©í•¨. ë§Œì¼ KEY ì´ë¥¼ ì§€ì •í•˜ê³ ìž í•œë‹¤ë©´ ì´ë¦„ì€
+--ë³¸ì¸ì´ ì•Œì•„ì„œ ì ë‹¹í•œ ì´ë¦„ì„ ì‚¬ìš©í•œë‹¤.)
 alter table tb_category
     add constraint name_pk PRIMARY KEY(NAME);
 
---4. TB_CLASS_TYPE Å×ÀÌºíÀÇ NAME ÄÃ·³¿¡ NULL °ªÀÌ µé¾î°¡Áö ¾Êµµ·Ï ¼Ó¼ºÀ» º¯°æÇÏ½Ã¿À.
+--4. TB_CLASS_TYPE í…Œì´ë¸”ì˜ NAME ì»¬ëŸ¼ì— NULL ê°’ì´ ë“¤ì–´ê°€ì§€ ì•Šë„ë¡ ì†ì„±ì„ ë³€ê²½í•˜ì‹œì˜¤.
 alter table tb_class_type
     modify name constraint name_nn not null;
 
---5. µÎ Å×ÀÌºí¿¡¼­ ÄÃ·³ ¸íÀÌ NO ÀÎ °ÍÀº ±âÁ¸ Å¸ÀÔÀ» À¯ÁöÇÏ¸é¼­ Å©±â´Â 10 À¸·Î, ÄÃ·³¸íÀÌ
---NAME ÀÎ °ÍÀº ¸¶Âù°¡Áö·Î ±âÁ¸ Å¸ÀÔÀ» À¯ÁöÇÏ¸é¼­ Å©±â 20 À¸·Î º¯°æÇÏ½Ã¿À.
+--5. ë‘ í…Œì´ë¸”ì—ì„œ ì»¬ëŸ¼ ëª…ì´ NO ì¸ ê²ƒì€ ê¸°ì¡´ íƒ€ìž…ì„ ìœ ì§€í•˜ë©´ì„œ í¬ê¸°ëŠ” 10 ìœ¼ë¡œ, ì»¬ëŸ¼ëª…ì´
+--NAME ì¸ ê²ƒì€ ë§ˆì°¬ê°€ì§€ë¡œ ê¸°ì¡´ íƒ€ìž…ì„ ìœ ì§€í•˜ë©´ì„œ í¬ê¸° 20 ìœ¼ë¡œ ë³€ê²½í•˜ì‹œì˜¤.
 alter table tb_category
     modify NAME VARCHAR(20);
     
@@ -36,8 +29,8 @@ alter table tb_class_type
     modify NO VARCHAR(10)
     modify NAME VARCHAR(20);
 
---6. µÎ Å×ÀÌºíÀÇ NO ÄÃ·³°ú NAME ÄÃ·³ÀÇ ÀÌ¸§À» °¢ °¢ TB_ ¸¦ Á¦¿ÜÇÑ Å×ÀÌºí ÀÌ¸§ÀÌ ¾Õ¿¡
---ºÙÀº ÇüÅÂ·Î º¯°æÇÑ´Ù.
+--6. ë‘ í…Œì´ë¸”ì˜ NO ì»¬ëŸ¼ê³¼ NAME ì»¬ëŸ¼ì˜ ì´ë¦„ì„ ê° ê° TB_ ë¥¼ ì œì™¸í•œ í…Œì´ë¸” ì´ë¦„ì´ ì•žì—
+--ë¶™ì€ í˜•íƒœë¡œ ë³€ê²½í•œë‹¤.
 alter table tb_category
     rename column NAME to CATEGORY_NAME;
     
@@ -47,73 +40,73 @@ alter table tb_class_type
 alter table tb_class_type    
     rename column NAME to CLASS_TYPE_NAME;
 
---7. TB_CATEGORY Å×ÀÌºí°ú TB_CLASS_TYPE Å×ÀÌºíÀÇ PRIMARY KEY ÀÌ¸§À» ´ÙÀ½°ú °°ÀÌ º¯°æÇÏ½Ã¿À.
+--7. TB_CATEGORY í…Œì´ë¸”ê³¼ TB_CLASS_TYPE í…Œì´ë¸”ì˜ PRIMARY KEY ì´ë¦„ì„ ë‹¤ìŒê³¼ ê°™ì´ ë³€ê²½í•˜ì‹œì˜¤.
 alter table tb_category
     rename constraint name_pk to PK_CATEGORY_NAME;
     
 alter table tb_class_type
     rename constraint SYS_C008396 to PK_CLASS_TYPE_NO;
 
---8. ´ÙÀ½°ú °°Àº INSERT ¹®À» ¼öÇàÇÑ´Ù.
-INSERT INTO TB_CATEGORY VALUES ('°øÇÐ', 'Y');
-INSERT INTO TB_CATEGORY VALUES ('ÀÚ¿¬°úÇÐ', 'Y');
-INSERT INTO TB_CATEGORY VALUES ('ÀÇÇÐ', 'Y');
-INSERT INTO TB_CATEGORY VALUES ('¿¹Ã¼´É', 'Y');
-INSERT INTO TB_CATEGORY VALUES ('ÀÎ¹®»çÈ¸', 'Y');
+--8. ë‹¤ìŒê³¼ ê°™ì€ INSERT ë¬¸ì„ ìˆ˜í–‰í•œë‹¤.
+INSERT INTO TB_CATEGORY VALUES ('ê³µí•™', 'Y');
+INSERT INTO TB_CATEGORY VALUES ('ìžì—°ê³¼í•™', 'Y');
+INSERT INTO TB_CATEGORY VALUES ('ì˜í•™', 'Y');
+INSERT INTO TB_CATEGORY VALUES ('ì˜ˆì²´ëŠ¥', 'Y');
+INSERT INTO TB_CATEGORY VALUES ('ì¸ë¬¸ì‚¬íšŒ', 'Y');
 commit;
 
---9.TB_DEPARTMENT ÀÇ CATEGORY ÄÃ·³ÀÌ TB_CATEGORY Å×ÀÌºíÀÇ CATEGORY_NAME ÄÃ·³À» 
---ºÎ¸ð °ªÀ¸·Î ÂüÁ¶ÇÏµµ·Ï FOREIGN KEY ¸¦ ÁöÁ¤ÇÏ½Ã¿À. 
---ÀÌ ¶§ KEY ÀÌ¸§Àº FK_Å×ÀÌºíÀÌ¸§_ÄÃ·³ÀÌ¸§À¸·Î ÁöÁ¤ÇÑ´Ù. (ex. FK_DEPARTMENT_CATEGORY )
+--9.TB_DEPARTMENT ì˜ CATEGORY ì»¬ëŸ¼ì´ TB_CATEGORY í…Œì´ë¸”ì˜ CATEGORY_NAME ì»¬ëŸ¼ì„ 
+--ë¶€ëª¨ ê°’ìœ¼ë¡œ ì°¸ì¡°í•˜ë„ë¡ FOREIGN KEY ë¥¼ ì§€ì •í•˜ì‹œì˜¤. 
+--ì´ ë•Œ KEY ì´ë¦„ì€ FK_í…Œì´ë¸”ì´ë¦„_ì»¬ëŸ¼ì´ë¦„ìœ¼ë¡œ ì§€ì •í•œë‹¤. (ex. FK_DEPARTMENT_CATEGORY )
 alter table tb_department
     add constraint FK_DEPARTMENT_CATEGORY FOREIGN KEY(CATEGORY) REFERENCES TB_CATEGORY(CATEGORY_NAME);
 
---10. Ãá ±â¼ú´ëÇÐ±³ ÇÐ»ýµéÀÇ Á¤º¸¸¸ÀÌ Æ÷ÇÔµÇ¾î ÀÖ´Â ÇÐ»ýÀÏ¹ÝÁ¤º¸ VIEW¸¦ ¸¸µé°íÀÚ ÇÑ´Ù.
---¾Æ·¡ ³»¿ëÀ» Âü°íÇÏ¿© ÀûÀýÇÑ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
-create or replace view "VW_ÇÐ»ýÀÏ¹ÝÁ¤º¸"
-    as select student_no as "ÇÐ¹ø", student_name as "ÇÐ»ýÀÌ¸§", student_address as "ÁÖ¼Ò"
+--10. ì¶˜ ê¸°ìˆ ëŒ€í•™êµ í•™ìƒë“¤ì˜ ì •ë³´ë§Œì´ í¬í•¨ë˜ì–´ ìžˆëŠ” í•™ìƒì¼ë°˜ì •ë³´ VIEWë¥¼ ë§Œë“¤ê³ ìž í•œë‹¤.
+--ì•„ëž˜ ë‚´ìš©ì„ ì°¸ê³ í•˜ì—¬ ì ì ˆí•œ SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+create or replace view "VW_í•™ìƒì¼ë°˜ì •ë³´"
+    as select student_no as "í•™ë²ˆ", student_name as "í•™ìƒì´ë¦„", student_address as "ì£¼ì†Œ"
         from tb_student;
         
-select * from vw_ÇÐ»ýÀÏ¹ÝÁ¤º¸;
---11. Ãá ±â¼ú´ëÇÐ±³´Â 1³â¿¡ µÎ ¹ø¾¿ ÇÐ°úº°·Î ÇÐ»ý°ú Áöµµ±³¼ö°¡ Áöµµ ¸é´ãÀ» ÁøÇàÇÑ´Ù.
---ÀÌ¸¦ À§ÇØ »ç¿ëÇÒ ÇÐ»ýÀÌ¸§, ÇÐ°úÀÌ¸§, ´ã´ç±³¼öÀÌ¸§ À¸·Î ±¸¼ºµÇ¾î ÀÖ´Â VIEW ¸¦ ¸¸µå½Ã¿À.
---ÀÌ¶§ Áöµµ ±³¼ö°¡ ¾ø´Â ÇÐ»ýÀÌ ÀÖÀ» ¼ö ÀÖÀ½À» °í·ÁÇÏ½Ã¿À(´Ü, ÀÌ VIEW ´Â ´Ü¼ø SELECT ¸¸À» ÇÒ °æ¿ì 
---ÇÐ°úº°·Î Á¤·ÄµÇ¾î È­¸é¿¡ º¸¿©Áö°Ô ¸¸µå½Ã¿À.)
-create or replace view "VW_Áöµµ¸é´ã"
-    as select student_name as "ÇÐ»ýÀÌ¸§", department_name as "ÇÐ°úÀÌ¸§", professor_name as "Áöµµ±³¼öÀÌ¸§"
+select * from vw_í•™ìƒì¼ë°˜ì •ë³´;
+--11. ì¶˜ ê¸°ìˆ ëŒ€í•™êµëŠ” 1ë…„ì— ë‘ ë²ˆì”© í•™ê³¼ë³„ë¡œ í•™ìƒê³¼ ì§€ë„êµìˆ˜ê°€ ì§€ë„ ë©´ë‹´ì„ ì§„í–‰í•œë‹¤.
+--ì´ë¥¼ ìœ„í•´ ì‚¬ìš©í•  í•™ìƒì´ë¦„, í•™ê³¼ì´ë¦„, ë‹´ë‹¹êµìˆ˜ì´ë¦„ ìœ¼ë¡œ êµ¬ì„±ë˜ì–´ ìžˆëŠ” VIEW ë¥¼ ë§Œë“œì‹œì˜¤.
+--ì´ë•Œ ì§€ë„ êµìˆ˜ê°€ ì—†ëŠ” í•™ìƒì´ ìžˆì„ ìˆ˜ ìžˆìŒì„ ê³ ë ¤í•˜ì‹œì˜¤(ë‹¨, ì´ VIEW ëŠ” ë‹¨ìˆœ SELECT ë§Œì„ í•  ê²½ìš° 
+--í•™ê³¼ë³„ë¡œ ì •ë ¬ë˜ì–´ í™”ë©´ì— ë³´ì—¬ì§€ê²Œ ë§Œë“œì‹œì˜¤.)
+create or replace view "VW_ì§€ë„ë©´ë‹´"
+    as select student_name as "í•™ìƒì´ë¦„", department_name as "í•™ê³¼ì´ë¦„", professor_name as "ì§€ë„êµìˆ˜ì´ë¦„"
         from tb_student ts
             left join tb_department td using (department_no)
             left join tb_professor tp on ts.coach_professor_no = tp.professor_no;
             
-select * from vw_Áöµµ¸é´ã;
+select * from vw_ì§€ë„ë©´ë‹´;
             
---12. ¸ðµç ÇÐ°úÀÇ ÇÐ°úº° ÇÐ»ý ¼ö¸¦ È®ÀÎÇÒ ¼ö ÀÖµµ·Ï ÀûÀýÇÑ VIEW ¸¦ ÀÛ¼ºÇØ º¸ÀÚ.
-create or replace view "VW_ÇÐ°úº°ÇÐ»ý¼ö"
-    as select department_name as "ÇÐ°úÀÌ¸§", count(*) as "ÇÐ»ý¼ö"
+--12. ëª¨ë“  í•™ê³¼ì˜ í•™ê³¼ë³„ í•™ìƒ ìˆ˜ë¥¼ í™•ì¸í•  ìˆ˜ ìžˆë„ë¡ ì ì ˆí•œ VIEW ë¥¼ ìž‘ì„±í•´ ë³´ìž.
+create or replace view "VW_í•™ê³¼ë³„í•™ìƒìˆ˜"
+    as select department_name as "í•™ê³¼ì´ë¦„", count(*) as "í•™ìƒìˆ˜"
         from tb_student
             join tb_department using (department_no)
                 group by department_name;
 
-select * from vw_ÇÐ°úº°ÇÐ»ý¼ö;
+select * from vw_í•™ê³¼ë³„í•™ìƒìˆ˜;
 
---13. À§¿¡¼­ »ý¼ºÇÑ ÇÐ»ýÀÏ¹ÝÁ¤º¸ View¸¦ ÅëÇØ¼­ ÇÐ¹øÀÌ A213046 ÀÎ ÇÐ»ýÀÇ ÀÌ¸§À» º»ÀÎ
---ÀÌ¸§À¸·Î º¯°æÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
-update vw_ÇÐ»ýÀÏ¹ÝÁ¤º¸ set ÇÐ»ýÀÌ¸§ = 'À¯¼öÇö' where ÇÐ¹ø = 'A213046';
+--13. ìœ„ì—ì„œ ìƒì„±í•œ í•™ìƒì¼ë°˜ì •ë³´ Viewë¥¼ í†µí•´ì„œ í•™ë²ˆì´ A213046 ì¸ í•™ìƒì˜ ì´ë¦„ì„ ë³¸ì¸
+--ì´ë¦„ìœ¼ë¡œ ë³€ê²½í•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+update vw_í•™ìƒì¼ë°˜ì •ë³´ set í•™ìƒì´ë¦„ = 'ìœ ìˆ˜í˜„' where í•™ë²ˆ = 'A213046';
 
-select * from vw_ÇÐ»ýÀÏ¹ÝÁ¤º¸ where ÇÐ¹ø = 'A213046';
+select * from vw_í•™ìƒì¼ë°˜ì •ë³´ where í•™ë²ˆ = 'A213046';
 
---14. 13 ¹ø¿¡¼­¿Í °°ÀÌ VIEW ¸¦ ÅëÇØ¼­ µ¥ÀÌÅÍ°¡ º¯°æµÉ ¼ö ÀÖ´Â »óÈ²À» ¸·À¸·Á¸é
---VIEW ¸¦ ¾î¶»°Ô »ý¼ºÇØ¾ß ÇÏ´ÂÁö ÀÛ¼ºÇÏ½Ã¿À.
-create or replace view "VW_ÇÐ»ýÀÏ¹ÝÁ¤º¸"
-    as select student_no as "ÇÐ¹ø", student_name as "ÇÐ»ýÀÌ¸§", student_address as "ÁÖ¼Ò"
+--14. 13 ë²ˆì—ì„œì™€ ê°™ì´ VIEW ë¥¼ í†µí•´ì„œ ë°ì´í„°ê°€ ë³€ê²½ë  ìˆ˜ ìžˆëŠ” ìƒí™©ì„ ë§‰ìœ¼ë ¤ë©´
+--VIEW ë¥¼ ì–´ë–»ê²Œ ìƒì„±í•´ì•¼ í•˜ëŠ”ì§€ ìž‘ì„±í•˜ì‹œì˜¤.
+create or replace view "VW_í•™ìƒì¼ë°˜ì •ë³´"
+    as select student_no as "í•™ë²ˆ", student_name as "í•™ìƒì´ë¦„", student_address as "ì£¼ì†Œ"
         from tb_student
-        -- ÀÐ±â Àü¿ë
+        -- ì½ê¸° ì „ìš©
         with read only;
 
---15. Ãá ±â¼ú´ëÇÐ±³´Â ¸Å³â ¼ö°­½ÅÃ» ±â°£¸¸ µÇ¸é Æ¯Á¤ ÀÎ±â °ú¸ñµé¿¡ ¼ö°­ ½ÅÃ»ÀÌ ¸ô·Á
---¹®Á¦°¡ µÇ°í ÀÖ´Ù.ÃÖ±Ù 3³âÀ» ±âÁØÀ¸·Î ¼ö°­ÀÎ¿øÀÌ °¡Àå ¸¹¾Ò´ø 3 °ú¸ñÀ» Ã£´Â ±¸¹®À» ÀÛ¼ºÇØº¸½Ã¿À.
-create or replace view "VW_ÀÎ±â°ú¸ñ_TOP3"
-    as select class_no as "°ú¸ñ¹øÈ£", class_name as "°ú¸ñÀÌ¸§", count(*) as "´©Àû¼ö°­»ý¼ö(¸í)"
+--15. ì¶˜ ê¸°ìˆ ëŒ€í•™êµëŠ” ë§¤ë…„ ìˆ˜ê°•ì‹ ì²­ ê¸°ê°„ë§Œ ë˜ë©´ íŠ¹ì • ì¸ê¸° ê³¼ëª©ë“¤ì— ìˆ˜ê°• ì‹ ì²­ì´ ëª°ë ¤
+--ë¬¸ì œê°€ ë˜ê³  ìžˆë‹¤.ìµœê·¼ 3ë…„ì„ ê¸°ì¤€ìœ¼ë¡œ ìˆ˜ê°•ì¸ì›ì´ ê°€ìž¥ ë§Žì•˜ë˜ 3 ê³¼ëª©ì„ ì°¾ëŠ” êµ¬ë¬¸ì„ ìž‘ì„±í•´ë³´ì‹œì˜¤.
+create or replace view "VW_ì¸ê¸°ê³¼ëª©_TOP3"
+    as select class_no as "ê³¼ëª©ë²ˆí˜¸", class_name as "ê³¼ëª©ì´ë¦„", count(*) as "ëˆ„ì ìˆ˜ê°•ìƒìˆ˜(ëª…)"
         from tb_grade
             join tb_class using (class_no)
             where term_no between '2007%' and '2010%'
@@ -121,4 +114,5 @@ create or replace view "VW_ÀÎ±â°ú¸ñ_TOP3"
                     order by 3 desc
                     fetch first 3 row only;
 
-select * from vw_ÀÎ±â°ú¸ñ_top3;
+select * from vw_ì¸ê¸°ê³¼ëª©_top3;
+

@@ -1,114 +1,105 @@
-select * from tb_class;
-select * from tb_department;
-select * from tb_professor;
-select * from tb_class_professor;
-select * from tb_student;
-select * from tb_grade;
-
---1. ¿µ¾î¿µ¹®ÇĞ°ú(ÇĞ°úÄÚµå 002) ÇĞ»ıµéÀÇ ÇĞ¹ø°ú ÀÌ¸§, ÀÔÇĞ ³âµµ¸¦ ÀÔÇĞ ³âµµ°¡ ºü¸¥ ¼øÀ¸·Î Ç¥½ÃÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
---( ´Ü, Çì´õ´Â "ÇĞ¹ø", "ÀÌ¸§", "ÀÔÇĞ³âµµ" °¡ Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.)
-select student_no as "ÇĞ¹ø", student_name as "ÀÌ¸§", to_char(entrance_date, 'yyyy-mm-dd') as "ÀÔÇĞ³âµµ"
+--1. ì˜ì–´ì˜ë¬¸í•™ê³¼(í•™ê³¼ì½”ë“œ 002) í•™ìƒë“¤ì˜ í•™ë²ˆê³¼ ì´ë¦„, ì…í•™ ë…„ë„ë¥¼ ì…í•™ ë…„ë„ê°€ ë¹ ë¥¸ ìˆœìœ¼ë¡œ í‘œì‹œí•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
+--( ë‹¨, í—¤ë”ëŠ” "í•™ë²ˆ", "ì´ë¦„", "ì…í•™ë…„ë„" ê°€ í‘œì‹œë˜ë„ë¡ í•œë‹¤.)
+select student_no as "í•™ë²ˆ", student_name as "ì´ë¦„", to_char(entrance_date, 'yyyy-mm-dd') as "ì…í•™ë…„ë„"
     from tb_student
         join tb_department using (department_no)
-            where department_name='¿µ¾î¿µ¹®ÇĞ°ú'
+            where department_name='ì˜ì–´ì˜ë¬¸í•™ê³¼'
                 order by 3;
 
---2. Ãá ±â¼ú´ëÇĞ±³ÀÇ ±³¼ö Áß ÀÌ¸§ÀÌ ¼¼ ±ÛÀÚ°¡ ¾Æ´Ñ ±³¼ö°¡ ÇÑ ¸í ÀÖ´Ù°í ÇÑ´Ù. 
---±× ±³¼öÀÇ ÀÌ¸§°ú ÁÖ¹Î¹øÈ£¸¦ È­¸é¿¡ Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇØ º¸ÀÚ. 
---(* ÀÌ¶§ ¿Ã¹Ù¸£°Ô ÀÛ¼ºÇÑ SQL ¹®ÀåÀÇ °á°ú °ªÀÌ ¿¹»ó°ú ´Ù¸£°Ô ³ª¿Ã ¼ö ÀÖ´Ù. ¿øÀÎÀÌ ¹«¾ùÀÏÁö »ı°¢ÇØº¼ °Í)
+--2. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ êµìˆ˜ ì¤‘ ì´ë¦„ì´ ì„¸ ê¸€ìê°€ ì•„ë‹Œ êµìˆ˜ê°€ í•œ ëª… ìˆë‹¤ê³  í•œë‹¤. 
+--ê·¸ êµìˆ˜ì˜ ì´ë¦„ê³¼ ì£¼ë¯¼ë²ˆí˜¸ë¥¼ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•´ ë³´ì. 
+--(* ì´ë•Œ ì˜¬ë°”ë¥´ê²Œ ì‘ì„±í•œ SQL ë¬¸ì¥ì˜ ê²°ê³¼ ê°’ì´ ì˜ˆìƒê³¼ ë‹¤ë¥´ê²Œ ë‚˜ì˜¬ ìˆ˜ ìˆë‹¤. ì›ì¸ì´ ë¬´ì—‡ì¼ì§€ ìƒê°í•´ë³¼ ê²ƒ)
 select professor_name, professor_ssn
     from tb_professor
         where professor_name not like '___'
             order by 1;
 
---3. Ãá ±â¼ú´ëÇĞ±³ÀÇ ³²ÀÚ ±³¼öµéÀÇ ÀÌ¸§°ú ³ªÀÌ¸¦ Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À. 
---´Ü ÀÌ¶§ ³ªÀÌ°¡ ÀûÀº »ç¶÷¿¡¼­ ¸¹Àº »ç¶÷ ¼ø¼­·Î È­¸é¿¡ Ãâ·ÂµÇµµ·Ï ¸¸µå½Ã¿À. 
---(´Ü, ±³¼ö Áß 2000³â ÀÌÈÄ Ãâ»ıÀÚ´Â ¾øÀ¸¸ç Ãâ·Â Çì´õ´Â "±³¼öÀÌ¸§", "³ªÀÌ"·Î ÇÑ´Ù. ³ªÀÌ´Â ¡®¸¸¡¯À¸·Î °è»êÇÑ´Ù.)
-select professor_name as "±³¼öÀÌ¸§", 
+--3. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ ë‚¨ì êµìˆ˜ë“¤ì˜ ì´ë¦„ê³¼ ë‚˜ì´ë¥¼ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ë‹¨ ì´ë•Œ ë‚˜ì´ê°€ ì ì€ ì‚¬ëŒì—ì„œ ë§ì€ ì‚¬ëŒ ìˆœì„œë¡œ í™”ë©´ì— ì¶œë ¥ë˜ë„ë¡ ë§Œë“œì‹œì˜¤. 
+--(ë‹¨, êµìˆ˜ ì¤‘ 2000ë…„ ì´í›„ ì¶œìƒìëŠ” ì—†ìœ¼ë©° ì¶œë ¥ í—¤ë”ëŠ” "êµìˆ˜ì´ë¦„", "ë‚˜ì´"ë¡œ í•œë‹¤. ë‚˜ì´ëŠ” â€˜ë§Œâ€™ìœ¼ë¡œ ê³„ì‚°í•œë‹¤.)
+select professor_name as "êµìˆ˜ì´ë¦„", 
     case when extract(month from sysdate) <= substr(professor_ssn,3,2) then 2023-(substr(professor_ssn,1,2)+1900)
         when extract(month from sysdate) > substr(professor_ssn,3,2) then 2023-(substr(professor_ssn,1,2)+1900-1)
-        end as "³ªÀÌ"
+        end as "ë‚˜ì´"
     from tb_professor
         order by 2;
 
---4. ±³¼öµéÀÇ ÀÌ¸§ Áß ¼ºÀ» Á¦¿ÜÇÑ ÀÌ¸§¸¸ Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À. 
---Ãâ·Â Çì´õ´Â 'ÀÌ¸§' ÀÌ ÂïÈ÷µµ·Ï ÇÑ´Ù. (¼ºÀÌ 2ÀÚÀÎ °æ¿ì´Â ±³¼ö´Â ¾ø´Ù°í °¡Á¤ÇÏ½Ã¿À)
-select substr(professor_name,2) as "ÀÌ¸§"
+--4. êµìˆ˜ë“¤ì˜ ì´ë¦„ ì¤‘ ì„±ì„ ì œì™¸í•œ ì´ë¦„ë§Œ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ì¶œë ¥ í—¤ë”ëŠ” 'ì´ë¦„' ì´ ì°íˆë„ë¡ í•œë‹¤. (ì„±ì´ 2ìì¸ ê²½ìš°ëŠ” êµìˆ˜ëŠ” ì—†ë‹¤ê³  ê°€ì •í•˜ì‹œì˜¤)
+select substr(professor_name,2) as "ì´ë¦„"
     from tb_professor;
 
---5. Ãá ±â¼ú´ëÇĞ±³ÀÇ Àç¼ö»ı ÀÔÇĞÀÚ¸¦ ±¸ÇÏ·Á°í ÇÑ´Ù. ¾î¶»°Ô Ã£¾Æ³¾ °ÍÀÎ°¡? 
---ÀÌ¶§, 19»ì¿¡ ÀÔÇĞÇÏ¸é Àç¼ö¸¦ ÇÏÁö ¾ÊÀº °ÍÀ¸·Î °£ÁÖÇÑ´Ù.
+--5. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ ì¬ìˆ˜ìƒ ì…í•™ìë¥¼ êµ¬í•˜ë ¤ê³  í•œë‹¤. ì–´ë–»ê²Œ ì°¾ì•„ë‚¼ ê²ƒì¸ê°€? 
+--ì´ë•Œ, 19ì‚´ì— ì…í•™í•˜ë©´ ì¬ìˆ˜ë¥¼ í•˜ì§€ ì•Šì€ ê²ƒìœ¼ë¡œ ê°„ì£¼í•œë‹¤.
 select student_no, student_name, student_ssn
     from tb_student
         where (case when student_no like 'A%' then 100+substr(entrance_date,1,2)-(substr(student_ssn,1,2))
         else substr(entrance_date,1,2)-(substr(student_ssn,1,2)) end) > 19;
 
---6. 2020 ³â Å©¸®½º¸¶½º´Â ¹«½¼ ¿äÀÏÀÎ°¡?
-select to_char(to_date(20201225, 'yyyymmdd'), 'dy') as "2020³â Å©¸®½º¸¶½º"
+--6. 2020 ë…„ í¬ë¦¬ìŠ¤ë§ˆìŠ¤ëŠ” ë¬´ìŠ¨ ìš”ì¼ì¸ê°€?
+select to_char(to_date(20201225, 'yyyymmdd'), 'dy') as "2020ë…„ í¬ë¦¬ìŠ¤ë§ˆìŠ¤"
     from dual;
 
---7. TO_DATE('99/10/11','YY/MM/DD'), TO_DATE('49/10/11','YY/MM/DD') Àº °¢°¢ ¸î ³â ¸î ¿ù ¸î ÀÏÀ» ÀÇ¹ÌÇÒ±î? 
---¶Ç TO_DATE('99/10/11','RR/MM/DD'), TO_DATE('49/10/11','RR/MM/DD') Àº °¢°¢ ¸î ³â ¸î ¿ù ¸î ÀÏÀ» ÀÇ¹ÌÇÒ±î?
---TO_DATE('99/10/11','YY/MM/DD') - 1999³â 10¿ù 11ÀÏ / TO_DATE('49/10/11','YY/MM/DD') - 1949³â 10¿ù 11ÀÏ
---TO_DATE('99/10/11','RR/MM/DD') - 1999³â 10¿ù 11ÀÏ / TO_DATE('49/10/11','RR/MM/DD') - 2049³â 10¿ù 11ÀÏ
+--7. TO_DATE('99/10/11','YY/MM/DD'), TO_DATE('49/10/11','YY/MM/DD') ì€ ê°ê° ëª‡ ë…„ ëª‡ ì›” ëª‡ ì¼ì„ ì˜ë¯¸í• ê¹Œ? 
+--ë˜ TO_DATE('99/10/11','RR/MM/DD'), TO_DATE('49/10/11','RR/MM/DD') ì€ ê°ê° ëª‡ ë…„ ëª‡ ì›” ëª‡ ì¼ì„ ì˜ë¯¸í• ê¹Œ?
+--TO_DATE('99/10/11','YY/MM/DD') - 1999ë…„ 10ì›” 11ì¼ / TO_DATE('49/10/11','YY/MM/DD') - 1949ë…„ 10ì›” 11ì¼
+--TO_DATE('99/10/11','RR/MM/DD') - 1999ë…„ 10ì›” 11ì¼ / TO_DATE('49/10/11','RR/MM/DD') - 2049ë…„ 10ì›” 11ì¼
 
---8. Ãá ±â¼ú´ëÇĞ±³ÀÇ 2000 ³âµµ ÀÌÈÄ ÀÔÇĞÀÚµéÀº ÇĞ¹øÀÌ A·Î ½ÃÀÛÇÏ°Ô µÇ¾îÀÖ´Ù. 
---2000 ³âµµ ÀÌÀü ÇĞ¹øÀ» ¹ŞÀº ÇĞ»ıµéÀÇ ÇĞ¹ø°ú ÀÌ¸§À» º¸¿©ÁÖ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--8. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ 2000 ë…„ë„ ì´í›„ ì…í•™ìë“¤ì€ í•™ë²ˆì´ Aë¡œ ì‹œì‘í•˜ê²Œ ë˜ì–´ìˆë‹¤. 
+--2000 ë…„ë„ ì´ì „ í•™ë²ˆì„ ë°›ì€ í•™ìƒë“¤ì˜ í•™ë²ˆê³¼ ì´ë¦„ì„ ë³´ì—¬ì£¼ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select student_no, student_name
     from tb_student
         where student_no not like 'A%';
 
---9. ÇĞ¹øÀÌ A517178 ÀÎ ÇÑ¾Æ¸§ ÇĞ»ıÀÇ ÇĞÁ¡ ÃÑ ÆòÁ¡À» ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
---´Ü, ÀÌ¶§ Ãâ·Â È­¸éÀÇ Çì´õ´Â "ÆòÁ¡" ÀÌ¶ó°í ÂïÈ÷°Ô ÇÏ°í, Á¡¼ö´Â ¹İ¿Ã¸²ÇÏ¿© ¼Ò¼öÁ¡ ÀÌÇÏ ÇÑÀÚ¸®±îÁö¸¸ Ç¥½ÃÇÑ´Ù.
-select round(avg(point),1) as "ÆòÁ¡"
+--9. í•™ë²ˆì´ A517178 ì¸ í•œì•„ë¦„ í•™ìƒì˜ í•™ì  ì´ í‰ì ì„ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ë‹¨, ì´ë•Œ ì¶œë ¥ í™”ë©´ì˜ í—¤ë”ëŠ” "í‰ì " ì´ë¼ê³  ì°íˆê²Œ í•˜ê³ , ì ìˆ˜ëŠ” ë°˜ì˜¬ë¦¼í•˜ì—¬ ì†Œìˆ˜ì  ì´í•˜ í•œìë¦¬ê¹Œì§€ë§Œ í‘œì‹œí•œë‹¤.
+select round(avg(point),1) as "í‰ì "
     from tb_student
         join tb_grade using (student_no)
             where student_no = 'A517178';
 
---10. ÇĞ°úº° ÇĞ»ı¼ö¸¦ ±¸ÇÏ¿© "ÇĞ°ú¹øÈ£", "ÇĞ»ı¼ö(¸í)" ÀÇ ÇüÅÂ·Î Çì´õ¸¦ ¸¸µé¾î
---°á°ú°ªÀÌ Ãâ·ÂµÇµµ·Ï ÇÏ½Ã¿À.
-select department_no as "ÇĞ°ú¹øÈ£", count(*) as "ÇĞ»ı¼ö(¸í)"
+--10. í•™ê³¼ë³„ í•™ìƒìˆ˜ë¥¼ êµ¬í•˜ì—¬ "í•™ê³¼ë²ˆí˜¸", "í•™ìƒìˆ˜(ëª…)" ì˜ í˜•íƒœë¡œ í—¤ë”ë¥¼ ë§Œë“¤ì–´
+--ê²°ê³¼ê°’ì´ ì¶œë ¥ë˜ë„ë¡ í•˜ì‹œì˜¤.
+select department_no as "í•™ê³¼ë²ˆí˜¸", count(*) as "í•™ìƒìˆ˜(ëª…)"
     from tb_student
         group by department_no
             order by 1;
 
---11. Áöµµ ±³¼ö¸¦ ¹èÁ¤¹ŞÁö ¸øÇÑ ÇĞ»ıÀÇ ¼ö´Â ¸î ¸í Á¤µµ µÇ´Â ¾Ë¾Æ³»´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--11. ì§€ë„ êµìˆ˜ë¥¼ ë°°ì •ë°›ì§€ ëª»í•œ í•™ìƒì˜ ìˆ˜ëŠ” ëª‡ ëª… ì •ë„ ë˜ëŠ” ì•Œì•„ë‚´ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select count(*)
     from tb_student
         where coach_professor_no is null;
 
---12. ÇĞ¹øÀÌ A112113 ÀÎ ±è°í¿î ÇĞ»ıÀÇ ³âµµ º° ÆòÁ¡À» ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
---´Ü, ÀÌ¶§ Ãâ·Â È­¸éÀÇ Çì´õ´Â "³âµµ", "³âµµ º° ÆòÁ¡" ÀÌ¶ó°í ÂïÈ÷°Ô ÇÏ°í, Á¡¼ö´Â ¹İ¿Ã¸²ÇÏ¿©
---¼Ò¼öÁ¡ ÀÌÇÏ ÇÑ ÀÚ¸®±îÁö¸¸ Ç¥½ÃÇÑ´Ù.
-select substr(term_no,1,4) as "³âµµ", round(avg(point),1) as "³âµµ º° ÆòÁ¡"
+--12. í•™ë²ˆì´ A112113 ì¸ ê¹€ê³ ìš´ í•™ìƒì˜ ë…„ë„ ë³„ í‰ì ì„ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ë‹¨, ì´ë•Œ ì¶œë ¥ í™”ë©´ì˜ í—¤ë”ëŠ” "ë…„ë„", "ë…„ë„ ë³„ í‰ì " ì´ë¼ê³  ì°íˆê²Œ í•˜ê³ , ì ìˆ˜ëŠ” ë°˜ì˜¬ë¦¼í•˜ì—¬
+--ì†Œìˆ˜ì  ì´í•˜ í•œ ìë¦¬ê¹Œì§€ë§Œ í‘œì‹œí•œë‹¤.
+select substr(term_no,1,4) as "ë…„ë„", round(avg(point),1) as "ë…„ë„ ë³„ í‰ì "
     from tb_student
         join tb_grade using (student_no)
             where student_no = 'A112113'
                 group by substr(term_no,1,4);
 
---13. ÇĞ°ú º° ÈŞÇĞ»ı ¼ö¸¦ ÆÄ¾ÇÇÏ°íÀÚ ÇÑ´Ù. ÇĞ°ú ¹øÈ£¿Í ÈŞÇĞ»ı ¼ö¸¦ Ç¥½ÃÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
-select department_no as "ÇĞ°úÄÚµå¸í", count(*) as "ÈŞÇĞ»ı ¼ö"
+--13. í•™ê³¼ ë³„ íœ´í•™ìƒ ìˆ˜ë¥¼ íŒŒì•…í•˜ê³ ì í•œë‹¤. í•™ê³¼ ë²ˆí˜¸ì™€ íœ´í•™ìƒ ìˆ˜ë¥¼ í‘œì‹œí•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
+select department_no as "í•™ê³¼ì½”ë“œëª…", count(*) as "íœ´í•™ìƒ ìˆ˜"
     from tb_student
         where absence_yn='Y'
             group by department_no
                 order by 1;
 
---14. Ãá ´ëÇĞ±³¿¡ ´Ù´Ï´Â µ¿¸íÀÌÀÎ(ÔÒÙ£ì¶ìÑ) ÇĞ»ıµéÀÇ ÀÌ¸§À» Ã£°íÀÚ ÇÑ´Ù. 
---¾î¶² SQL ¹®ÀåÀ» »ç¿ëÇÏ¸é °¡´ÉÇÏ°Ú´Â°¡?
-select student_name as "µ¿ÀÏÀÌ¸§", count(*) as "µ¿¸íÀÎ ¼ö"
+--14. ì¶˜ ëŒ€í•™êµì— ë‹¤ë‹ˆëŠ” ë™ëª…ì´ì¸(åŒåç•°äºº) í•™ìƒë“¤ì˜ ì´ë¦„ì„ ì°¾ê³ ì í•œë‹¤. 
+--ì–´ë–¤ SQL ë¬¸ì¥ì„ ì‚¬ìš©í•˜ë©´ ê°€ëŠ¥í•˜ê² ëŠ”ê°€?
+select student_name as "ë™ì¼ì´ë¦„", count(*) as "ë™ëª…ì¸ ìˆ˜"
     from tb_student
         group by student_name
             having count(student_name) > 1
                 order by 1;
 
---15. ÇĞ¹øÀÌ A112113 ÀÎ ±è°í¿î ÇĞ»ıÀÇ ³âµµ, ÇĞ±â º° ÆòÁ¡°ú ³âµµ º° ´©Àû ÆòÁ¡, 
---ÃÑ ÆòÁ¡À» ±¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
---(´Ü, ÆòÁ¡Àº ¼Ò¼öÁ¡ 1ÀÚ¸®±îÁö¸¸ ¹İ¿Ã¸²ÇÏ¿© Ç¥½ÃÇÑ´Ù.)
-
--- union all + inline view¸¦ »ç¿ëÇØ¼­ Äõ¸®¹® ÀÛ¼º
-select "³âµµ", "ÇĞ±â", "ÆòÁ¡"
+--15. í•™ë²ˆì´ A112113 ì¸ ê¹€ê³ ìš´ í•™ìƒì˜ ë…„ë„, í•™ê¸° ë³„ í‰ì ê³¼ ë…„ë„ ë³„ ëˆ„ì  í‰ì , 
+--ì´ í‰ì ì„ êµ¬í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--(ë‹¨, í‰ì ì€ ì†Œìˆ˜ì  1ìë¦¬ê¹Œì§€ë§Œ ë°˜ì˜¬ë¦¼í•˜ì—¬ í‘œì‹œí•œë‹¤.)
+select "ë…„ë„", "í•™ê¸°", "í‰ì "
 from(
-    select substr(term_no,1,4) as "³âµµ", substr(term_no,5,2) as "ÇĞ±â", round(avg(point),1) as "ÆòÁ¡"
+    select substr(term_no,1,4) as "ë…„ë„", substr(term_no,5,2) as "í•™ê¸°", round(avg(point),1) as "í‰ì "
         from tb_student
             join tb_grade using (student_no)
             where student_no = 'A112113'
@@ -116,7 +107,7 @@ from(
     
     union all
     
-    select substr(term_no,1,4) as "³âµµ",' ' as "ÇĞ±â", round(avg(point),1) as "ÆòÁ¡"
+    select substr(term_no,1,4) as "ë…„ë„",' ' as "í•™ê¸°", round(avg(point),1) as "í‰ì "
         from tb_student
             join tb_grade using (student_no)
             where student_no = 'A112113'
@@ -125,34 +116,14 @@ from(
                     
     union all
     
-    select ' ' as "³âµµ", ' ' as "ÇĞ±â", round(avg(point),1) as "ÆòÁ¡"
+    select ' ' as "ë…„ë„", ' ' as "í•™ê¸°", round(avg(point),1) as "í‰ì "
         from tb_student
             join tb_grade using (student_no)
             where student_no = 'A112113'
     )
 
     order by 
-        case when "³âµµ" = ' ' then 1 else 0 end, "³âµµ", 
-        case when "ÇĞ±â" = ' ' then 1 else 0 end, "ÇĞ±â";
+        case when "ë…„ë„" = ' ' then 1 else 0 end, "ë…„ë„",
+        case when "í•™ê¸°" = ' ' then 1 else 0 end, "í•™ê¸°";
 
 
--- rollupÀ» »ç¿ëÇØ¼­ Äõ¸®¹® ÀÛ¼º
-select substr(term_no,1,4) as "³âµµ", substr(term_no,5,2) as "ÇĞ±â", round(avg(point),1) as "ÆòÁ¡"
-    from tb_student
-        left join tb_grade using (student_no)
-    where student_no = 'A112113'
-    group by rollup(substr(term_no,1,4), substr(term_no,5,2))
-    order by 1, 2;
-                    
--- rollupÀ» »ç¿ëÇØ¼­ Äõ¸®¹® ÀÛ¼º(groupingÀ» ÀÌ¿ëÇÏ¿© null °ª °ø¹é Ä¡È¯)
-select 
-case when grouping(substr(term_no,1,4)) = 1 then ' ' else substr(term_no,1,4) end as "³âµµ",
-case when grouping(substr(term_no,5,2)) = 1 then ' ' else substr(term_no,5,2) end as "ÇĞ±â", 
-round(avg(point),1) as "ÆòÁ¡"
-    from tb_student
-        left join tb_grade using (student_no)
-            where student_no = 'A112113'
-                group by rollup(substr(term_no,1,4), substr(term_no,5,2))
-                    order by 
-                        case when "³âµµ" = ' ' then 1 else 0 end, "³âµµ", 
-                        case when "ÇĞ±â" = ' ' then 1 else 0 end, "ÇĞ±â";

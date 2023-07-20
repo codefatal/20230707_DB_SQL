@@ -1,101 +1,94 @@
-select * from tb_class;
-select * from tb_department;
-select * from tb_professor;
-select * from tb_class_professor;
-select * from tb_student;
-select * from tb_grade;
-
---1. ÇĞ»ıÀÌ¸§°ú ÁÖ¼ÒÁö¸¦ Ç¥½ÃÇÏ½Ã¿À. ´Ü, Ãâ·Â Çì´õ´Â "ÇĞ»ı ÀÌ¸§", "ÁÖ¼ÒÁö"·Î ÇÏ°í,
---Á¤·ÄÀº ÀÌ¸§À¸·Î ¿À¸§Â÷¼ø Ç¥½ÃÇÏµµ·Ï ÇÑ´Ù.
-select student_name as "ÇĞ»ı ÀÌ¸§", student_address as "ÁÖ¼ÒÁö"
+--1. í•™ìƒì´ë¦„ê³¼ ì£¼ì†Œì§€ë¥¼ í‘œì‹œí•˜ì‹œì˜¤. ë‹¨, ì¶œë ¥ í—¤ë”ëŠ” "í•™ìƒ ì´ë¦„", "ì£¼ì†Œì§€"ë¡œ í•˜ê³ ,
+--ì •ë ¬ì€ ì´ë¦„ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ í‘œì‹œí•˜ë„ë¡ í•œë‹¤.
+select student_name as "í•™ìƒ ì´ë¦„", student_address as "ì£¼ì†Œì§€"
     from tb_student
         order by 1;
 
---2. ÈŞÇĞÁßÀÎ ÇĞ»ıµéÀÇ ÀÌ¸§°ú ÁÖ¹Î¹øÈ£¸¦ ³ªÀÌ°¡ ÀûÀº ¼ø¼­·Î È­¸é¿¡ Ãâ·ÂÇÏ½Ã¿À.
+--2. íœ´í•™ì¤‘ì¸ í•™ìƒë“¤ì˜ ì´ë¦„ê³¼ ì£¼ë¯¼ë²ˆí˜¸ë¥¼ ë‚˜ì´ê°€ ì ì€ ìˆœì„œë¡œ í™”ë©´ì— ì¶œë ¥í•˜ì‹œì˜¤.
 select student_name, student_ssn
     from tb_student
         where absence_yn='Y'
             order by 2 desc;
 
---3. ÁÖ¼ÒÁö°¡ °­¿øµµ³ª °æ±âµµÀÎ ÇĞ»ıµé Áß 1900 ³â´ë ÇĞ¹øÀ» °¡Áø ÇĞ»ıµéÀÇ ÀÌ¸§°ú
---ÇĞ¹ø, ÁÖ¼Ò¸¦ ÀÌ¸§ÀÇ ¿À¸§Â÷¼øÀ¸·Î È­¸é¿¡ Ãâ·ÂÇÏ½Ã¿À. 
---´Ü, Ãâ·ÂÇì´õ¿¡´Â "ÇĞ»ıÀÌ¸§","ÇĞ¹ø","°ÅÁÖÁö ÁÖ¼Ò" °¡ Ãâ·ÂµÇµµ·Ï ÇÑ´Ù.
-select student_name as "ÇĞ»ı ÀÌ¸§", student_no as "ÇĞ¹ø", student_address as "°ÅÁÖÁö ÁÖ¼Ò"
+--3. ì£¼ì†Œì§€ê°€ ê°•ì›ë„ë‚˜ ê²½ê¸°ë„ì¸ í•™ìƒë“¤ ì¤‘ 1900 ë…„ëŒ€ í•™ë²ˆì„ ê°€ì§„ í•™ìƒë“¤ì˜ ì´ë¦„ê³¼
+--í•™ë²ˆ, ì£¼ì†Œë¥¼ ì´ë¦„ì˜ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ í™”ë©´ì— ì¶œë ¥í•˜ì‹œì˜¤. 
+--ë‹¨, ì¶œë ¥í—¤ë”ì—ëŠ” "í•™ìƒì´ë¦„","í•™ë²ˆ","ê±°ì£¼ì§€ ì£¼ì†Œ" ê°€ ì¶œë ¥ë˜ë„ë¡ í•œë‹¤.
+select student_name as "í•™ìƒ ì´ë¦„", student_no as "í•™ë²ˆ", student_address as "ê±°ì£¼ì§€ ì£¼ì†Œ"
     from tb_student
         where student_no not like 'A%' 
-        and (student_address like '°­¿øµµ%'
-        or student_address like '°æ±âµµ%')
+        and (student_address like 'ê°•ì›ë„%'
+        or student_address like 'ê²½ê¸°ë„%')
             order by 1;
 
---4. ÇöÀç ¹ıÇĞ°ú ±³¼ö Áß °¡Àå ³ªÀÌ°¡ ¸¹Àº »ç¶÷ºÎÅÍ ÀÌ¸§À» È®ÀÎÇÒ ¼ö ÀÖ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À. 
---(¹ıÇĞ°úÀÇ 'ÇĞ°úÄÚµå'´Â ÇĞ°ú Å×ÀÌºí(TB_DEPARTMENT)À» Á¶È¸ÇØ¼­ Ã£¾Æ ³»µµ·Ï ÇÏÀÚ)
+--4. í˜„ì¬ ë²•í•™ê³¼ êµìˆ˜ ì¤‘ ê°€ì¥ ë‚˜ì´ê°€ ë§ì€ ì‚¬ëŒë¶€í„° ì´ë¦„ì„ í™•ì¸í•  ìˆ˜ ìˆëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--(ë²•í•™ê³¼ì˜ 'í•™ê³¼ì½”ë“œ'ëŠ” í•™ê³¼ í…Œì´ë¸”(TB_DEPARTMENT)ì„ ì¡°íšŒí•´ì„œ ì°¾ì•„ ë‚´ë„ë¡ í•˜ì)
 select professor_name, professor_ssn
     from tb_professor tp
         join tb_department using (department_no)
-            where department_name in '¹ıÇĞ°ú'
+            where department_name in 'ë²•í•™ê³¼'
                 order by 2;
 
---5. 2004 ³â 2ÇĞ±â¿¡ 'C3118100' °ú¸ñÀ» ¼ö°­ÇÑ ÇĞ»ıµéÀÇ ÇĞÁ¡À» Á¶È¸ÇÏ·Á°í ÇÑ´Ù. 
---ÇĞÁ¡ÀÌ ³ôÀº ÇĞ»ıºÎÅÍ Ç¥½ÃÇÏ°í, ÇĞÁ¡ÀÌ °°À¸¸é ÇĞ¹øÀÌ ³·Àº ÇĞ»ıºÎÅÍ Ç¥½ÃÇÏ´Â ±¸¹®À» ÀÛ¼ºÇØº¸½Ã¿À.
+--5. 2004 ë…„ 2í•™ê¸°ì— 'C3118100' ê³¼ëª©ì„ ìˆ˜ê°•í•œ í•™ìƒë“¤ì˜ í•™ì ì„ ì¡°íšŒí•˜ë ¤ê³  í•œë‹¤. 
+--í•™ì ì´ ë†’ì€ í•™ìƒë¶€í„° í‘œì‹œí•˜ê³ , í•™ì ì´ ê°™ìœ¼ë©´ í•™ë²ˆì´ ë‚®ì€ í•™ìƒë¶€í„° í‘œì‹œí•˜ëŠ” êµ¬ë¬¸ì„ ì‘ì„±í•´ë³´ì‹œì˜¤.
 select student_no, point
     from tb_grade
         where class_no = 'C3118100' and term_no = '200402'
             order by 2 desc, 1 asc;
 
---6. ÇĞ»ı ¹øÈ£, ÇĞ»ı ÀÌ¸§, ÇĞ°ú ÀÌ¸§À» ÇĞ»ı ÀÌ¸§À¸·Î ¿À¸§Â÷¼ø Á¤·ÄÇÏ¿© Ãâ·ÂÇÏ´Â SQL¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--6. í•™ìƒ ë²ˆí˜¸, í•™ìƒ ì´ë¦„, í•™ê³¼ ì´ë¦„ì„ í•™ìƒ ì´ë¦„ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬í•˜ì—¬ ì¶œë ¥í•˜ëŠ” SQLë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select student_no, student_name, department_name
     from tb_student
         join tb_department using (department_no)
             order by student_name;
 
---7. Ãá ±â¼ú´ëÇĞ±³ÀÇ °ú¸ñ ÀÌ¸§°ú °ú¸ñÀÇ ÇĞ°ú ÀÌ¸§À» Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--7. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ ê³¼ëª© ì´ë¦„ê³¼ ê³¼ëª©ì˜ í•™ê³¼ ì´ë¦„ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select class_name, department_name
     from tb_class
         join tb_department using (department_no);
 
---8. °ú¸ñº° ±³¼ö ÀÌ¸§À» Ã£À¸·Á°í ÇÑ´Ù. °ú¸ñ ÀÌ¸§°ú ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--8. ê³¼ëª©ë³„ êµìˆ˜ ì´ë¦„ì„ ì°¾ìœ¼ë ¤ê³  í•œë‹¤. ê³¼ëª© ì´ë¦„ê³¼ êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select class_name, professor_name
     from tb_class
         join tb_professor using (department_no);
 
---9. 8¹øÀÇ °á°ú Áß ¡®ÀÎ¹®»çÈ¸' °è¿­¿¡ ¼ÓÇÑ °ú¸ñÀÇ ±³¼ö ÀÌ¸§À» Ã£À¸·Á°í ÇÑ´Ù. ÀÌ¿¡ ÇØ´çÇÏ´Â °ú¸ñ ÀÌ¸§°ú 
---±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--9. 8ë²ˆì˜ ê²°ê³¼ ì¤‘ â€˜ì¸ë¬¸ì‚¬íšŒ' ê³„ì—´ì— ì†í•œ ê³¼ëª©ì˜ êµìˆ˜ ì´ë¦„ì„ ì°¾ìœ¼ë ¤ê³  í•œë‹¤. ì´ì— í•´ë‹¹í•˜ëŠ” ê³¼ëª© ì´ë¦„ê³¼ 
+--êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select class_name, professor_name
     from tb_class
         join tb_professor using (department_no)
         join tb_department using (department_no)
-            where category = 'ÀÎ¹®»çÈ¸';
+            where category = 'ì¸ë¬¸ì‚¬íšŒ';
             
---10. 'À½¾ÇÇĞ°ú' ÇĞ»ıµéÀÇ ÆòÁ¡À» ±¸ÇÏ·Á°í ÇÑ´Ù. À½¾ÇÇĞ°ú ÇĞ»ıµéÀÇ "ÇĞ¹ø", "ÇĞ»ı ÀÌ¸§",
---"ÀüÃ¼ ÆòÁ¡"À» Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À. 
---(´Ü, ÆòÁ¡Àº ¼Ò¼öÁ¡ 1ÀÚ¸®±îÁö¸¸ ¹İ¿Ã¸²ÇÏ¿© Ç¥½ÃÇÑ´Ù.)
-select student_no as "ÇĞ¹ø", student_name as "ÇĞ»ı ÀÌ¸§", round(avg(point),1) as "ÀüÃ¼ ÆòÁ¡"
+--10. 'ìŒì•…í•™ê³¼' í•™ìƒë“¤ì˜ í‰ì ì„ êµ¬í•˜ë ¤ê³  í•œë‹¤. ìŒì•…í•™ê³¼ í•™ìƒë“¤ì˜ "í•™ë²ˆ", "í•™ìƒ ì´ë¦„",
+--"ì „ì²´ í‰ì "ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--(ë‹¨, í‰ì ì€ ì†Œìˆ˜ì  1ìë¦¬ê¹Œì§€ë§Œ ë°˜ì˜¬ë¦¼í•˜ì—¬ í‘œì‹œí•œë‹¤.)
+select student_no as "í•™ë²ˆ", student_name as "í•™ìƒ ì´ë¦„", round(avg(point),1) as "ì „ì²´ í‰ì "
     from tb_student
         join tb_department using (department_no)
         join tb_grade using (student_no)
-            where department_name = 'À½¾ÇÇĞ°ú'
+            where department_name = 'ìŒì•…í•™ê³¼'
                 group by student_no, student_name
                     order by 1;
     
---11. ÇĞ¹øÀÌ A313047 ÀÎ ÇĞ»ıÀÌ ÇĞ±³¿¡ ³ª¿À°í ÀÖÁö ¾Ê´Ù. Áöµµ ±³¼ö¿¡°Ô ³»¿ëÀ» Àü´ŞÇÏ±â
---À§ÇÑ ÇĞ°ú ÀÌ¸§, ÇĞ»ı ÀÌ¸§°ú Áöµµ ±³¼ö ÀÌ¸§ÀÌ ÇÊ¿äÇÏ´Ù. ÀÌ¶§ »ç¿ëÇÒ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
---´Ü, Ãâ·ÂÇì´õ´Â ¡°ÇĞ°úÀÌ¸§¡±, ¡°ÇĞ»ıÀÌ¸§¡±, ¡°Áöµµ±³¼öÀÌ¸§¡±À¸·Î Ãâ·ÂµÇµµ·Ï ÇÑ´Ù.
-select department_name as "ÇĞ°úÀÌ¸§", student_name as "ÇĞ»ıÀÌ¸§", professor_name as "Áöµµ±³¼öÀÌ¸§"
+--11. í•™ë²ˆì´ A313047 ì¸ í•™ìƒì´ í•™êµì— ë‚˜ì˜¤ê³  ìˆì§€ ì•Šë‹¤. ì§€ë„ êµìˆ˜ì—ê²Œ ë‚´ìš©ì„ ì „ë‹¬í•˜ê¸°
+--ìœ„í•œ í•™ê³¼ ì´ë¦„, í•™ìƒ ì´ë¦„ê³¼ ì§€ë„ êµìˆ˜ ì´ë¦„ì´ í•„ìš”í•˜ë‹¤. ì´ë•Œ ì‚¬ìš©í•  SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ë‹¨, ì¶œë ¥í—¤ë”ëŠ” â€œí•™ê³¼ì´ë¦„â€, â€œí•™ìƒì´ë¦„â€, â€œì§€ë„êµìˆ˜ì´ë¦„â€ìœ¼ë¡œ ì¶œë ¥ë˜ë„ë¡ í•œë‹¤.
+select department_name as "í•™ê³¼ì´ë¦„", student_name as "í•™ìƒì´ë¦„", professor_name as "ì§€ë„êµìˆ˜ì´ë¦„"
     from tb_student ts
         join tb_department td using (department_no)
         join tb_professor tp on ts.coach_professor_no = tp.professor_no
         where student_no = 'A313047';
 
---12. 2007 ³âµµ¿¡ 'ÀÎ°£°ü°è·Ğ' °ú¸ñÀ» ¼ö°­ÇÑ ÇĞ»ıÀ» Ã£¾Æ ÇĞ»ıÀÌ¸§°ú ¼ö°­ÇĞ±â¸§ Ç¥½ÃÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--12. 2007 ë…„ë„ì— 'ì¸ê°„ê´€ê³„ë¡ ' ê³¼ëª©ì„ ìˆ˜ê°•í•œ í•™ìƒì„ ì°¾ì•„ í•™ìƒì´ë¦„ê³¼ ìˆ˜ê°•í•™ê¸°ë¦„ í‘œì‹œí•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select student_name, term_no
     from tb_grade
         join tb_class using (class_no)
         join tb_student using (student_no)
-            where class_name = 'ÀÎ°£°ü°è·Ğ' and substr(term_no,1,4)='2007'
+            where class_name = 'ì¸ê°„ê´€ê³„ë¡ ' and substr(term_no,1,4)='2007'
                 order by 2;
 
---13. ¿¹Ã¼´É °è¿­ °ú¸ñ Áß °ú¸ñ ´ã´ç±³¼ö¸¦ ÇÑ ¸íµµ ¹èÁ¤¹ŞÁö ¸øÇÑ °ú¸ñÀ» Ã£¾Æ ±× °ú¸ñ
---ÀÌ¸§°ú ÇĞ°ú ÀÌ¸§À» Ãâ·ÂÇÏ´Â SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À.
+--13. ì˜ˆì²´ëŠ¥ ê³„ì—´ ê³¼ëª© ì¤‘ ê³¼ëª© ë‹´ë‹¹êµìˆ˜ë¥¼ í•œ ëª…ë„ ë°°ì •ë°›ì§€ ëª»í•œ ê³¼ëª©ì„ ì°¾ì•„ ê·¸ ê³¼ëª©
+--ì´ë¦„ê³¼ í•™ê³¼ ì´ë¦„ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select class_name, department_name
     from tb_class tc
         left join tb_professor tp on tc.department_no = tp.department_no
@@ -103,19 +96,19 @@ select class_name, department_name
             where tc.department_no >= '056' and tc.department_no <= '063'
             and tp.department_no is null;
 
---14. Ãá ±â¼ú´ëÇĞ±³ ¼­¹İ¾Æ¾îÇĞ°ú ÇĞ»ıµéÀÇ Áöµµ±³¼ö¸¦ °Ô½ÃÇÏ°íÀÚ ÇÑ´Ù. ÇĞ»ıÀÌ¸§°ú Áöµµ±³¼ö ÀÌ¸§À» Ã£°í 
---¸¸ÀÏ Áöµµ ±³¼ö°¡ ¾ø´Â ÇĞ»ıÀÏ °æ¿ì "Áöµµ±³¼ö ¹ÌÁöÁ¤¡±À¸·Î Ç¥½ÃÇÏµµ·Ï ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
---´Ü, Ãâ·ÂÇì´õ´Â ¡°ÇĞ»ıÀÌ¸§¡± Áöµµ±³¼ö"·Î Ç¥½ÃÇÏ¸ç °íÇĞ¹ø ÇĞ»ıÀÌ ¸ÕÀú Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.
-select student_name as "ÇĞ»ıÀÌ¸§", nvl(professor_name,'Áöµµ±³¼ö ¹ÌÁöÁ¤') as "Áöµµ±³¼ö"
+--14. ì¶˜ ê¸°ìˆ ëŒ€í•™êµ ì„œë°˜ì•„ì–´í•™ê³¼ í•™ìƒë“¤ì˜ ì§€ë„êµìˆ˜ë¥¼ ê²Œì‹œí•˜ê³ ì í•œë‹¤. í•™ìƒì´ë¦„ê³¼ ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì°¾ê³  
+--ë§Œì¼ ì§€ë„ êµìˆ˜ê°€ ì—†ëŠ” í•™ìƒì¼ ê²½ìš° "ì§€ë„êµìˆ˜ ë¯¸ì§€ì •â€ìœ¼ë¡œ í‘œì‹œí•˜ë„ë¡ í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+--ë‹¨, ì¶œë ¥í—¤ë”ëŠ” â€œí•™ìƒì´ë¦„â€ ì§€ë„êµìˆ˜"ë¡œ í‘œì‹œí•˜ë©° ê³ í•™ë²ˆ í•™ìƒì´ ë¨¼ì € í‘œì‹œë˜ë„ë¡ í•œë‹¤.
+select student_name as "í•™ìƒì´ë¦„", nvl(professor_name,'ì§€ë„êµìˆ˜ ë¯¸ì§€ì •') as "ì§€ë„êµìˆ˜"
     from tb_student ts
         left join tb_department td using (department_no)
         left join tb_professor tp on ts.coach_professor_no = tp.professor_no
-            where department_name = '¼­¹İ¾Æ¾îÇĞ°ú'
+            where department_name = 'ì„œë°˜ì•„ì–´í•™ê³¼'
                 order by entrance_date;
 
---15. ÈŞÇĞ»ıÀÌ ¾Æ´Ñ ÇĞ»ı Áß ÆòÁ¡ÀÌ 4.0 ÀÌ»óÀÎ ÇĞ»ıÀ» Ã£¾Æ ±× ÇĞ»ıÀÇ ÇĞ¹ø, ÀÌ¸§, ÇĞ°ú
---ÀÌ¸§, ÆòÁ¡À» Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
-select student_no, student_name, department_name, round(avg(point),3) as "ÆòÁ¡"
+--15. íœ´í•™ìƒì´ ì•„ë‹Œ í•™ìƒ ì¤‘ í‰ì ì´ 4.0 ì´ìƒì¸ í•™ìƒì„ ì°¾ì•„ ê·¸ í•™ìƒì˜ í•™ë²ˆ, ì´ë¦„, í•™ê³¼
+--ì´ë¦„, í‰ì ì„ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
+select student_no, student_name, department_name, round(avg(point),3) as "í‰ì "
     from tb_student ts
         left join tb_department td using (department_no)
         left join tb_grade tg using (student_no)
@@ -126,41 +119,51 @@ select student_no, student_name, department_name, round(avg(point),3) as "ÆòÁ¡"
 
 
 
---16. È¯°æÁ¶°æÇĞ°ú Àü°ø°ú¸ñµéÀÇ °ú¸ñ º° ÆòÁ¡À» ÆÄ¾ÇÇÒ ¼ö ÀÖ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--16. í™˜ê²½ì¡°ê²½í•™ê³¼ ì „ê³µê³¼ëª©ë“¤ì˜ ê³¼ëª© ë³„ í‰ì ì„ íŒŒì•…í•  ìˆ˜ ìˆëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select class_no, class_name, round(avg(point),3)
     from tb_class tc
         left join tb_grade tg using (class_no)
         left join tb_department td using (department_no)
-            where department_name = 'È¯°æÁ¶°æÇĞ°ú'
+            where department_name = 'í™˜ê²½ì¡°ê²½í•™ê³¼'
             group by class_no, class_name;
 
---17. Ãá ±â¼ú´ëÇĞ±³¿¡ ´Ù´Ï°í ÀÖ´Â ÃÖ°æÈñ ÇĞ»ı°ú °°Àº °ú ÇĞ»ıµéÀÇ ÀÌ¸§°ú ÁÖ¼Ò¸¦ Ãâ·ÂÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--17. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì— ë‹¤ë‹ˆê³  ìˆëŠ” ìµœê²½í¬ í•™ìƒê³¼ ê°™ì€ ê³¼ í•™ìƒë“¤ì˜ ì´ë¦„ê³¼ ì£¼ì†Œë¥¼ ì¶œë ¥í•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select student_name, student_address
     from tb_student ts
         join tb_department td using (department_no)
-        where td.department_name IN (select td2.department_name from tb_department td2 join tb_student ts2 on td2.department_no = ts2.department_no where ts2.student_name='ÃÖ°æÈñ');
+        where td.department_name IN (select td2.department_name from tb_department td2 join tb_student ts2 on td2.department_no = ts2.department_no where ts2.student_name='ìµœê²½í¬');
 
---18. ±¹¾î±¹¹®ÇĞ°ú¿¡¼­ ÃÑ ÆòÁ¡ÀÌ °¡Àå ³ôÀº ÇĞ»ıÀÇ ÀÌ¸§°ú ÇĞ¹øÀ» Ç¥½ÃÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--18. êµ­ì–´êµ­ë¬¸í•™ê³¼ì—ì„œ ì´ í‰ì ì´ ê°€ì¥ ë†’ì€ í•™ìƒì˜ ì´ë¦„ê³¼ í•™ë²ˆì„ í‘œì‹œí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select student_no, student_name
 from (
     select ts.student_no, ts.student_name, sum(tg.point) as total_point
     from tb_student ts
         join tb_grade tg on ts.student_no = tg.student_no
         join tb_department td on ts.department_no = td.department_no
-            where td.department_name = '±¹¾î±¹¹®ÇĞ°ú'
+            where td.department_name = 'êµ­ì–´êµ­ë¬¸í•™ê³¼'
                 group by ts.student_no, ts.student_name
 ) subquery
     order by total_point desc
     fetch first 1 row only;
 
---19. Ãá ±â¼ú´ëÇĞ±³ÀÇ "È¯°æÁ¶°æÇĞ°ú"°¡ ¼ÓÇÑ °°Àº °è¿­ ÇĞ°úµéÀÇ ÇĞ°ú º° Àü°ø°ú¸ñ ÆòÁ¡À»
---ÆÄ¾ÇÇÏ±â À§ÇÑ ÀûÀıÇÑ SQL ¹®À» Ã£¾Æ³»½Ã¿À. 
---´Ü, Ãâ·ÂÇì´õ´Â "°è¿­", "ÇĞ°ú¸í", "Àü°øÆòÁ¡"À¸·Î Ç¥½ÃµÇµµ·Ï ÇÏ°í, 
---ÆòÁ¡Àº ¼Ò¼öÁ¡ ÇÑ ÀÚ¸®±îÁö¸¸ ¹İ¿Ã¸²ÇÏ¿© Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.
-select department_name as "°è¿­ ÇĞ°ú¸í", round(avg(point),1) as "Àü°øÆòÁ¡"
+--19. ì¶˜ ê¸°ìˆ ëŒ€í•™êµì˜ "í™˜ê²½ì¡°ê²½í•™ê³¼"ê°€ ì†í•œ ê°™ì€ ê³„ì—´ í•™ê³¼ë“¤ì˜ í•™ê³¼ ë³„ ì „ê³µê³¼ëª© í‰ì ì„
+--íŒŒì•…í•˜ê¸° ìœ„í•œ ì ì ˆí•œ SQL ë¬¸ì„ ì°¾ì•„ë‚´ì‹œì˜¤. 
+--ë‹¨, ì¶œë ¥í—¤ë”ëŠ” "ê³„ì—´", "í•™ê³¼ëª…", "ì „ê³µí‰ì "ìœ¼ë¡œ í‘œì‹œë˜ë„ë¡ í•˜ê³ , 
+--í‰ì ì€ ì†Œìˆ˜ì  í•œ ìë¦¬ê¹Œì§€ë§Œ ë°˜ì˜¬ë¦¼í•˜ì—¬ í‘œì‹œë˜ë„ë¡ í•œë‹¤.
+select department_name as "ê³„ì—´ í•™ê³¼ëª…", round(avg(point),1) as "ì „ê³µí‰ì "
     from tb_class tc
     join tb_department td using (department_no)
     join tb_grade tg using (class_no)
-        where category in (select category from tb_department where department_name = 'È¯°æÁ¶°æÇĞ°ú')
+        where category in (select category from tb_department where department_name = 'í™˜ê²½ì¡°ê²½í•™ê³¼')
         group by department_name
         order by 1;
+
+
+
+
+04-11
+join-having
+havingì— ì„œë¸Œì¿¼ë¦¬ ;;
+
+ì¶˜ëŒ€í•™êµ 02-14
+ì¶˜ëŒ€í•™êµ 03-16

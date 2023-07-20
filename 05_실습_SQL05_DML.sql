@@ -1,78 +1,71 @@
-select * from tb_class;
-select * from tb_department;
-select * from tb_professor;
-select * from tb_class_professor;
-select * from tb_student;
-select * from tb_grade;
-
---1. °ú¸ñÀ¯Çü Å×ÀÌºí(TB_CLASS_TYPE)¿¡ ¾Æ·¡¿Í °°Àº µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ½Ã¿À. 
-INSERT INTO TB_CLASS_TYPE VALUES ('01', 'Àü°øÇÊ¼ö');
-INSERT INTO TB_CLASS_TYPE VALUES ('02', 'Àü°ø¼±ÅÃ');
-INSERT INTO TB_CLASS_TYPE VALUES ('03', '±³¾çÇÊ¼ö');
-INSERT INTO TB_CLASS_TYPE VALUES ('04', '±³¾ç¼±ÅÃ');
-INSERT INTO TB_CLASS_TYPE VALUES ('05', '³í¹®Áöµµ');
+--1. ê³¼ëª©ìœ í˜• í…Œì´ë¸”(TB_CLASS_TYPE)ì— ì•„ë˜ì™€ ê°™ì€ ë°ì´í„°ë¥¼ ì…ë ¥í•˜ì‹œì˜¤. 
+INSERT INTO TB_CLASS_TYPE VALUES ('01', 'ì „ê³µí•„ìˆ˜');
+INSERT INTO TB_CLASS_TYPE VALUES ('02', 'ì „ê³µì„ íƒ');
+INSERT INTO TB_CLASS_TYPE VALUES ('03', 'êµì–‘í•„ìˆ˜');
+INSERT INTO TB_CLASS_TYPE VALUES ('04', 'êµì–‘ì„ íƒ');
+INSERT INTO TB_CLASS_TYPE VALUES ('05', 'ë…¼ë¬¸ì§€ë„');
 commit;
 
 select * from TB_CLASS_TYPE;
 
---2. Ãá ±â¼ú´ëÇĞ±³ ÇĞ»ıµéÀÇ Á¤º¸°¡ Æ÷ÇÔµÇ¾î ÀÖ´Â ÇĞ»ıÀÏ¹İÁ¤º¸ Å×ÀÌºíÀ» ¸¸µé°íÀÚ ÇÑ´Ù. 
---¾Æ·¡ ³»¿ëÀ» Âü°íÇÏ¿© ÀûÀıÇÑ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. (¼­ºêÄõ¸®¸¦ ÀÌ¿ëÇÏ½Ã¿À) 
---view vw_ÇĞ»ıÀÏ¹İÁ¤º¸¸¦ ¾²´Â °æ¿ì
-create table TB_ÇĞ»ıÀÏ¹İÁ¤º¸
-    as select * from vw_ÇĞ»ıÀÏ¹İÁ¤º¸;
+--2. ì¶˜ ê¸°ìˆ ëŒ€í•™êµ í•™ìƒë“¤ì˜ ì •ë³´ê°€ í¬í•¨ë˜ì–´ ìˆëŠ” í•™ìƒì¼ë°˜ì •ë³´ í…Œì´ë¸”ì„ ë§Œë“¤ê³ ì í•œë‹¤. 
+--ì•„ë˜ ë‚´ìš©ì„ ì°¸ê³ í•˜ì—¬ ì ì ˆí•œ SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. (ì„œë¸Œì¿¼ë¦¬ë¥¼ ì´ìš©í•˜ì‹œì˜¤) 
+--view vw_í•™ìƒì¼ë°˜ì •ë³´ë¥¼ ì“°ëŠ” ê²½ìš°
+create table TB_í•™ìƒì¼ë°˜ì •ë³´
+    as select * from vw_í•™ìƒì¼ë°˜ì •ë³´;
 
--- view vw_ÇĞ»ıÀÏ¹İÁ¤º¸¸¦ ¾È¾²´Â °æ¿ì
-create table TB_ÇĞ»ıÀÏ¹İÁ¤º¸
-    as select student_no as "ÇĞ¹ø", student_name as "ÇĞ»ıÀÌ¸§", student_address as "ÁÖ¼Ò"
+-- view vw_í•™ìƒì¼ë°˜ì •ë³´ë¥¼ ì•ˆì“°ëŠ” ê²½ìš°
+create table TB_í•™ìƒì¼ë°˜ì •ë³´
+    as select student_no as "í•™ë²ˆ", student_name as "í•™ìƒì´ë¦„", student_address as "ì£¼ì†Œ"
         from tb_student;
 
-select * from tb_ÇĞ»ıÀÏ¹İÁ¤º¸;
+select * from tb_í•™ìƒì¼ë°˜ì •ë³´;
 
---3. ±¹¾î±¹¹®ÇĞ°ú ÇĞ»ıµéÀÇ Á¤º¸¸¸ÀÌ Æ÷ÇÔµÇ¾î ÀÖ´Â ÇĞ°úÁ¤º¸ Å×ÀÌºíÀ» ¸¸µé°íÀÚ ÇÑ´Ù. 
---¾Æ·¡ ³»¿ëÀ» Âü°íÇÏ¿© ÀûÀıÇÑ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. (ÈùÆ® : ¹æ¹ıÀº ´Ù¾çÇÔ, ¼Ò½Å²¯ ÀÛ¼ºÇÏ½Ã¿À) 
-create table TB_±¹¾î±¹¹®ÇĞ°ú
-    as select student_no as "ÇĞ¹ø", student_name as "ÇĞ»ıÀÌ¸§", substr(student_ssn,1,2)+1900 as "Ãâ»ı³âµµ", professor_name as "±³¼öÀÌ¸§"
+--3. êµ­ì–´êµ­ë¬¸í•™ê³¼ í•™ìƒë“¤ì˜ ì •ë³´ë§Œì´ í¬í•¨ë˜ì–´ ìˆëŠ” í•™ê³¼ì •ë³´ í…Œì´ë¸”ì„ ë§Œë“¤ê³ ì í•œë‹¤. 
+--ì•„ë˜ ë‚´ìš©ì„ ì°¸ê³ í•˜ì—¬ ì ì ˆí•œ SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. (íŒíŠ¸ : ë°©ë²•ì€ ë‹¤ì–‘í•¨, ì†Œì‹ ê» ì‘ì„±í•˜ì‹œì˜¤) 
+create table TB_êµ­ì–´êµ­ë¬¸í•™ê³¼
+    as select student_no as "í•™ë²ˆ", student_name as "í•™ìƒì´ë¦„", substr(student_ssn,1,2)+1900 as "ì¶œìƒë…„ë„", professor_name as "êµìˆ˜ì´ë¦„"
         from tb_student ts
             join tb_department td using (department_no)
             join tb_professor tp on ts.coach_professor_no = tp.professor_no
-                where department_name = '±¹¾î±¹¹®ÇĞ°ú'
+                where department_name = 'êµ­ì–´êµ­ë¬¸í•™ê³¼'
 ;
 
-select * from tb_±¹¾î±¹¹®ÇĞ°ú;
+select * from tb_êµ­ì–´êµ­ë¬¸í•™ê³¼;
 
---4. Çö ÇĞ°úµéÀÇ Á¤¿øÀ» 10% Áõ°¡½ÃÅ°°Ô µÇ¾ú´Ù. ÀÌ¿¡ »ç¿ëÇÒ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
---(´Ü, ¹İ¿Ã¸²À» »ç¿ëÇÏ¿© ¼Ò¼öÁ¡ ÀÚ¸´¼ö´Â »ı±âÁö ¾Êµµ·Ï ÇÑ´Ù) 
+--4. í˜„ í•™ê³¼ë“¤ì˜ ì •ì›ì„ 10% ì¦ê°€ì‹œí‚¤ê²Œ ë˜ì—ˆë‹¤. ì´ì— ì‚¬ìš©í•  SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
+--(ë‹¨, ë°˜ì˜¬ë¦¼ì„ ì‚¬ìš©í•˜ì—¬ ì†Œìˆ˜ì  ìë¦¿ìˆ˜ëŠ” ìƒê¸°ì§€ ì•Šë„ë¡ í•œë‹¤) 
 update tb_department set capacity = trunc(capacity*1.1);
 
 select * from tb_department;
 
---5. ÇĞ¹ø A413042 ÀÎ ¹Ú°Ç¿ì ÇĞ»ıÀÇ ÁÖ¼Ò°¡ "¼­¿ï½Ã Á¾·Î±¸ ¼şÀÎµ¿ 181-21 "·Î º¯°æµÇ¾ú´Ù°í ÇÑ´Ù. 
---ÁÖ¼ÒÁö¸¦ Á¤Á¤ÇÏ±â À§ÇØ »ç¿ëÇÒ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
-update tb_student set student_address = '¼­¿ï½Ã Á¾·Î±¸ ¼şÀÎµ¿ 181-21 ' where student_no = 'A413042';
+--5. í•™ë²ˆ A413042 ì¸ ë°•ê±´ìš° í•™ìƒì˜ ì£¼ì†Œê°€ "ì„œìš¸ì‹œ ì¢…ë¡œêµ¬ ìˆ­ì¸ë™ 181-21 "ë¡œ ë³€ê²½ë˜ì—ˆë‹¤ê³  í•œë‹¤. 
+--ì£¼ì†Œì§€ë¥¼ ì •ì •í•˜ê¸° ìœ„í•´ ì‚¬ìš©í•  SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
+update tb_student set student_address = 'ì„œìš¸ì‹œ ì¢…ë¡œêµ¬ ìˆ­ì¸ë™ 181-21 ' where student_no = 'A413042';
 
 select * from tb_student where student_no = 'A413042';
 
---6. ÁÖ¹Îµî·Ï¹øÈ£ º¸È£¹ı¿¡ µû¶ó ÇĞ»ıÁ¤º¸ Å×ÀÌºí¿¡¼­ ÁÖ¹Î¹øÈ£ µŞÀÚ¸®¸¦ ÀúÀåÇÏÁö ¾Ê±â·Î °áÁ¤ÇÏ¿´´Ù. 
---ÀÌ ³»¿ëÀ» ¹İ¿µÇÒ ÀûÀıÇÑ SQL ¹®ÀåÀ» ÀÛ¼ºÇÏ½Ã¿À. 
+--6. ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ë³´í˜¸ë²•ì— ë”°ë¼ í•™ìƒì •ë³´ í…Œì´ë¸”ì—ì„œ ì£¼ë¯¼ë²ˆí˜¸ ë’·ìë¦¬ë¥¼ ì €ì¥í•˜ì§€ ì•Šê¸°ë¡œ ê²°ì •í•˜ì˜€ë‹¤. 
+--ì´ ë‚´ìš©ì„ ë°˜ì˜í•  ì ì ˆí•œ SQL ë¬¸ì¥ì„ ì‘ì„±í•˜ì‹œì˜¤. 
 --(all. 830530-2124663 => 830530 ) 
 update tb_student set student_ssn = substr(student_ssn,1, 6);
 
 select * from tb_student;
 
---7. ÀÇÇĞ°ú ±è¸íÈÆ ÇĞ»ıÀº 2005³â 1ÇĞ±â¿¡ ÀÚ½ÅÀÌ ¼ö°­ÇÑ 'ÇÇºÎ»ı¸®ÇĞ' Á¡¼ö°¡ Àß¸øµÇ¾ú´Ù´Â °ÍÀ» 
---¹ß°ßÇÏ°í´Â Á¤Á¤À» ¿äÃ»ÇÏ¿´´Ù. ´ã´ç ±³¼öÀÇ È®ÀÎ ¹ŞÀº °á°ú ÇØ´ç °ú¸ñÀÇ ÇĞÁ¡À» 3.5·Î º¯°æÅ°·Î °áÁ¤µÇ¾ú´Ù. 
---ÀûÀıÇÑ SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À. 
+--7. ì˜í•™ê³¼ ê¹€ëª…í›ˆ í•™ìƒì€ 2005ë…„ 1í•™ê¸°ì— ìì‹ ì´ ìˆ˜ê°•í•œ 'í”¼ë¶€ìƒë¦¬í•™' ì ìˆ˜ê°€ ì˜ëª»ë˜ì—ˆë‹¤ëŠ” ê²ƒì„ 
+--ë°œê²¬í•˜ê³ ëŠ” ì •ì •ì„ ìš”ì²­í•˜ì˜€ë‹¤. ë‹´ë‹¹ êµìˆ˜ì˜ í™•ì¸ ë°›ì€ ê²°ê³¼ í•´ë‹¹ ê³¼ëª©ì˜ í•™ì ì„ 3.5ë¡œ ë³€ê²½í‚¤ë¡œ ê²°ì •ë˜ì—ˆë‹¤. 
+--ì ì ˆí•œ SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤. 
 update tb_grade set point = '3.5' 
 where (student_no, class_no) in (select student_no, class_no
     from tb_student 
         join tb_department using (department_no)
         join tb_grade using (student_no)
         join tb_class using (class_no)
-        where student_name = '±è¸íÈÆ' and department_name = 'ÀÇÇĞ°ú' and term_no = '200501' and class_name = 'ÇÇºÎ»ı¸®ÇĞ');
+        where student_name = 'ê¹€ëª…í›ˆ' and department_name = 'ì˜í•™ê³¼' and term_no = '200501' and class_name = 'í”¼ë¶€ìƒë¦¬í•™');
 
 select * from tb_grade;
 
---8. ¼ºÀû Å×ÀÌºí(TB_GRADE) ¿¡¼­ ÈŞÇĞ»ıµéÀÇ ¼ºÀûÇ×¸ñÀ» Á¦°ÅÇÏ½Ã¿À. 
+--8. ì„±ì  í…Œì´ë¸”(TB_GRADE) ì—ì„œ íœ´í•™ìƒë“¤ì˜ ì„±ì í•­ëª©ì„ ì œê±°í•˜ì‹œì˜¤. 
 delete from tb_grade 
 where student_no in (select student_no
     from tb_student 
@@ -80,3 +73,4 @@ where student_no in (select student_no
         where absence_yn = 'Y');
 
 select * from tb_student where absence_yn = 'Y';
+
